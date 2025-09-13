@@ -7,7 +7,7 @@ As the name implies, most of the weapons or rebalances in this mod are not compl
 ### Spas-12
 Type: **Shotgun**  
 Classes: **Soldier, Pyro, Heavy, Engineer**  
--Hard hitting, best for up-close combat  
--Double-shot on Alt-fire  
+- Hard hitting, best for up-close combat  
+- Double-shot on Alt-fire  
 
 ## Rebalances
