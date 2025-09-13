@@ -139,12 +139,17 @@
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
-					"value"	"1.33"
+					"value"	"0.67"
 				}
 				"Construction rate decreased"
 				{
 					"attribute_class"	"mult_construction_value"
-					"value"	"1.33"
+					"value"	"0.67"
+				}
+				"crit mod disabled" 
+				{
+					"attribute_class"	"mult_crit_chance"
+					"value"	"0"
 				}
 				"special taunt"
 				{

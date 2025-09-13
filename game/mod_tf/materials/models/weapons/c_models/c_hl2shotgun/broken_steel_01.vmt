@@ -1,7 +1,7 @@
 "VertexlitGeneric"
 {
-	"$basetexture" "vgui\replay\thumbnails\models/weapons/c_models/c_shotgun/broken_steel_07"
-    "$phongexponenttexture" "vgui\replay\thumbnails\models/weapons/c_models/c_shotgun/broken_steel_exp"	
+	"$basetexture" "models\weapons\c_models\c_hl2shotgun/broken_steel_07"
+    "$phongexponenttexture" "models\weapons\c_models\c_hl2shotgun/broken_steel_exp"	
 	
 	"$phong" "1"
 	//commented out to use the exponent mask

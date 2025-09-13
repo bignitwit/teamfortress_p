@@ -11,7 +11,7 @@
 					"gamelist"
 					{
 						"configVersion"		"2"
-						"lastBarWidth"		"925"
+						"lastBarWidth"		"923"
 						"0_hidden"		"0"
 						"0_width"		"16"
 						"1_hidden"		"0"
@@ -19,7 +19,7 @@
 						"2_hidden"		"0"
 						"2_width"		"16"
 						"3_hidden"		"0"
-						"3_width"		"340"
+						"3_width"		"338"
 						"4_hidden"		"1"
 						"4_width"		"64"
 						"5_hidden"		"0"
@@ -192,9 +192,9 @@
 					}
 				}
 			}
-			"xpos"		"480"
+			"xpos"		"481"
 			"ypos"		"243"
-			"wide"		"960"
+			"wide"		"958"
 			"tall"		"594"
 		}
 	}

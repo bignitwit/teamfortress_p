@@ -2,7 +2,7 @@
 {
 	"ctf_2fort"
 	{
-		"viewed"		"25"
+		"viewed"		"28"
 	}
 	"itemtest"
 	{
