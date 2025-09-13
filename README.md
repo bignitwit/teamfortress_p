@@ -14,7 +14,7 @@ Credits: **[Model](https://steamcommunity.com/sharedfiles/filedetails/?id=316887
 ### Frenzy Wrench [Temp Name]
 Type: ** Wrench**  
 Classes: **Engineer**  
-Credits: **[Model](https://steamcommunity.com/sharedfiles/filedetails/?id=3168872482](https://steamcommunity.com/sharedfiles/filedetails/?id=697431996)** 
+Credits: **[Model](https://steamcommunity.com/sharedfiles/filedetails/?id=3168872482](https://steamcommunity.com/sharedfiles/filedetails/?id=697431996))** 
 - Best for maintaining an nest
 - Sets up slower
 - Repairs faster and destroys sappers more easily
