@@ -4,7 +4,7 @@ As the name implies, most of the weapons or rebalances in this mod are not compl
 
 ## Custom Weapons
 
-### Spas-12
+### Spas-12 [Temp Name]
 Type: **Shotgun**  
 Classes: **Soldier, Pyro, Heavy, Engineer**  
 - Hard hitting, best for up-close combat  
