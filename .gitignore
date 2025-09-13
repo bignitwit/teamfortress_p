@@ -1,15 +1,15 @@
 # Files to ignore when considering what GIT should commit.
 
-game/platform/config
-game/mod_tf/downloadlists
 
+
+game/platform/config/
+game/mod_tf/downloadlists/
 game/mod_tf/tf2_playerstats.dmx
 game/mod_tf/stats.txt
 game/mod_tf/ServerConfig.vdf
 game/mod_tf/voice_ban.dt
-game/mod_tf/voice_ban.dt
 game/mod_tf/media/viewed.res
-game/mod_tf/cfg
+game/mod_tf/cfg/
 
 
 # Visual Studio 

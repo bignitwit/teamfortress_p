@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture"		"backpack/weapons/c_models/c_hl2shotgun/c_hl2shotgun"
+	"$translucent"		"1"
+	"$vertexcolor"		"1"
+}
