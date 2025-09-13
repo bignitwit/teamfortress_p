@@ -10,6 +10,7 @@
 		"9001"
 		{
 			"auto_unlock"	"1"
+			"show_in_armory"	"1"
 
 			// Base def
 			"name"	"HL2Shotgun"
@@ -18,12 +19,11 @@
 			"item_type_name"	"#TF_Weapon_Shotgun"
 			"prefab"	"weapon_shotgun"
 			"item_logname"	"hl2_shotgun"
+			"min_ilevel"	"67"
+			"max_ilevel"	"67"
 
 			// Usage
-			"item_slot"		"secondary"
 			"item_quality"	"unique"
-
-
 
 			"capabilities"
 			{
@@ -65,9 +65,9 @@
 					"attribute_class"	"mult_bullets_per_shot"
 					"value"	"1.33"
 				}
-				"deploy time increased"
+				"single wep deploy time increased"
 				{
-					"attribute_class"	"mult_deploy_time"
+					"attribute_class"	"mult_single_wep_deploy_time"
 					"value"	"1.5"
 				}
 
@@ -77,7 +77,7 @@
 			"inspect_panel_dist" "40"
 			"attach_to_hands"	"1"
 			"model_player"	"models/weapons/c_models/c_hl2shotgun/c_hl2shotgun.mdl"
-			"image_inventory"	"backpack/weapons/c_models/c_hl2shotgun/c_hl2shotgun_large"
+			"image_inventory"	"backpack/weapons/c_models/c_hl2shotgun/c_hl2shotgun"
 			"visuals"
 			{
 				"sound_single_shot"		"Weapon_BackShot_Shotty.Single"
@@ -85,6 +85,81 @@
 			}
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
 			"drop_sound"		"ui/item_heavy_gun_drop.wav"
+
+		}
+
+		"9002"
+		{
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			// Base def
+			"name"	"FrenzyWrench"
+			"item_name"		"#TFP_WEP_FrenzyWrench"
+			"item_description"	"#TFP_WEP_FrenzyWrench_Desc"
+			"item_type_name"	"#TF_Weapon_Wrench"
+			"prefab"	"weapon_wrench"
+			"item_logname"	"frenzy_wrench"
+			"min_ilevel"	"38"
+			"max_ilevel"	"38"
+
+			// Usage
+			"item_slot"		"melee"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"engineer"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+				"can_destroy_sappers"		"1"
+			}
+			"attributes"
+			{
+				"Repair rate increased"
+				{
+					"attribute_class"	"mult_repair_value"
+					"value"	"1.33"
+				}
+				"dmg bonus vs buildings"
+				{
+					"attribute_class"	"mult_dmg_vs_buildings"
+					"value"	"1.20"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"1.33"
+				}
+				"Construction rate decreased"
+				{
+					"attribute_class"	"mult_construction_value"
+					"value"	"1.33"
+				}
+				"special taunt"
+				{
+					"attribute_class"	"special_taunt"
+					"value" "1"
+				}
+
+			}
+
+			// Visuals
+			"inspect_panel_dist" "40"
+			"model_player"	"models/weapons/c_models/c_toothwrench/c_toothwrench.mdl"
+			//"image_inventory"	"backpack/weapons/c_models/c_toothwrench/c_toothwrench"
+			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
 
 		}
 	}
