@@ -20,8 +20,10 @@
 			"item_type_name"	"#TF_Weapon_Shotgun"
 			"prefab"	"weapon_shotgun"
 			"item_logname"	"hl2_shotgun"
+			"item_iconname"	"hl2_shotgun"
 			"min_ilevel"	"67"
 			"max_ilevel"	"67"
+			"propername"	"0"
 
 			// Usage
 			"item_quality"	"unique"
@@ -61,9 +63,9 @@
 					"attribute_class"	"mult_spread_scale"
 					"value"	"1.15"
 				}
-				"Reload time increased" 
+				"fire rate penalty" 
 				{
-					"attribute_class"	"mult_bullets_per_shot"
+					"attribute_class"	"mult_postfiredelay"
 					"value"	"1.33"
 				}
 				"single wep deploy time increased"
@@ -71,6 +73,8 @@
 					"attribute_class"	"mult_single_wep_deploy_time"
 					"value"	"1.5"
 				}
+
+
 
 			}
 
@@ -103,6 +107,7 @@
 			"item_logname"	"frenzy_wrench"
 			"min_ilevel"	"38"
 			"max_ilevel"	"38"
+			"propername"	"0"
 
 			// Usage
 			"item_slot"		"melee"
@@ -183,6 +188,8 @@
 			"prefab"	"weapon_shovel"
 			"item_logname"	"hl2_crowbar"
 
+			"propername"	"0"
+
 			// Usage
 			"item_slot"		"melee"
 			"item_quality"	"unique"
@@ -240,7 +247,92 @@
 
 			"mouse_pressed_sound"	"Weapon_Wrench.HitBuilding_Success"
 			"drop_sound"		"Weapon_Wrench.HitBuilding_Success"
-			
+		}
+
+		"9004"
+		{
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+			"prefab"	"weapon_detonator"
+
+			// Base def
+			"name"	"DetonatorJumper"
+			"item_name"		"#TFP_WEP_DetonatorJumper"
+			"item_description"	"#TFP_WEP_DetonatorJumper_Desc"
+			"item_type_name"	"TFP_WEP_DetonatorJumper_Type"
+			"item_logname"	"detonator_jumper"
+			"item_iconname" "detonator"
+			"propername"	"0"
+
+			// Usage
+			"item_slot"	"secondary"
+			"capabilities"
+			{
+				"can_craft_count"	"0"
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"pyro"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"0"
+				"can_deal_posthumous_damage"	"0"
+				"can_deal_critical_damage"	"0"
+				"can_deal_long_distance_damage"	"0"
+				"can_deal_taunt_damage"		"1"
+			}
+			"attributes"
+			{
+				"maxammo secondary increased"
+				{
+					"attribute_class"	"mult_maxammo_secondary"
+					"value"	"2"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"0"
+				}
+				"crit mod disabled"
+				{
+					"attribute_class"	"mult_crit_chance"
+					"value"	"0"
+				}
+				"no self blast dmg"
+				{
+					"attribute_class"	"no_self_blast_dmg"
+					"value" "2"
+				}
+				"minicrit vs burning player"
+				{
+					"attribute_class"	"or_minicrit_vs_playercond_burning"
+					"value"	"0"
+				}				
+				"cannot pick up intelligence"
+				{
+					"attribute_class"	"cannot_pick_up_intelligence"
+					"value"				"1"
+				}
+			}
+
+
+			// Visuals
+			"visuals"
+			{
+				"sound_single_shot"	"Weapon_Rocket_Jumper.Single"				
+				"sound_special1"	"Weapon_Detonator.Detonate"
+				"sound_special2"	"Weapon_Detonator.DetonateWorld"
+			}
+			"inspect_panel_dist" "40"
+			"model_player"	"models/weapons/c_models/c_rocketjumper/c_rocketjumper.mdl"			
+			"image_inventory"	"backpack/workshop/weapons/c_models/c_detonator/c_detonator"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
 		}
 
 	}

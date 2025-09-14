@@ -1,0 +1,18 @@
+#base mod_textures.txt
+
+"sprites/640_hud"
+{
+	TextureData
+	{
+		"hl2_shotgun"
+		{
+			"dfile"	"hud/killicons/hl2_shotgun"
+			"dnegfile"	"HUD/killicons/hl2_shotgun_neg"
+			"x"		"0"
+			"y"		"0"
+			"width"		"96"
+			"height"	"32"
+		}
+	}
+}
+	
