@@ -163,9 +163,83 @@
 			// Visuals
 			"inspect_panel_dist" "40"
 			"model_player"	"models/weapons/c_models/c_toothwrench/c_toothwrench.mdl"
-			//"image_inventory"	"backpack/weapons/c_models/c_toothwrench/c_toothwrench"
+			"image_inventory"	"backpack/weapons/c_models/c_toothwrench/c_toothwrench"
+			"image_inventory_size_w"		"110"
+			"image_inventory_size_h"		"110"
 			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
 			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+			
+		}
+		"9003"
+		{
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			// Base def
+			"name"	"HL2Crowbar"
+			"item_name"		"#TFP_WEP_HL2Crowbar"
+			"item_description"	"#TFP_WEP_HL2Crowbar_Desc"
+			"item_type_name"	"TFP_WEP_HL2Crowbar_Type"
+			"prefab"	"weapon_shovel"
+			"item_logname"	"hl2_crowbar"
+
+			// Usage
+			"item_slot"		"melee"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"soldier"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+			}
+			"attributes"
+			{
+				"fire rate bonus"
+				{
+					"attribute_class"	"mult_postfiredelay"
+					"value"	"0.6"
+				}
+				"dmg bonus vs buildings"
+				{
+					"attribute_class"	"mult_dmg_vs_buildings"
+					"value"	"1.33"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"0.8"
+				}
+				"allowed in medieval mode"
+				{
+					"attribute_class"	"allowed_in_medieval_mode"
+					"value"	"1"
+				}
+			}
+
+			// Visuals
+			"visuals"
+			{
+				"sound_melee_hit"		"Weapon_Wrench.HitBuilding_Success"
+				"sound_melee_hit_world"	"Weapon_Wrench.HitBuilding_Success"
+				"sound_melee_miss"	"Weapon_PickAxe.Swing"
+			}
+			"inspect_panel_dist" "40"
+			"model_player"	"models/weapons/c_models/c_toothwrench/c_toothwrench.mdl"
+			"image_inventory"	"backpack/weapons/c_models/c_toothwrench/c_toothwrench"
+
+			"mouse_pressed_sound"	"Weapon_Wrench.HitBuilding_Success"
+			"drop_sound"		"Weapon_Wrench.HitBuilding_Success"
 			
 		}
 
@@ -178,6 +252,7 @@
 			"items"
 			{
 				"HL2Shotgun"				"1"
+				"HL2Crowbar"				"1"
 			}
 		}
 	}
