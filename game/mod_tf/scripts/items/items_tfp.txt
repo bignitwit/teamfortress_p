@@ -4,6 +4,7 @@
 {
 	"attributes" 
 	{
+
 	}
 	"items"
 	{
@@ -144,7 +145,7 @@
 				"Construction rate decreased"
 				{
 					"attribute_class"	"mult_construction_value"
-					"value"	"0.67"
+					"value"	"0.5"
 				}
 				"crit mod disabled" 
 				{
@@ -165,7 +166,19 @@
 			//"image_inventory"	"backpack/weapons/c_models/c_toothwrench/c_toothwrench"
 			"mouse_pressed_sound"	"ui/item_metal_weapon_pickup.wav"
 			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+			
+		}
 
+	}
+	"item_sets" 
+	{
+		"hl2_soldier_pack"
+		{
+			"name"	"#TFP_Set_HL2Soldier"
+			"items"
+			{
+				"HL2Shotgun"				"1"
+			}
 		}
 	}
 }
