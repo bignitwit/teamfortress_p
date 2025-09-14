@@ -8,6 +8,7 @@
 	}
 	"items"
 	{
+		// HL2 Shotgun
 		"9001"
 		{
 			"auto_unlock"	"1"
@@ -68,6 +69,11 @@
 					"attribute_class"	"mult_postfiredelay"
 					"value"	"1.33"
 				}
+				"Reload time increased" 
+				{
+					"attribute_class"	"mult_reload_time"
+					"value"	"1.33"
+				}
 				"single wep deploy time increased"
 				{
 					"attribute_class"	"mult_single_wep_deploy_time"
@@ -90,9 +96,9 @@
 			}
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
 			"drop_sound"		"ui/item_heavy_gun_drop.wav"
-
 		}
 
+		// Frenzy Wrench
 		"9002"
 		{
 			"auto_unlock"	"1"
@@ -175,6 +181,8 @@
 			"drop_sound"		"ui/item_metal_weapon_drop.wav"
 			
 		}
+		
+		// HL2 Crowbar
 		"9003"
 		{
 			"auto_unlock"	"1"
@@ -242,13 +250,13 @@
 				"sound_melee_miss"	"Weapon_PickAxe.Swing"
 			}
 			"inspect_panel_dist" "40"
-			"model_player"	"models/weapons/c_models/c_toothwrench/c_toothwrench.mdl"
-			"image_inventory"	"backpack/weapons/c_models/c_toothwrench/c_toothwrench"
+			"model_player"	"models/weapons/c_models/v_crowbar.mdl"
 
 			"mouse_pressed_sound"	"Weapon_Wrench.HitBuilding_Success"
 			"drop_sound"		"Weapon_Wrench.HitBuilding_Success"
 		}
 
+		// Detonator Jumper
 		"9004"
 		{
 			"auto_unlock"	"1"
@@ -335,6 +343,95 @@
 			"image_inventory_size_h"		"82"
 		}
 
+		// HL2 Stunstick 
+		"9005"
+		{
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			// Base def
+			"name"	"HL2Stunstick"
+			"item_name"		"#TFP_WEP_HL2Stunstick"
+			"item_description"	"#TFP_WEP_HL2Stunstick_Desc"
+			"item_type_name"	"TFP_WEP_HL2Stunstick_Type"
+			"prefab"	"weapon_fireaxe"
+			"item_logname"	"hl2_Stunstick"
+
+			"propername"	"0"
+
+			// Usage
+			"item_slot"		"melee"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"pyro"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+			}
+
+			"attributes"
+			{
+				"mark for death"
+				{
+					"attribute_class"	"mark_for_death"
+					"value"	"1"
+				}
+				"single wep deploy time increased"
+				{
+					"attribute_class"	"mult_single_wep_deploy_time"
+					"value"	"1.5"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"0.67"
+				}
+
+
+				"allowed in medieval mode"
+				{
+					"attribute_class"	"allowed_in_medieval_mode"
+					"value"	"1"
+				}
+			}
+
+			// Visuals
+			"inspect_panel_dist" "40"
+			"image_inventory"		"backpack/workshop/weapons/c_models/c_invasion_bat/c_invasion_bat"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"		"models/workshop/weapons/c_models/c_invasion_bat/c_invasion_bat.mdl"
+			"visuals"
+			{
+				"sound_melee_miss"		"Weapon_BatSaber.Swing"
+				"sound_melee_hit"		"Weapon_BatSaber.HitFlesh"
+				"sound_melee_hit_world"		"Weapon_BatSaber.HitWorld"
+				"sound_burst"		"Weapon_BatSaber.SwingCrit"
+				"sound_deploy"		"Weapon_BatSaber.Draw"
+
+				"animation_replacement"
+				{
+					"ACT_MELEE_VM_INSPECT_START"	"ACT_MELEE_ALLCLASS_VM_INSPECT_START"
+					"ACT_MELEE_VM_INSPECT_IDLE"		"ACT_MELEE_ALLCLASS_VM_INSPECT_IDLE"
+					"ACT_MELEE_VM_INSPECT_END"		"ACT_MELEE_ALLCLASS_VM_INSPECT_END"
+				}
+
+			}
+			"mouse_pressed_sound"	"Weapon_Wrench.HitBuilding_Success"
+			"drop_sound"		"Weapon_Wrench.HitBuilding_Success"
+		}
+
 	}
 	"item_sets" 
 	{
@@ -343,8 +440,16 @@
 			"name"	"#TFP_Set_HL2Soldier"
 			"items"
 			{
-				"HL2Shotgun"				"1"
 				"HL2Crowbar"				"1"
+			}
+		}
+		"hl2_pyro_pack"
+		{
+			"name"	"#TFP_Set_HL2Pyro"
+			"items"
+			{
+				"HL2Shotgun"				"1"
+				"HL2Stunstick"				"1"
 			}
 		}
 	}
