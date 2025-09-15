@@ -76,15 +76,6 @@ END_DATADESC()
 IMPLEMENT_NETWORKCLASS_ALIASED(TFMinigun_Artillery, DT_WeaponMinigun_Artillery)
 
 BEGIN_NETWORK_TABLE(CTFMinigun_Artillery, DT_WeaponMinigun_Artillery)
-// Client specific.
-#ifdef CLIENT_DLL
-RecvPropInt(RECVINFO(m_iWeaponState)),
-RecvPropBool(RECVINFO(m_bCritShot))
-// Server specific.
-#else
-SendPropInt(SENDINFO(m_iWeaponState), 4, SPROP_UNSIGNED | SPROP_CHANGES_OFTEN),
-SendPropBool(SENDINFO(m_bCritShot))
-#endif
 END_NETWORK_TABLE()
 
 #ifdef CLIENT_DLL
@@ -1563,12 +1554,6 @@ void CTFMinigun_Artillery::OnPlayerKill(CTFPlayer* pVictim, const CTakeDamageInf
 }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 #endif
-
-
-CTFMinigun_Artillery::CTFMinigun_Artillery()
-{
-
-}
 
 int CTFMinigun_Artillery::GetCount(void)
 {

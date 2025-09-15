@@ -9,7 +9,7 @@
 			"name"	"accuracy increase on kill HIDDEN"
 			"attribute_class"	"accuracy_increase_on_kill"
 			"description_string"	"#TFP_ATR_BonusAccuracyOnKill"
-			"description_format"	"value_is_percentage"
+			"description_format"	"value_is_additive"
 			"hidden"	"1"
 			"effect_type"	"positive"
 		}
@@ -18,7 +18,7 @@
 			"name"	"firing speed increase on kill HIDDEN"
 			"attribute_class"	"firing_speed_on_kill"
 			"description_string"	"#TFP_ATR_BonusFiringSpeedOnKill"
-			"description_format"	"value_is_percentage"
+			"description_format"	"value_is_additive"
 			"hidden"	"1"
 			"effect_type"	"positive"
 		}
@@ -472,7 +472,7 @@
 			"name"	"ArtilleryMinigun"
 			"item_name"		"#TFP_WEP_ArtilleryMinigun"
 			"item_description"	"#TFP_WEP_ArtilleryMinigun_Desc"
-			"prefab"	"weapon_minigun"
+			"item_class"	"tf_weapon_minigun_artillery"
 			"item_logname"	"minigun_artillery"
 
 			"propername"	"0"
@@ -496,10 +496,17 @@
 			{
 				"can_deal_damage"			"1"
 				"can_deal_critical_damage"	"1"
+				"can_deal_mvm_penetration_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
 			}
 
 			"attributes"
 			{
+				"fixed shot pattern ring"
+				{
+					"attribute_class"	"fixed_shot_pattern_ring"
+					"value"	"1"
+				}
 				"artillery minigun on kill stats"
 				{
 					"attribute_class"	"desc_artillery_minigun"
@@ -508,22 +515,12 @@
 				"accuracy increase on kill HIDDEN"
 				{
 					"attribute_class"	"accuracy_increase_on_kill"
-					"value"	"1.1"
+					"value"	"0.0075" // From 0.08->0.05; 4 kills to max out 0.03/4
 				}
 				"firing speed increase on kill HIDDEN"
 				{
 					"attribute_class"	"firing_speed_on_kill"
-					"value"	"1.1"
-				}
-				"fixed shot pattern ring"
-				{
-					"attribute_class"	"fixed_shot_pattern_ring"
-					"value"	"1"
-				}
-				"bullets per shot bonus" // Make hidden
-				{
-					"attribute_class"	"mult_bullets_per_shot"
-					"value"	"4"
+					"value"	"0.02"
 				}
 				"maxammo primary reduced"
 				{
@@ -532,15 +529,19 @@
 				}
 				"minigun spinup time increased"
 				{
-					"attribute_class"	"mult_maxammo_primary"
+					"attribute_class"	"mult_minigun_spinup_time"
 					"value"	"1.33"
 				}
-				"damage penalty" // Make hidden
-				{
-					"attribute_class"	"mult_dmg"
-					"value"	"0.33"
-				}
+
+
 			}
+
+
+			"image_inventory"	"backpack/weapons/w_models/w_minigun"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/weapons/c_models/c_minigun/c_minigun.mdl"
+
 		}
 	}
 

@@ -1639,6 +1639,22 @@ bool CHudItemEffectMeter_Weapon<CTFSpellBook>::ShouldDraw( void )
 	return CHudItemEffectMeter::ShouldDraw();
 }
 
+//-----------------------------------------------------------------------------
+// Minigun Artillery Headcounter
+//-----------------------------------------------------------------------------
+template <>
+int CHudItemEffectMeter_Weapon<CTFMinigun_Artillery>::GetCount(void)
+{
+	CTFMinigun_Artillery* pWeapon = GetWeapon();
+	if (pWeapon)
+	{
+		return pWeapon->GetCount();
+	}
+	else
+	{
+		return 0;
+	}
+}
 
 //-----------------------------------------------------------------------------
 CHudItemEffectMeter_ItemAttribute::CHudItemEffectMeter_ItemAttribute( const char *pszElementName, C_TFPlayer *pPlayer, loadout_positions_t iLoadoutSlot, const char *pszLabelText /*= NULL*/, bool bBeeps /*= true*/ )

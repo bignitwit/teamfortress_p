@@ -221,8 +221,6 @@ class CTFMinigun_Artillery : public CTFMinigun
 			DECLARE_DATADESC();
 	#endif
 
-	CTFMinigun_Artillery();
-
 	virtual int		GetWeaponID(void) const { return TF_WEAPON_MINIGUN_ARTILLERY; }
 	const char* GetEffectLabelText(void) { return "#TF_KILLS"; }
 	virtual int		GetCount(void);

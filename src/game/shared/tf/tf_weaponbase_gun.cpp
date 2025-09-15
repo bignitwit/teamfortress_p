@@ -847,7 +847,7 @@ float CTFWeaponBaseGun::GetWeaponSpread( void )
 	CALL_ATTRIB_HOOK_FLOAT( fSpread, mult_spread_scale );
 
 
-	// Get Spread Increase per Kill
+	// Get Spread decrease per Kill
 	float fSpreadInc = 0.0f;
 	CALL_ATTRIB_HOOK_FLOAT(fSpreadInc, accuracy_increase_on_kill);
 
@@ -855,13 +855,13 @@ float CTFWeaponBaseGun::GetWeaponSpread( void )
 	
 	if ( pPlayer )
 	{
-		// Reduce spread by
-		fSpread = fSpread - (fSpreadInc * pPlayer->m_Shared.GetDecapitations());
+		float fSpreadMod = fSpreadInc * pPlayer->m_Shared.GetDecapitations();
+		fSpread -= fSpreadMod;
 
-		// Clamp min Spread to 0
-		fSpread = MAX(0.0f , fSpread);
+		//Msg("Base spread: %.1f ; Spread mod: %.2f ; Clamped %.3f ; Increment %.4f \n ", fSpread, fSpreadMod, MAX(0.0f, fSpread), fSpreadInc);
+		//Msg("Kills: %i \n", pPlayer->m_Shared.GetDecapitations());
 
-
+		fSpread = MAX(0.05f, fSpread);
 
 		if ( pPlayer->m_Shared.GetCarryingRuneType() == RUNE_PRECISION )
 		{
