@@ -18,6 +18,7 @@
 // Client specific.
 #ifdef CLIENT_DLL
 #define CTFMinigun C_TFMinigun
+#define CTFMinigun_Artillery C_TFMinigun_Artillery
 #endif
 
 #ifdef GAME_DLL
@@ -202,6 +203,33 @@ private:
 
 	MinigunState_t		m_iPrevMinigunState;
 #endif
+};
+
+//=============================================================================
+//
+// TF Weapon Minigun Artillery
+//
+class CTFMinigun_Artillery : public CTFMinigun 
+{
+	public:
+		DECLARE_CLASS(CTFMinigun_Artillery, CTFMinigun);
+		DECLARE_NETWORKCLASS();
+		DECLARE_PREDICTABLE();
+
+	// Server specific.
+	#ifdef GAME_DLL
+			DECLARE_DATADESC();
+	#endif
+
+	CTFMinigun_Artillery();
+
+	virtual int		GetWeaponID(void) const { return TF_WEAPON_MINIGUN_ARTILLERY; }
+	const char* GetEffectLabelText(void) { return "#TF_KILLS"; }
+	virtual int		GetCount(void);
+
+	#ifdef GAME_DLL
+		virtual void	OnPlayerKill(CTFPlayer* pVictim, const CTakeDamageInfo& info);
+	#endif
 };
 
 #endif // TF_WEAPON_MINIGUN_H

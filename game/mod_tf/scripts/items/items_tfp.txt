@@ -4,7 +4,42 @@
 {
 	"attributes" 
 	{
-
+		"9001"
+		{
+			"name"	"accuracy increase on kill HIDDEN"
+			"attribute_class"	"accuracy_increase_on_kill"
+			"description_string"	"#TFP_ATR_BonusAccuracyOnKill"
+			"description_format"	"value_is_percentage"
+			"hidden"	"1"
+			"effect_type"	"positive"
+		}
+		"9002"
+		{
+			"name"	"firing speed increase on kill HIDDEN"
+			"attribute_class"	"firing_speed_on_kill"
+			"description_string"	"#TFP_ATR_BonusFiringSpeedOnKill"
+			"description_format"	"value_is_percentage"
+			"hidden"	"1"
+			"effect_type"	"positive"
+		}
+		"9003"
+		{
+			"name"	"fixed shot pattern ring"
+			"attribute_class"	"fixed_shot_pattern_ring"
+			"description_string"	"#TFP_ATR_FixedShotPatternRing"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9004"
+		{
+			"name"	"artillery minigun on kill stats"
+			"attribute_class"	"desc_artillery_minigun"
+			"description_string"	"#TFP_ATR_ArtilleryMinigunOnKillDesc"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
 	}
 	"items"
 	{
@@ -79,9 +114,6 @@
 					"attribute_class"	"mult_single_wep_deploy_time"
 					"value"	"1.5"
 				}
-
-
-
 			}
 
 			// Visuals
@@ -428,11 +460,90 @@
 				}
 
 			}
-			"mouse_pressed_sound"	"Weapon_Wrench.HitBuilding_Success"
-			"drop_sound"		"Weapon_Wrench.HitBuilding_Success"
 		}
 
+		// Artillery Minigun
+		"9006"
+		{
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			// Base def
+			"name"	"ArtilleryMinigun"
+			"item_name"		"#TFP_WEP_ArtilleryMinigun"
+			"item_description"	"#TFP_WEP_ArtilleryMinigun_Desc"
+			"prefab"	"weapon_minigun"
+			"item_logname"	"minigun_artillery"
+
+			"propername"	"0"
+
+			// Usage
+			"item_slot"		"primary"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"heavy"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+			}
+
+			"attributes"
+			{
+				"artillery minigun on kill stats"
+				{
+					"attribute_class"	"desc_artillery_minigun"
+					"value"	"0"
+				}
+				"accuracy increase on kill HIDDEN"
+				{
+					"attribute_class"	"accuracy_increase_on_kill"
+					"value"	"1.1"
+				}
+				"firing speed increase on kill HIDDEN"
+				{
+					"attribute_class"	"firing_speed_on_kill"
+					"value"	"1.1"
+				}
+				"fixed shot pattern ring"
+				{
+					"attribute_class"	"fixed_shot_pattern_ring"
+					"value"	"1"
+				}
+				"bullets per shot bonus" // Make hidden
+				{
+					"attribute_class"	"mult_bullets_per_shot"
+					"value"	"4"
+				}
+				"maxammo primary reduced"
+				{
+					"attribute_class"	"mult_maxammo_primary"
+					"value"	"0.75"
+				}
+				"minigun spinup time increased"
+				{
+					"attribute_class"	"mult_maxammo_primary"
+					"value"	"1.33"
+				}
+				"damage penalty" // Make hidden
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"0.33"
+				}
+			}
+		}
 	}
+
 	"item_sets" 
 	{
 		"hl2_soldier_pack"

@@ -151,6 +151,25 @@ Vector g_vecFixedWpnSpreadPelletsWideLarge[] =
 // 	Vector( 0.f, 0.25f, 0.f ),
 };
 
+// 12, Ring
+Vector g_vecFixedWpnSpreadRing[] =
+{
+	Vector(1.0f, 0.0f, 0.0f),
+	Vector(0.866f, 0.5f, 0.0f),
+	Vector(0.5f, 0.866f, 0.0f),
+	Vector(0.0f, 1.0f, 0.0f),
+
+	Vector(-0.5f, 0.866f, 0.0f),
+	Vector(-0.866f, 0.5f, 0.0f),
+	Vector(-1.0f, 0.0f, 0.0f),
+	Vector(-0.866f, -0.5f, 0.0f),
+
+	Vector(-0.5f, -0.866f, 0.0f),
+	Vector(0.0f, -1.0f, 0.0f),
+	Vector(0.5f, -0.866f, 0.0f),
+	Vector(0.866f, -0.5f, 0.0f)
+};
+
 //-----------------------------------------------------------------------------
 // Purpose: This runs on both the client and the server.  On the server, it 
 // only does the damage calculations.  On the client, it does all the effects.
@@ -300,9 +319,13 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 
 	int nBulletsPerShot = pWeaponInfo->GetWeaponData( iMode ).m_nBulletsPerShot;
 	bool bFixedSpread = ( nDamageType & DMG_BUCKSHOT ) && ( nBulletsPerShot > 1 ) && IsFixedWeaponSpreadEnabled( pWpn );
+
+	int iFixedSpreadRing = 0;
 	if ( pWeapon )
 	{
 		CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pWeapon, nBulletsPerShot, mult_bullets_per_shot );
+
+		CALL_ATTRIB_HOOK_INT_ON_OTHER(pWeapon, iFixedSpreadRing, fixed_shot_pattern_ring);
 	}
 	for ( int iBullet = 0; iBullet < nBulletsPerShot; ++iBullet )
 	{
@@ -312,9 +335,11 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 		float x = 0.f;
 		float y = 0.f;
 
-		if ( bFixedSpread )
+		if ( bFixedSpread || iFixedSpreadRing)
 		{
-			if ( nBulletsPerShot >= 15 )
+
+
+			if ( nBulletsPerShot >= 15 && !iFixedSpreadRing)
 			{
 				int iSpread = iBullet;
 				while ( iSpread >= ARRAYSIZE( g_vecFixedWpnSpreadPelletsWideLarge ) )
@@ -324,6 +349,17 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 				float flScalar = 1.f;
 				x = ( g_vecFixedWpnSpreadPelletsWideLarge[iSpread].x + random->RandomFloat( -0.07f, 0.07f ) ) * flScalar;
 				y = ( g_vecFixedWpnSpreadPelletsWideLarge[iSpread].y + random->RandomFloat( -0.07f, 0.07f ) ) * flScalar;
+			}
+			else if (iFixedSpreadRing) 
+			{
+				int iSpread = iBullet;
+				while (iSpread >= ARRAYSIZE(g_vecFixedWpnSpreadRing))
+				{
+					iSpread -= ARRAYSIZE(g_vecFixedWpnSpreadRing);
+				}
+				float flScalar = 0.5f;
+				x = g_vecFixedWpnSpreadRing[iSpread].x * flScalar;
+				y = g_vecFixedWpnSpreadRing[iSpread].y * flScalar;
 			}
 			else
 			{
@@ -426,7 +462,11 @@ bool IsFixedWeaponSpreadEnabled( CTFWeaponBase *pWeapon /*= NULL*/ )
 	{
 		int iFixedSpread = 0;
 		CALL_ATTRIB_HOOK_INT_ON_OTHER( pWeapon, iFixedSpread, fixed_shot_pattern );
-		if ( iFixedSpread )
+
+		int iFixedSpreadRing = 0;
+		CALL_ATTRIB_HOOK_INT_ON_OTHER(pWeapon, iFixedSpreadRing, fixed_shot_pattern_ring);
+
+		if ( iFixedSpread || iFixedSpreadRing)
 			return true;
 	}
 

@@ -71,6 +71,40 @@ END_DATADESC()
 
 //=============================================================================
 //
+// Weapon Minigun Artillery tables.
+//
+IMPLEMENT_NETWORKCLASS_ALIASED(TFMinigun_Artillery, DT_WeaponMinigun_Artillery)
+
+BEGIN_NETWORK_TABLE(CTFMinigun_Artillery, DT_WeaponMinigun_Artillery)
+// Client specific.
+#ifdef CLIENT_DLL
+RecvPropInt(RECVINFO(m_iWeaponState)),
+RecvPropBool(RECVINFO(m_bCritShot))
+// Server specific.
+#else
+SendPropInt(SENDINFO(m_iWeaponState), 4, SPROP_UNSIGNED | SPROP_CHANGES_OFTEN),
+SendPropBool(SENDINFO(m_bCritShot))
+#endif
+END_NETWORK_TABLE()
+
+#ifdef CLIENT_DLL
+BEGIN_PREDICTION_DATA(CTFMinigun_Artillery)
+DEFINE_FIELD(m_iWeaponState, FIELD_INTEGER),
+END_PREDICTION_DATA()
+#endif
+
+LINK_ENTITY_TO_CLASS(tf_weapon_minigun_artillery, CTFMinigun_Artillery);
+PRECACHE_WEAPON_REGISTER(tf_weapon_minigun_artillery);
+
+
+// Server specific.
+#ifndef CLIENT_DLL
+BEGIN_DATADESC(CTFMinigun_Artillery)
+END_DATADESC()
+#endif
+
+//=============================================================================
+//
 // Weapon Minigun functions.
 //
 
@@ -1509,3 +1543,38 @@ void CTFMinigun::PlayStopFiringSound()
 }
 
 #endif
+
+#ifdef GAME_DLL
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+void CTFMinigun_Artillery::OnPlayerKill(CTFPlayer* pVictim, const CTakeDamageInfo& info)
+{
+	BaseClass::OnPlayerKill(pVictim, info);
+
+	CTFPlayer* pOwner = ToTFPlayer(GetOwner());
+	if (!pOwner)
+		return;
+
+	int iDecap = pOwner->m_Shared.GetDecapitations() + 1;
+	if (pVictim)
+	{
+		iDecap += pVictim->m_Shared.GetDecapitations();
+	}
+	pOwner->m_Shared.SetDecapitations(iDecap);
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+#endif
+
+
+CTFMinigun_Artillery::CTFMinigun_Artillery()
+{
+
+}
+
+int CTFMinigun_Artillery::GetCount(void)
+{
+	CTFPlayer* pOwner = ToTFPlayer(GetOwner());
+	if (!pOwner)
+		return 0;
+
+	return pOwner->m_Shared.GetDecapitations();
+}

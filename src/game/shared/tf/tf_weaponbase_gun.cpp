@@ -846,10 +846,23 @@ float CTFWeaponBaseGun::GetWeaponSpread( void )
 	float fSpread = m_pWeaponInfo->GetWeaponData( m_iWeaponMode ).m_flSpread;
 	CALL_ATTRIB_HOOK_FLOAT( fSpread, mult_spread_scale );
 
+
+	// Get Spread Increase per Kill
+	float fSpreadInc = 0.0f;
+	CALL_ATTRIB_HOOK_FLOAT(fSpreadInc, accuracy_increase_on_kill);
+
 	CTFPlayer *pPlayer = ToTFPlayer( GetPlayerOwner() ); 
 	
 	if ( pPlayer )
 	{
+		// Reduce spread by
+		fSpread = fSpread - (fSpreadInc * pPlayer->m_Shared.GetDecapitations());
+
+		// Clamp min Spread to 0
+		fSpread = MAX(0.0f , fSpread);
+
+
+
 		if ( pPlayer->m_Shared.GetCarryingRuneType() == RUNE_PRECISION )
 		{
 			if ( GetWeaponID() == TF_WEAPON_MINIGUN )
