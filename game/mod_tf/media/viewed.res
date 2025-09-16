@@ -2,7 +2,7 @@
 {
 	"ctf_2fort"
 	{
-		"viewed"		"96"
+		"viewed"		"103"
 	}
 	"itemtest"
 	{
@@ -10,6 +10,6 @@
 	}
 	"pl_badwater"
 	{
-		"viewed"		"1"
+		"viewed"		"2"
 	}
 }

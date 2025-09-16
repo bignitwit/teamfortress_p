@@ -861,7 +861,7 @@ float CTFWeaponBaseGun::GetWeaponSpread( void )
 		//Msg("Base spread: %.1f ; Spread mod: %.2f ; Clamped %.3f ; Increment %.4f \n ", fSpread, fSpreadMod, MAX(0.0f, fSpread), fSpreadInc);
 		//Msg("Kills: %i \n", pPlayer->m_Shared.GetDecapitations());
 
-		fSpread = MAX(0.04f, fSpread);
+		fSpread = MAX(fSpread * 0.5f, fSpread); // Clamp min spread from IncOnKill to half of base val
 
 		if ( pPlayer->m_Shared.GetCarryingRuneType() == RUNE_PRECISION )
 		{

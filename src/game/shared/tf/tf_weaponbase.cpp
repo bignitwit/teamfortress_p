@@ -1884,27 +1884,44 @@ float CTFWeaponBase::ApplyFireDelay( float flDelay ) const
 
 	flDelayMult -= flComboBoost;
 
+	CTFPlayer* pPlayer = ToTFPlayer(GetPlayerOwner());
+
 	// Haste Powerup Rune adds multiplier to fire delay time. Flare guns get double boost
-	CTFPlayer *pPlayer = ToTFPlayer( GetPlayerOwner() );
-	if ( pPlayer && pPlayer->m_Shared.GetCarryingRuneType() == RUNE_HASTE )
+	if ( pPlayer )
 	{
-		if ( pPlayer->IsPlayerClass( TF_CLASS_PYRO ) && GetWeaponID() == TF_WEAPON_FLAREGUN )
-		{
-			flDelayMult *= 0.25f;
+		float flDelayInc = 0.0f;
+		CALL_ATTRIB_HOOK_FLOAT(flDelayInc, firing_speed_on_kill);
+		float flDelayKillMod = flDelayInc * pPlayer->m_Shared.GetDecapitations();
+
+
+		//Msg("Base speed: %.1f ; speed mod: %.2f ; Clamped %.3f ; Increment %.4f \n", flDelayMult, flDelayKillMod, MAX(0.5, flDelayMult - flDelayKillMod), flDelayInc);
+
+		flDelayMult -= flDelayKillMod;
+
+		flDelayMult = MAX(flDelayMult * 0.5f, flDelayMult); // Clamp max change to half of base 
+
+		if (pPlayer->m_Shared.GetCarryingRuneType() == RUNE_HASTE) {
+			if (pPlayer->IsPlayerClass(TF_CLASS_PYRO) && GetWeaponID() == TF_WEAPON_FLAREGUN)
+			{
+				flDelayMult *= 0.25f;
+			}
+			else if (pPlayer->m_Shared.InCond(TF_COND_POWERUPMODE_DOMINANT))
+			{
+				flDelayMult *= 0.75f;
+			}
+			else
+			{
+				flDelayMult *= 0.50f;
+			}
 		}
-		else if ( pPlayer->m_Shared.InCond( TF_COND_POWERUPMODE_DOMINANT ) )
+		else if ((pPlayer->m_Shared.GetCarryingRuneType() == RUNE_KING || pPlayer->m_Shared.InCond(TF_COND_KING_BUFFED)))
 		{
 			flDelayMult *= 0.75f;
 		}
-		else
-		{
-			flDelayMult *= 0.50f;
-		}
+
+
 	}
-	else if ( pPlayer && ( pPlayer->m_Shared.GetCarryingRuneType() == RUNE_KING || pPlayer->m_Shared.InCond( TF_COND_KING_BUFFED ) ) )
-	{
-		flDelayMult *= 0.75f;
-	}
+
 
 	return flDelay * flDelayMult;
 }
