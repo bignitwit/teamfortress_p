@@ -515,7 +515,7 @@
 				"accuracy increase on kill HIDDEN"
 				{
 					"attribute_class"	"accuracy_increase_on_kill"
-					"value"	"0.005" // From 0.08->0.04; 8 kills to max out 0.04/8
+					"value"	"0.0075" // From 0.08->0.05; 4 kills to max out 0.03/4
 				}
 				"firing speed increase on kill HIDDEN"
 				{
