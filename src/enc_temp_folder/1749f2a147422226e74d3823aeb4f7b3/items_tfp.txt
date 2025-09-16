@@ -533,6 +533,11 @@
 					"attribute_class"	"mult_minigun_spinup_time"
 					"value"	"1.50"
 				}
+				"aiming movespeed decreased"
+				{
+					"attribute_class"	"mult_player_aiming_movespeed"
+					"value"	"0.9"
+				}
 
 			}
 
