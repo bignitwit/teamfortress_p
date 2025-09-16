@@ -473,6 +473,7 @@
 			"item_name"		"#TFP_WEP_ArtilleryMinigun"
 			"item_description"	"#TFP_WEP_ArtilleryMinigun_Desc"
 			"item_class"	"tf_weapon_minigun_artillery"
+			"item_type_name"	"#TF_Weapon_Minigun"
 			"item_logname"	"minigun_artillery"
 
 			"propername"	"0"
@@ -532,7 +533,11 @@
 					"attribute_class"	"mult_minigun_spinup_time"
 					"value"	"1.50"
 				}
-
+				"aiming movespeed decreased"
+				{
+					"attribute_class"	"mult_player_aiming_movespeed"
+					"value"	"0.9"
+				}
 
 			}
 
