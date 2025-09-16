@@ -514,3 +514,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/game/mod_tf/media/viewed.res
+/game/mod_tf/cfg/settings.scr
+/game/mod_tf/tf2_playerstats.dmx
+/game/mod_tf/GameState.txt
