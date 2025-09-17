@@ -518,3 +518,4 @@ FodyWeavers.xsd
 /game/mod_tf/cfg/settings.scr
 /game/mod_tf/tf2_playerstats.dmx
 /game/mod_tf/GameState.txt
+/game/mod_tf/cfg/local_loadout.txt
