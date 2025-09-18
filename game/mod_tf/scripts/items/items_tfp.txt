@@ -58,7 +58,6 @@
 			"item_class"	"tf_weapon_shotgun"
 			"item_logname"	"hl2_shotgun"
 			"item_iconname"	"hl2_shotgun"
-
 			"propername"	"1"
 
 			// Usage
@@ -66,7 +65,7 @@
 
 			"capabilities"
 			{
-				"nameable"	"1"
+				"nameable"	"0"
 			}
 			"used_by_classes"
 			{
@@ -137,7 +136,6 @@
 			"item_type_name"	"#TF_Weapon_Wrench"
 			"item_class"	"tf_weapon_wrench"
 			"item_logname"	"frenzy_wrench"
-
 			"propername"	"1"
 
 			// Usage
@@ -435,14 +433,15 @@
 
 		}
 
-		// Artillery Minigun
+		// One-Man Army
 		"9006"
 		{
+			"enabled"	"1"
 			"auto_unlock"	"1"
 			"show_in_armory"	"1"
 
 			// Base def
-			"name"	"ArtilleryMinigun"
+			"name"	"The One-Man Army"
 			"item_name"		"#TFP_WEP_ArtilleryMinigun"
 			"item_description"	"#TFP_WEP_ArtilleryMinigun_Desc"
 			"item_class"	"tf_weapon_minigun_artillery"
@@ -505,9 +504,8 @@
 				"minigun spinup time increased"
 				{
 					"attribute_class"	"mult_minigun_spinup_time"
-					"value"	"1.50"
+					"value"	"1.60"
 				}
-
 
 			}
 			
