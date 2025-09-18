@@ -69,10 +69,8 @@
 			}
 			"used_by_classes"
 			{
-				"soldier"	"secondary"
-				"pyro"	"secondary"
-				"engineer"	"primary"
-				"heavy"	"secondary"
+				"soldier"	"1"
+				"pyro"	"1"
 			}
 
 
@@ -167,11 +165,6 @@
 				{
 					"attribute_class"	"mult_repair_value"
 					"value"	"1.33"
-				}
-				"dmg bonus vs buildings"
-				{
-					"attribute_class"	"mult_dmg_vs_buildings"
-					"value"	"1.20"
 				}
 				"damage penalty"
 				{
@@ -408,11 +401,6 @@
 					"attribute_class"	"mult_onhit_enemyspeed_major"
 					"value"	"3"
 				}
-				"single wep deploy time increased"
-				{
-					"attribute_class"	"mult_single_wep_deploy_time"
-					"value"	"1.5"
-				}
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
@@ -442,6 +430,7 @@
 				}
 
 			}
+
 		}
 
 		// One-Man Army
@@ -535,7 +524,7 @@
 			"image_inventory"	"backpack/weapons/w_models/w_minigun"
 			"image_inventory_size_w"		"128"
 			"image_inventory_size_h"		"82"
-			"model_player"	"models/workshop/weapons/c_models/c_liberty_launcher/c_liberty_launcher.mdl"
+			"model_player"	"models/weapons/c_models/c_treadmill/c_treadmill.mdl"
 
 		}
 	}
