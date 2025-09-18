@@ -46,6 +46,7 @@
 		// HL2 Shotgun
 		"9001"
 		{
+			"enabled"	"1"
 			"auto_unlock"	"1"
 			"show_in_armory"	"1"
 
@@ -54,11 +55,10 @@
 			"item_name"		"#TFP_WEP_HL2Shotgun"
 			"item_description"	"#TFP_WEP_HL2Shotgun_Desc"
 			"item_type_name"	"#TF_Weapon_Shotgun"
-			"prefab"	"weapon_shotgun"
+			"item_class"	"tf_weapon_shotgun"
 			"item_logname"	"hl2_shotgun"
 			"item_iconname"	"hl2_shotgun"
-			"min_ilevel"	"67"
-			"max_ilevel"	"67"
+
 			"propername"	"1"
 
 			// Usage
@@ -70,10 +70,8 @@
 			}
 			"used_by_classes"
 			{
-				"soldier"	"secondary"
-				"pyro"	"secondary"
-				"engineer"	"primary"
-				"heavy"	"secondary"
+				"soldier"	"1"
+				"pyro"	"1"
 			}
 
 
@@ -104,15 +102,10 @@
 					"attribute_class"	"mult_postfiredelay"
 					"value"	"1.33"
 				}
-				"Reload time increased" 
-				{
-					"attribute_class"	"mult_reload_time"
-					"value"	"1.33"
-				}
 				"single wep deploy time increased"
 				{
 					"attribute_class"	"mult_single_wep_deploy_time"
-					"value"	"1.5"
+					"value"	"1.33"
 				}
 			}
 
@@ -133,6 +126,7 @@
 		// Frenzy Wrench
 		"9002"
 		{
+			"enabled"	"1"
 			"auto_unlock"	"1"
 			"show_in_armory"	"1"
 
@@ -141,10 +135,9 @@
 			"item_name"		"#TFP_WEP_FrenzyWrench"
 			"item_description"	"#TFP_WEP_FrenzyWrench_Desc"
 			"item_type_name"	"#TF_Weapon_Wrench"
-			"prefab"	"weapon_wrench"
+			"item_class"	"tf_weapon_wrench"
 			"item_logname"	"frenzy_wrench"
-			"min_ilevel"	"38"
-			"max_ilevel"	"38"
+
 			"propername"	"1"
 
 			// Usage
@@ -175,11 +168,6 @@
 					"attribute_class"	"mult_repair_value"
 					"value"	"1.33"
 				}
-				"dmg bonus vs buildings"
-				{
-					"attribute_class"	"mult_dmg_vs_buildings"
-					"value"	"1.20"
-				}
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
@@ -188,12 +176,7 @@
 				"Construction rate decreased"
 				{
 					"attribute_class"	"mult_construction_value"
-					"value"	"0.5"
-				}
-				"crit mod disabled" 
-				{
-					"attribute_class"	"mult_crit_chance"
-					"value"	"0"
+					"value"	"0.8"
 				}
 				"special taunt"
 				{
@@ -217,6 +200,7 @@
 		// HL2 Crowbar
 		"9003"
 		{
+			"enabled"	"1"
 			"auto_unlock"	"1"
 			"show_in_armory"	"1"
 
@@ -225,7 +209,7 @@
 			"item_name"		"#TFP_WEP_HL2Crowbar"
 			"item_description"	"#TFP_WEP_HL2Crowbar_Desc"
 			"item_type_name"	"TFP_WEP_HL2Crowbar_Type"
-			"prefab"	"weapon_shovel"
+			"item_class"	"tf_weapon_shovel"
 			"item_logname"	"hl2_crowbar"
 			"item_iconname"	"skull_tf"
 
@@ -287,6 +271,7 @@
 		// Detonator Jumper
 		"9004"
 		{
+			"enabled"	"1"
 			"auto_unlock"	"1"
 			"show_in_armory"	"1"
 			"prefab"	"weapon_detonator"
@@ -375,6 +360,7 @@
 		// HL2 Stunstick 
 		"9005"
 		{
+			"enabled"	"1"
 			"auto_unlock"	"1"
 			"show_in_armory"	"1"
 
@@ -383,8 +369,8 @@
 			"item_name"		"#TFP_WEP_HL2Stunstick"
 			"item_description"	"#TFP_WEP_HL2Stunstick_Desc"
 			"item_type_name"	"TFP_WEP_HL2Stunstick_Type"
-			"prefab"	"weapon_fireaxe"
-			"item_logname"	"hl2_Stunstick"
+			"item_class"	"tf_weapon_fireaxe"
+			"item_logname"	"hl2_stunstick"
 			"item_iconname"	"skull_tf"
 
 			"propername"	"1"
@@ -414,13 +400,8 @@
 			{
 				"slow enemy on hit major"
 				{
-					"attribute_class"	"mark_for_death"
-					"value"	"4"
-				}
-				"single wep deploy time increased"
-				{
-					"attribute_class"	"mult_single_wep_deploy_time"
-					"value"	"1.5"
+					"attribute_class"	"mult_onhit_enemyspeed_major"
+					"value"	"3"
 				}
 				"damage penalty"
 				{
@@ -451,6 +432,7 @@
 				}
 
 			}
+
 		}
 
 		// Artillery Minigun
@@ -544,7 +526,7 @@
 			"image_inventory"	"backpack/weapons/w_models/w_minigun"
 			"image_inventory_size_w"		"128"
 			"image_inventory_size_h"		"82"
-			"model_player"	"models/workshop/weapons/c_models/c_liberty_launcher/c_liberty_launcher.mdl"
+			"model_player"	"models/weapons/c_models/c_treadmill/c_treadmill.mdl"
 
 		}
 	}
