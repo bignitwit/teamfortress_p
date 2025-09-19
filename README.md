@@ -44,7 +44,7 @@ Classes: **Pyro**
 
 Type: **Minigun**
 Classes: **Heavy**  
-Credits: [**Model**](https://steamcommunity.com/sharedfiles/filedetails/?id=229943267))
+Credits: [**Model**](https://steamcommunity.com/sharedfiles/filedetails/?id=697431003))
 
 * Spins up slower
 * Has less ammo
