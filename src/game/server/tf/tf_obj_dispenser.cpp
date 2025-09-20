@@ -523,8 +523,14 @@ bool CObjectDispenser::DispenseAmmo( CTFPlayer *pPlayer )
 	int iTotalPickedUp = 0;
 	int iAmmoToAdd = 0;
 
+
 	int nNoPrimaryAmmoFromDispensersWhileActive = 0;
 	CALL_ATTRIB_HOOK_INT_ON_OTHER( pPlayer->GetActiveWeapon(), nNoPrimaryAmmoFromDispensersWhileActive, no_primary_ammo_from_dispensers );
+
+
+	int nNoSecondaryAmmoFromDispensersWhileActive = 0;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(pPlayer->GetActiveWeapon(), nNoSecondaryAmmoFromDispensersWhileActive, no_secondary_ammo_from_dispensers);
+
 
 	float flAmmoRate = g_flDispenserAmmoRates[GetUpgradeLevel()];
 
@@ -537,9 +543,12 @@ bool CObjectDispenser::DispenseAmmo( CTFPlayer *pPlayer )
 		iTotalPickedUp += pPlayer->GiveAmmo( iAmmoToAdd, TF_AMMO_PRIMARY, !m_bPlayAmmoPickupSound, kAmmoSource_DispenserOrCart );
 	}
 
-	// secondary
-	iAmmoToAdd = (int)( pPlayer->GetMaxAmmo( TF_AMMO_SECONDARY ) * flAmmoRate );
-	iTotalPickedUp += pPlayer->GiveAmmo( iAmmoToAdd, TF_AMMO_SECONDARY, !m_bPlayAmmoPickupSound, kAmmoSource_DispenserOrCart );
+	if (nNoSecondaryAmmoFromDispensersWhileActive == 0)
+	{
+		// secondary
+		iAmmoToAdd = (int)( pPlayer->GetMaxAmmo( TF_AMMO_SECONDARY ) * flAmmoRate );
+		iTotalPickedUp += pPlayer->GiveAmmo( iAmmoToAdd, TF_AMMO_SECONDARY, !m_bPlayAmmoPickupSound, kAmmoSource_DispenserOrCart );
+	}
 
 	// metal
 	int iNoMetalFromDispenserWhileActive = 0;

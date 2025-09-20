@@ -40,6 +40,74 @@
 			"hidden"	"0"
 			"effect_type"	"positive"
 		}
+		"9005"
+		{
+			"name"	"sticky auto detonate mode"
+			"attribute_class"	"set_detonate_mode"
+			"description_string"	"#TFP_ATR_StickyAutoDetonateMode"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"negative"
+		}
+		"9006"
+		{
+			"name"	"auto fires full clip STICKIES"
+			"attribute_class"	"auto_fires_full_clip"
+			"description_string"	"#TFP_ATR_AutoFiresFullClipStickies"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"1"
+		}
+		"9007"
+		{
+			"name"	"can overload STICKIES"
+			"attribute_class"	"can_overload"
+			"description_string"	"#TFP_ATR_CanOverloadStickies"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"1"
+		}
+		"9008"
+		{
+			"name"	"no secondary ammo from dispensers while active"
+			"attribute_class"	"no_secondary_ammo_from_dispensers"
+			"description_string"	"#TFP_ATR_NoSecondaryAmmoFromDispenserWhileActive"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"negative"
+			"stored_as_integer"	"1"
+		}
+		"9009"
+		{
+			"name"	"stickybomb charge disable"
+			"attribute_class"	"stickybomb_charge_disable"
+			"description_string"	"#TFP_ATR_StickyDisableCharge"
+			"description_format"	"value_is_additive"
+			"hidden"	"1"
+			"effect_type"	"negative"
+			"stored_as_integer"	"1"
+		}
+		"9010" // Spaghetti
+		{
+			"name"	"stickybomb charge rate HIDDEN"
+			"attribute_class"	"stickybomb_charge_rate"
+			"description_string"	"#Attrib_stickybomb_charge_rate"
+			"description_format"	"value_is_inverted_percentage"
+			"hidden"	"1"
+			"effect_type"	"positive"
+		}
+		"9011"
+		{
+			"name"	"max pipebombs decreased HIDDEN"
+			"attribute_class"	"add_max_pipebombs"
+			"description_string"	"#Attrib_MaxPipebombs_Decreased"
+			"description_format"	"value_is_additive"
+			"hidden"	"1"
+			"effect_type"	"negative"
+			"stored_as_integer"	"0"
+		}
 	}
 	"items"
 	{
@@ -521,6 +589,97 @@
 			"image_inventory_size_w"		"128"
 			"image_inventory_size_h"		"82"
 			"model_player"	"models/weapons/c_models/c_treadmill/c_treadmill.mdl"
+
+		}
+		// CarpetBomber
+		"9007"
+		{
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			// Base def
+			"name"	"CarpetBomber"
+			"item_name"		"#TFP_WEP_CarpetBomber"
+			"item_description"	"#TFP_WEP_CarpetBomber_Desc"
+			"item_class"	"tf_weapon_pipebomblauncher"
+			"item_logname"	"carpet_bomber"
+			"item_iconname"	"skull_tf"
+			"propername"	"1"
+
+			// Usage
+			"item_slot"		"secondary"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"demoman"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"		"1"
+				"can_deal_gib_damage"	"1"
+				"can_be_equipped_by_soldier_or_demo"	"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+			"attributes"
+			{
+				"auto fires full clip STICKIES"
+				{
+					"attribute_class"	"auto_fires_full_clip"
+					"value"	"1"
+				}
+				"can overload STICKIES"
+				{
+					"attribute_class"	"can_overload"
+					"value"	"1"
+				}
+				"no secondary ammo from dispensers while active"
+				{
+					"attribute_class"	"no_secondary_ammo_from_dispensers"
+					"value"	"1"
+				}
+				"clip size penalty HIDDEN"
+				{
+					"attribute_class"	"mult_clipsize"
+					"value"	"0.75"
+				}
+				"max pipebombs decreased HIDDEN"
+				{
+					"attribute_class"	"add_max_pipebombs"
+					"value"	"-2"
+				}
+				"projectile spread angle penalty"
+				{
+					"attribute_class"	"projectile_spread_angle"
+					"value"	"3"
+				}
+				"stickybomb charge disable"
+				{
+					"attribute_class"	"stickybomb_charge_disable"
+					"value"	"1"
+				}
+				"fire rate bonus HIDDEN"
+				{
+					"attribute_class"	"mult_postfiredelay"
+					"value"	"0.70"
+				}
+				"stickybomb charge rate HIDDEN"
+				{
+					"attribute_class"	"stickybomb_charge_rate"
+					"value"	"0.001"
+				}
+
+			}
+
 
 		}
 	}

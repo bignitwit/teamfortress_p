@@ -198,7 +198,7 @@ void CTFPipebombLauncher::PrimaryAttack( void )
 		return;
 	}
 
-	if ( m_flChargeBeginTime <= 0 )
+	if ( m_flChargeBeginTime <= 0)
 	{
 		// Set the weapon mode.
 		m_iWeaponMode = TF_WEAPON_PRIMARY_MODE;
@@ -214,6 +214,8 @@ void CTFPipebombLauncher::PrimaryAttack( void )
 	}
 	else
 	{
+		//if (!CanCharge()) { m_flChargeBeginTime = gpGlobals->curtime + GetChargeMaxTime(); }
+
 		float flTotalChargeTime = gpGlobals->curtime - m_flChargeBeginTime;
 
 		if ( flTotalChargeTime >= GetChargeMaxTime() )
@@ -254,7 +256,7 @@ void CTFPipebombLauncher::WeaponIdle( void )
 	if ( !pPlayer )
 		return;
 
-	if ( m_flChargeBeginTime > 0 && m_iClip1 > 0 && (pPlayer->m_afButtonReleased & IN_ATTACK) )
+	if (m_flChargeBeginTime > 0 && m_iClip1 > 0 && (pPlayer->m_afButtonReleased & IN_ATTACK))
 	{
 		if ( m_iClip1 > 0 )
 		{
@@ -465,6 +467,14 @@ void CTFPipebombLauncher::SecondaryAttack( void )
 			}
 #endif
 		}
+
+		//if (AutoFiresFullClip()) {
+		//	m_bWantsToShoot = false;
+		//	m_bFiringWholeClip = false;
+		//	m_iClip1 = 0;
+		//	m_iClip2 = 0;
+		//}
+
 	}
 }
 
