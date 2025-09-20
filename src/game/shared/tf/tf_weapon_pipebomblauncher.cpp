@@ -660,6 +660,17 @@ bool CTFPipebombLauncher::Reload( void )
 	if ( m_flChargeBeginTime > 0 )
 		return false;
 
+	CTFPlayer* pPlayer = GetTFPlayerOwner();
+
+	if (AutoFiresFullClip())
+	{
+		if (Clip1() >= GetMaxClip1() || (Clip1() > 0 && pPlayer && pPlayer->GetAmmoCount(m_iSecondaryAmmoType) == 0))
+		{
+			Misfire();
+		}
+	}
+
+
 	return BaseClass::Reload();
 }
 
@@ -667,9 +678,12 @@ void CTFPipebombLauncher::Misfire(void)
 {
 	BaseClass::Misfire();
 
+	Msg("Try misfire!!!!!!");
+
 #ifdef GAME_DLL
 	if (CanOverload())
 	{
+		Msg("Misfire!!");
 		CTFPlayer* pPlayer = ToTFPlayer(GetPlayerOwner());
 		if (!pPlayer)
 			return;
@@ -680,6 +694,7 @@ void CTFPipebombLauncher::Misfire(void)
 			trace_t tr;
 			UTIL_TraceLine(pProjectile->GetAbsOrigin(), pPlayer->EyePosition(), MASK_SOLID, pProjectile, COLLISION_GROUP_NONE, &tr);
 			pProjectile->Detonate();
+			SecondaryAttack();
 		}
 	}
 #endif
