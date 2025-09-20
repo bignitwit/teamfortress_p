@@ -41,7 +41,7 @@
 			"effect_type"	"positive"
 		}
 		"9005"
-		{
+		{	// No implementation yet
 			"name"	"sticky auto detonate mode"
 			"attribute_class"	"set_detonate_mode"
 			"description_string"	"#TFP_ATR_StickyAutoDetonateMode"
@@ -66,7 +66,7 @@
 			"description_string"	"#TFP_ATR_CanOverloadStickies"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
-			"effect_type"	"positive"
+			"effect_type"	"negative"
 			"stored_as_integer"	"1"
 		}
 		"9008"
@@ -677,10 +677,18 @@
 					"attribute_class"	"stickybomb_charge_rate"
 					"value"	"0.001"
 				}
-
+				"Blast radius decreased"
+				{
+					"attribute_class"	"mult_explosion_radius"
+					"value"	"0.85"
+				}
 			}
 
+			"anim_slot"	"primary"
+			"model_player"	"models/weapons/c_models/c_stickybomb_launcher/c_stickybomb_launcher.mdl"
 
+			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
+			"drop_sound"		"ui/item_heavy_gun_drop.wav"
 		}
 	}
 

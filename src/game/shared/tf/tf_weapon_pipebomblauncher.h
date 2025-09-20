@@ -93,6 +93,8 @@ public:
 	virtual void AddPipeBomb( CTFGrenadePipebombProjectile *pBomb );
 	void			DeathNotice( CBaseEntity *pVictim );
 
+	virtual void	Misfire(void);
+	virtual bool	CheckReloadMisfire(void) OVERRIDE;
 
 #ifdef CLIENT_DLL
 	void		BombHighlightThink( void );
@@ -112,6 +114,7 @@ protected:
 	int				m_iPipebombCount;
 	float			m_flNextBombCheckTime;
 	bool			m_bBombThinking;
+	bool			m_bIsOverloading;
 #endif
 
 	// List of active pipebombs

@@ -91,6 +91,10 @@ CTFPipebombLauncher::CTFPipebombLauncher()
 	m_flNextBombCheckTime = 0;
 	m_bBombThinking = false;
 #endif
+
+#ifdef GAME_DLL
+	m_bIsOverloading = false;
+#endif //GAME_DLL
 }
 
 //-----------------------------------------------------------------------------
@@ -400,6 +404,7 @@ CBaseEntity *CTFPipebombLauncher::FireProjectile( CTFPlayer *pPlayer )
 		m_Pipebombs.AddToTail( hHandle );
 
 		m_iPipebombCount = m_Pipebombs.Count();
+		m_bIsOverloading = false;
 #endif
 	}
 
@@ -656,4 +661,57 @@ bool CTFPipebombLauncher::Reload( void )
 		return false;
 
 	return BaseClass::Reload();
+}
+
+void CTFPipebombLauncher::Misfire(void)
+{
+	BaseClass::Misfire();
+
+#ifdef GAME_DLL
+	if (CanOverload())
+	{
+		CTFPlayer* pPlayer = ToTFPlayer(GetPlayerOwner());
+		if (!pPlayer)
+			return;
+
+		CTFGrenadePipebombProjectile* pProjectile = static_cast<CTFGrenadePipebombProjectile*>(FireProjectile(pPlayer));
+		if (pProjectile)
+		{
+			trace_t tr;
+			UTIL_TraceLine(pProjectile->GetAbsOrigin(), pPlayer->EyePosition(), MASK_SOLID, pProjectile, COLLISION_GROUP_NONE, &tr);
+			pProjectile->Detonate();
+		}
+	}
+#endif
+}
+
+//-----------------------------------------------------------------------------
+bool CTFPipebombLauncher::CheckReloadMisfire(void)
+{
+	if (!CanOverload())
+		return false;
+
+#ifdef GAME_DLL
+	CTFPlayer* pPlayer = GetTFPlayerOwner();
+
+	if (m_bIsOverloading)
+	{
+		if (Clip1() > 0)
+		{
+			Misfire();
+			return true;
+		}
+		else
+		{
+			m_bIsOverloading = false;
+		}
+	}
+	else if (Clip1() >= GetMaxClip1() || (Clip1() > 0 && pPlayer && pPlayer->GetAmmoCount(m_iSecondaryAmmoType) == 0))
+	{
+		Misfire();
+		m_bIsOverloading = true;
+		return true;
+	}
+#endif // GAME_DLL
+	return false;
 }

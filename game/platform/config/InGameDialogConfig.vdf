@@ -77,7 +77,7 @@
 						"2_hidden"		"0"
 						"2_width"		"16"
 						"3_hidden"		"0"
-						"3_width"		"417"
+						"3_width"		"416"
 						"4_hidden"		"1"
 						"4_width"		"64"
 						"5_hidden"		"0"
@@ -91,7 +91,7 @@
 						"9_hidden"		"0"
 						"9_width"		"55"
 						"10_hidden"		"0"
-						"10_width"		"107"
+						"10_width"		"108"
 					}
 				}
 				"SpectateGames"
@@ -184,11 +184,11 @@
 					{
 						"lastBarWidth"		"923"
 						"0_hidden"		"0"
-						"0_width"		"823"
+						"0_width"		"822"
 						"1_hidden"		"1"
 						"1_width"		"64"
 						"2_hidden"		"0"
-						"2_width"		"101"
+						"2_width"		"102"
 					}
 				}
 			}
