@@ -2058,7 +2058,7 @@ void CObjectSentrygun::Killed( const CTakeDamageInfo &info )
 		CTFShotgun_Revenge* pShotgun = dynamic_cast<CTFShotgun_Revenge*>( pOwner->Weapon_OwnsThisID( TF_WEAPON_SENTRY_REVENGE ) );
 		if ( pShotgun )
 		{
-			pShotgun->SentryKilled( GetKills() * 2 + GetAssists() );
+			pShotgun->AvengeKilled( GetKills() * 2 + GetAssists() );
 		}
 	}
 

@@ -148,11 +148,16 @@ void CTFShotgun_Revenge::PrimaryAttack()
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
-void CTFShotgun_Revenge::SentryKilled( int iCrits )
+void CTFShotgun_Revenge::AvengeKilled( int iCrits )
 {
-	int val = 0;
-	CALL_ATTRIB_HOOK_INT( val, sentry_killed_revenge );
-	if ( val == 1 )
+	int val1 = 0;
+	CALL_ATTRIB_HOOK_INT( val1, sentry_killed_revenge );
+
+	int val2 = 0;
+	CALL_ATTRIB_HOOK_INT(val2, medic_killed_revenge);
+
+	// If can get revenge then get crits
+	if ( val1 == 1 || val2 == 1)
 	{
 		CTFPlayer *pOwner = ToTFPlayer( GetPlayerOwner() );
 		if ( pOwner )
@@ -160,6 +165,9 @@ void CTFShotgun_Revenge::SentryKilled( int iCrits )
 			pOwner->m_Shared.SetRevengeCrits( pOwner->m_Shared.GetRevengeCrits() + iCrits );
 		}
 	}
+
+
+
 }
 
 //-----------------------------------------------------------------------------
@@ -183,6 +191,7 @@ bool CTFShotgun_Revenge::Holster( CBaseCombatWeapon *pSwitchingTo )
 //-----------------------------------------------------------------------------
 bool CTFShotgun_Revenge::Deploy( void )
 {
+
 #ifdef GAME_DLL
 	CTFPlayer *pOwner = ToTFPlayer( GetOwner() );
 	if ( pOwner && pOwner->m_Shared.GetRevengeCrits() )

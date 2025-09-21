@@ -84,7 +84,7 @@ public:
 
 	void				Precache();
 	virtual void		PrimaryAttack();
-	virtual void		SentryKilled( int iKills );
+	virtual void		AvengeKilled( int iKills );
 	virtual bool		Holster( CBaseCombatWeapon *pSwitchingTo = NULL );
 	virtual bool		Deploy( void );
 	virtual int         GetCustomDamageType() const;

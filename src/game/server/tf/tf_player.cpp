@@ -11786,6 +11786,8 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 		CWeaponMedigun* pMedigun = assert_cast<CWeaponMedigun*>( Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );
 		float flChargeLevel = pMedigun ? pMedigun->GetChargeLevel() : 0.f;
 		float flMinChargeLevel = pMedigun ? pMedigun->GetMinChargeAmount() : 1.f;
+		CTFPlayer* pHealTarget = ToTFPlayer(pMedigun->GetHealTarget());
+		Msg("Heal target on death %p", pHealTarget->GetPlayerName());
 
 		bool bCharged = flChargeLevel >= flMinChargeLevel;
 
@@ -11846,6 +11848,22 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 
 			gameeventmanager->FireEvent( event );
 		}
+
+		// Revenge Crits
+		if (pHealTarget) {
+
+			CTFShotgun_Revenge* pShotgun = dynamic_cast<CTFShotgun_Revenge*>(pHealTarget->Weapon_OwnsThisID(TF_WEAPON_SENTRY_REVENGE));
+			if (pShotgun)
+			{
+				int iBaseMedKilledCrits = 2;
+				int iUberIncrementCrits = RoundFloatToInt((flChargeLevel * 100) / 25);
+				Msg("Awarding Med Revenge");
+				pShotgun->AvengeKilled(iBaseMedKilledCrits + iUberIncrementCrits);
+			}
+		}
+
+
+
 	}
 	else if ( IsPlayerClass( TF_CLASS_SOLDIER ) || IsPlayerClass( TF_CLASS_DEMOMAN ) )
 	{

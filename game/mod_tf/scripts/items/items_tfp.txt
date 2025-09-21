@@ -108,6 +108,16 @@
 			"effect_type"	"negative"
 			"stored_as_integer"	"0"
 		}
+		"9012"
+		{
+			"name"	"mod medic killed revenge CUSTOM"
+			"attribute_class"	"medic_killed_revenge"
+			"description_string"	"#TFP_ATR_MedicKilledRevenge"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"0"
+		}
 	}
 	"items"
 	{
@@ -589,7 +599,6 @@
 			"image_inventory_size_w"		"128"
 			"image_inventory_size_h"		"82"
 			"model_player"	"models/weapons/c_models/c_treadmill/c_treadmill.mdl"
-
 		}
 		// CarpetBomber
 		"9007"
@@ -689,6 +698,80 @@
 
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
 			"drop_sound"		"ui/item_heavy_gun_drop.wav"
+		}
+		// Med Revenge Shotgun 
+		"9008"
+		{
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			// Base def
+			"name"	"MedRevengeShotgun"
+			"item_name"		"#TFP_WEP_MedRevengeShotgun"
+			"item_class"	"tf_weapon_sentry_revenge"
+			"item_type_name"	"#TF_Weapon_Shotgun"
+			"item_logname"	"shotgun_medicrevenge"
+			"item_iconname"	"frontier_kill"
+			"propername"	"1"
+
+			// Usage
+			"item_slot"		"secondary"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"heavy"	"1"
+			}
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_mvm_penetration_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+
+			"attributes"
+			{
+				"mod medic killed revenge CUSTOM"
+				{
+					"attribute_class"	"medic_killed_revenge"
+					"value"	"1"
+				}
+				"overheal decay bonus"
+				{
+					"attribute_class"	"mult_medigun_overheal_decay"
+					"value"	"0.67"
+				}
+				"lose revenge crits on death DISPLAY ONLY"
+				{
+					"attribute_class"	"lose_revenge_crits_on_death_DISPLAY_ONLY"
+					"value"	"1"
+				}
+				"crit mod disabled"
+				{
+					"attribute_class"	"mult_crit_chance"
+					"value"	"0"
+				}
+				"clip size penalty"
+				{
+					"attribute_class"	"mult_clipsize"
+					"value" "0.5"
+				}
+			}
+
+			"image_inventory"	"backpack/weapons/c_models/c_frontierjustice/c_frontierjustice"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"	"models/weapons/c_models/c_frontierjustice/c_frontierjustice.mdl"
+			"anim_slot"	"secondary"
+
 		}
 	}
 
