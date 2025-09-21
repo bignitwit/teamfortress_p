@@ -129,6 +129,7 @@ const char* g_EffectTypes[NUM_EFFECT_TYPES] =
 	"neutral",		// ATTRIB_EFFECT_NEUTRAL = 0,
 	"positive",		// ATTRIB_EFFECT_POSITIVE,
 	"negative",		// ATTRIB_EFFECT_NEGATIVE,
+	"rebalance",		// ATTRIB_EFFECT_REBALANCE,
 };
 
 //-----------------------------------------------------------------------------

@@ -92,6 +92,9 @@ public:
 	float				GetProgress( void ) { return 0.f; }
 	const char*			GetEffectLabelText( void ) { return "#TF_REVENGE"; }
 
+	virtual bool CanDeploy(void);
+
+
 #ifdef CLIENT_DLL
 	virtual void		SetWeaponVisible( bool visible );
 	virtual int			GetWorldModelIndex( void );

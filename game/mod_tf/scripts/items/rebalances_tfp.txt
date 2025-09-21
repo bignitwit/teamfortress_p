@@ -1,0 +1,172 @@
+
+"items_game"
+{
+	"prefabs"
+	{
+		"hidden_by_rebalance"
+		{
+			"public_prefab"			"1"
+			"name"	"#TFP_Rebalance_Rebalanced"
+			"enabled"	"0"
+			"hidden"	"1"
+			"show_in_armory"	"0"
+			"item_slot"	"misc"
+			"item_class"		"no_entity"
+			"used_by_classes"
+			{
+				"scout"	"0"
+				"sniper"	"0"
+				"soldier"	"0"
+				"demoman"	"0"
+				"medic"	"0"
+				"heavy"	"0"
+				"spy" "0"
+				"engineer" "0"
+				"pyro" "0"
+			}
+
+			"image_inventory"	""
+			"mouse_pressed_sound"	"vo/k_lab/kl_fiddlesticks.wav"
+			"drop_sound"		"vo/k_lab/kl_fiddlesticks.wav"
+			"model_player"	"models/error.mdl"
+
+			"attributes"
+			{
+				"rebalanced disable"
+				{
+					"attribute_class"	"disable"
+					"value"	"1"
+				}
+			}
+
+		}
+	}
+	"attributes" 
+	{
+		"7000"
+		{
+			"name"	"rebalanced disable"
+			"attribute_class"	"disable"
+			"description_string"	"#TFP_Rebalance_Rebalanced"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"unusual"
+		}
+		"7001"
+		{
+			"name"	"hot hand rebalance desc"
+			"attribute_class"	"rebalance"
+			"description_string"	"#TFP_Rebalance_HotHand_Summary"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"unusual"
+		}
+	}
+	"items"
+	{
+		// Hot hand disablers
+		"1181" 
+		{
+			"prefab"	"hidden_by_rebalance"
+		}
+
+		// Hot hand rebalance
+		"10001"
+		{
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			"name"	"The Hot Hand (Rebalanced)"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+			}
+			"item_class"	"tf_weapon_slap"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"item_type_name"	"#TF_Weapon_Slap"
+			"item_name"	"#TFP_Rebalance_HotHand_Name"
+			"item_description"	"#TF_Weapon_HotHand_Desc"
+			"item_slot"	"melee"
+			"anim_slot"	"MELEE_ALLCLASS"
+			"item_quality"	"unique"
+			"item_logname"	"hot_hand"
+			"item_iconname"	"hot_hand"
+			"min_ilevel"	"1"
+			"max_ilevel"	"100"
+			"image_inventory"	"backpack/weapons/c_models/c_slapping_glove/w_slapping_glove"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"model_player"		"models/weapons/c_models/c_slapping_glove/c_slapping_glove.mdl"
+			"model_world"		"models/weapons/c_models/c_slapping_glove/w_slapping_glove.mdl"	 
+			"attach_to_hands" "1"
+			"propername"	"1"
+			"used_by_classes"
+			{
+				"pyro"	"1"
+			}
+			"static_attrs"
+			{
+				"speed_boost_on_hit_enemy"			"1.0"
+			}
+			"attributes"
+			{
+				"disable weapon hiding for animations"
+				{
+					"attribute_class"	"disable_weapon_hiding_for_animations"
+					"value"	"1"
+				}
+				"speed buff ally"
+				{
+					"attribute_class"	"speed_buff_ally"
+					"value"	"1"
+				}
+				"hot hand rebalance desc"
+				{
+					"attribute_class"	"rebalance"
+					"value"	"1"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"0.7"
+				}
+			}
+			"visuals"
+			{
+				"animation_replacement"
+				{
+					"ACT_VM_IDLE"				"ACT_ITEM3_VM_IDLE"
+					"ACT_VM_DRAW"				"ACT_ITEM3_VM_DRAW"
+					"ACT_VM_HITCENTER"			"ACT_ITEM3_VM_PRIMARYATTACK"
+					"ACT_VM_SWINGHARD"			"ACT_ITEM3_VM_PRIMARYATTACK"
+					"ACT_MELEE_VM_INSPECT_START"		"ACT_ITEM3_VM_INSPECT_START"
+					"ACT_MELEE_VM_INSPECT_IDLE"			"ACT_ITEM3_VM_INSPECT_IDLE"
+					"ACT_MELEE_VM_INSPECT_END"			"ACT_ITEM3_VM_INSPECT_END"
+
+
+					"ACT_MP_ATTACK_STAND_MELEE_ALLCLASS"		"ACT_MP_ATTACK_STAND_ITEM3"
+					"ACT_MP_ATTACK_CROUCH_MELEE_ALLCLASS"		"ACT_MP_ATTACK_CROUCH_ITEM3"
+					"ACT_MP_ATTACK_SWIM_MELEE_ALLCLASS"			"ACT_MP_ATTACK_SWIM_ITEM3"
+				}
+				"player_poseparam"
+				{
+					"r_hand_grip"		"15"
+					"r_arm"				"3"
+				}
+				"sound_deploy"	"Weapon_Slap.Draw"
+				"sound_melee_miss"	"Weapon_Slap.Swing"
+				"sound_burst"	"Weapon_Slap.SwingCrit"
+				"sound_special1"	"Weapon_Slap.SwingFire"
+				"sound_special2"	"Weapon_Slap.SwingFireCrit"
+			}
+		}
+
+
+	}
+}

@@ -1,7 +1,16 @@
 #base items_game.txt
 
+#base rebalances_tfp.txt
+
 "items_game"
 {
+	"colors"
+	{
+		"desc_attrib_rebalance"
+		{
+			"color_name"	"ItemAttribRebalance"
+		}
+	}
 	"attributes" 
 	{
 		"9001"
@@ -595,7 +604,6 @@
 				"sound_burst"	"Weapon_Gatling.FireCrit"
 			}
 
-			"image_inventory"	"backpack/weapons/w_models/w_minigun"
 			"image_inventory_size_w"		"128"
 			"image_inventory_size_h"		"82"
 			"model_player"	"models/weapons/c_models/c_treadmill/c_treadmill.mdl"
@@ -773,6 +781,8 @@
 			"anim_slot"	"secondary"
 
 		}
+
+
 	}
 
 	"item_sets" 

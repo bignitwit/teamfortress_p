@@ -266,6 +266,8 @@ CSchemaColorDefHandle g_AttribColorDefs[] =
 	CSchemaColorDefHandle( "desc_attrib_neutral" ),		// ATTRIB_COL_NEUTRAL
 	CSchemaColorDefHandle( "desc_attrib_positive" ),	// ATTRIB_COL_POSITIVE
 	CSchemaColorDefHandle( "desc_attrib_negative" ),	// ATTRIB_COL_NEGATIVE
+
+
 	CSchemaColorDefHandle( "desc_itemset_name" ),		// ATTRIB_COL_ITEMSET_NAME
 	CSchemaColorDefHandle( "desc_itemset_equipped" ),	// ATTRIB_COL_ITEMSET_EQUIPPED
 	CSchemaColorDefHandle( "desc_itemset_missing" ),	// ATTRIB_COL_ITEMSET_MISSING
@@ -286,6 +288,7 @@ CSchemaColorDefHandle g_AttribColorDefs[] =
 
 	CSchemaColorDefHandle( "desc_strange" ),			// ATTRIB_COL_STRANGE
 	CSchemaColorDefHandle( "desc_unusual" ),			// ATTRIB_COL_UNUSUAL
+	CSchemaColorDefHandle("desc_attrib_rebalance"),		// ATTRIB_COL_REBALANCE
 };
 
 COMPILE_TIME_ASSERT( ARRAYSIZE( g_AttribColorDefs ) == NUM_ATTRIB_COLORS );

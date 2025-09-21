@@ -114,6 +114,13 @@ CTFShotgun_Revenge::CTFShotgun_Revenge()
 {
 }
 
+bool CTFShotgun_Revenge::CanDeploy(void)
+{
+	return true;
+
+	return BaseClass::CanDeploy();
+}
+
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
