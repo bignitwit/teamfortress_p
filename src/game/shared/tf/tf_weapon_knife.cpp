@@ -398,6 +398,14 @@ float CTFKnife::GetMeleeDamage( CBaseEntity *pTarget, int* piDamageType, int* pi
 //-----------------------------------------------------------------------------
 bool CTFKnife::CanPerformBackstabAgainstTarget( CTFPlayer *pTarget )
 {
+
+	// Can this knife backstab?
+	int iBackstabsDisabled = 0;
+	CALL_ATTRIB_HOOK_INT(iBackstabsDisabled, disable_backstabs);
+	if (iBackstabsDisabled)
+		return false;
+
+
 	if ( !pTarget )
 		return false;
 

@@ -127,6 +127,34 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"0"
 		}
+		"9013"
+		{
+			"name"	"silent killer revolver"
+			"attribute_class"	"set_silent_killer"
+			"description_string"	"#TFP_ATR_SilentKillerRevolver"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"0"
+		}
+		"9015"
+		{
+			"name"	"farrange backattack minicrits"
+			"attribute_class"	"farrange_backattack_minicrits"
+			"description_string"	"#TFP_ATR_FarRangeMiniCritBack"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9016"
+		{
+			"name"	"disable backstabs"
+			"attribute_class"	"disable_backstabs"
+			"description_string"	"#TFP_ATR_DisableBackstabs"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"negative"
+		}
 	}
 	"items"
 	{
@@ -781,7 +809,241 @@
 			"anim_slot"	"secondary"
 
 		}
+		// HotSauce
+		"9009"
+		{
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
 
+			// Base def
+			"name"	"HotSauce"
+			"item_name"		"#TFP_WEP_HotSauce"
+			"item_type_name"	"#TF_Weapon_LunchBox"
+			"item_class"	"tf_weapon_lunchbox_drink"
+			"item_logname"	"hot_sauce"
+			"item_iconname"	"skull_tf"
+			"propername"	"1"
+
+			// Usage
+			"item_slot"		"secondary"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"scout"	"1"
+			}
+
+
+			// Stats
+			"attributes"
+			{
+				"kill eater score type"
+				{
+					"attribute_class"	"kill_eater_score_type"
+					"value" 	"50" 
+				}
+				"lunchbox adds minicrits"
+				{
+					"attribute_class"	"set_weapon_mode"
+					"value"	"8"
+				}
+				"special taunt"
+				{
+					"attribute_class"	"special_taunt"
+					"value" "1"
+				}
+				"allowed in medieval mode"
+				{
+					"attribute_class"	"allowed_in_medieval_mode"
+					"value"	"1"
+				}
+			}
+
+			"visuals"
+			{
+				"sound_deploy"	"Scout.DodgeCanOpen"
+
+				"animation_replacement"
+				{
+					"ACT_SECONDARY_VM_INSPECT_START"	"ACT_ITEM1_VM_INSPECT_START"
+					"ACT_SECONDARY_VM_INSPECT_IDLE"		"ACT_ITEM1_VM_INSPECT_IDLE"
+					"ACT_SECONDARY_VM_INSPECT_END"		"ACT_ITEM1_VM_INSPECT_END"
+				}
+
+				"player_poseparam"
+				{
+					"r_hand_grip"		"16"
+				}
+			}
+			"image_inventory"	"backpack/weapons/c_models/c_energy_drink/c_energy_drink"
+			"model_player"	"models/weapons/c_models/c_energy_drink/c_energy_drink.mdl"	
+			"anim_slot"	"ITEM1"
+			"mouse_pressed_sound"	"ui/item_soda_can_pickup.wav"
+			"drop_sound"		"ui/item_soda_can_drop.wav"
+		}
+
+		// The MIA
+		"9010"
+		{
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			// Base def
+			"name"	"The Missing In Action"
+			"item_name"		"#TFP_WEP_MIA"
+			"item_type_name"	"#TF_Weapon_Revolver"
+			"item_class"	"tf_weapon_revolver"
+			"item_logname"	"revolver_mia"
+			"item_iconname"	"skull_tf"
+			"propername"	"1"
+
+			// Usage
+			"item_slot"		"secondary"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"spy"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_mvm_penetration_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+			"attributes"
+			{
+				"silent killer revolver"
+				{
+					"attribute_class"	"set_silent_killer"
+					"value" "1"
+				}
+				"farrange backattack minicrits"
+				{
+					"attribute_class"	"farrange_backattack_minicrits"
+					"value"	"1"
+				}
+				"cloak regen rate decreased"
+				{
+					"attribute_class"	"mult_cloak_meter_regen_rate"
+					"value"	"0.85"
+				}
+				"crit mod disabled"
+				{
+					"attribute_class"	"mult_crit_chance"
+					"value"	"0"
+				}
+			}
+
+
+			"visuals"
+			{
+				"sound_single_shot"	"Weapon_UrbanProfessional.Single"
+				"sound_burst"		"Weapon_UrbanProfessional.SingleCrit"
+			}
+			"image_inventory"	"backpack/workshop/weapons/c_models/c_snub_nose/c_snub_nose"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"inspect_panel_dist" 			"32"
+			"model_player"	"models/workshop/weapons/c_models/c_snub_nose/c_snub_nose.mdl"
+			"mouse_pressed_sound"	"ui/item_light_gun_pickup.wav"
+			"drop_sound"		"ui/item_light_gun_drop.wav"
+		}
+		// Duelist
+		"9011"
+		{
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+
+			// Base def
+			"name"	"The Duelist"
+			"item_name"		"#TFP_WEP_Duelist"
+			"item_type_name"	"#TF_Weapon_Knife"
+			"item_class"	"tf_weapon_knife"
+			"item_logname"	"knife_duelist"
+			"item_iconname"	"knife_duelist"
+			"propername"	"1"
+
+			// Usage
+			"item_quality"	"unique"
+
+			"capabilities"
+			{
+				"nameable"	"0"
+			}
+			"used_by_classes"
+			{
+				"spy"	"melee"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_taunt_damage"		"1"
+			}
+			"attributes"
+			{
+				"max health additive bonus"
+				{
+					"attribute_class"	"add_maxhealth"
+					"value" "25"
+				}	
+				"damage bonus"
+				{
+					"attribute_class"	"mult_dmg"
+					"value" "1.625"
+				}	
+				"disable backstabs"
+				{
+					"attribute_class"	"disable_backstabs"
+					"value" "1"
+				}	
+				"melee range multiplier"
+				{
+					"attribute_class"	"melee_range_multiplier"
+					"value"	"1.5"
+				}
+				"melee bounds multiplier"
+				{
+					"attribute_class"	"melee_bounds_multiplier"
+					"value"	"1.25"
+				}
+				"hide enemy health"
+				{
+					"attribute_class"	"hide_enemy_health"
+					"value" "1"
+				}	
+			}
+
+			// Visuals
+			"inspect_panel_dist" "40"
+			"attach_to_hands"	"1"
+			"mouse_pressed_sound"	"ui/item_knife_small_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+			"particle_suffix"		"knife"
+
+			"mouse_pressed_sound"	"ui/item_knife_small_pickup.wav"
+			"drop_sound"		"ui/item_metal_weapon_drop.wav"
+			"particle_suffix"		"knife"
+		}
 
 	}
 
