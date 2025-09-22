@@ -54,7 +54,15 @@ public:
 
 	bool				CanPerformBackstabAgainstTarget( CTFPlayer *pTarget );		// "backstab" sometimes means "frontstab"
 	bool				IsBehindAndFacingTarget( CTFPlayer *pTarget );
-	bool				IsBackstab( void ) { return (m_hBackstabVictim.Get() != NULL); }
+	bool				IsBackstab( void ) 
+	{ 
+		if (!CanBackstab()) 
+		{
+			return false;
+		}
+		return (m_hBackstabVictim.Get() != NULL); 
+	}
+	bool				CanBackstab(void) const { int iBackstabsDisabled = 0; CALL_ATTRIB_HOOK_INT( iBackstabsDisabled, disable_backstabs ); return !iBackstabsDisabled; };
 	void				BackstabBlocked( void );
 	bool				ShouldDisguiseOnBackstab( void );
 	void				DisguiseOnKill();

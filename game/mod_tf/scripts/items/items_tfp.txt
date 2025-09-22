@@ -137,7 +137,7 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"0"
 		}
-		"9015"
+		"9014" // No work
 		{
 			"name"	"farrange backattack minicrits"
 			"attribute_class"	"farrange_backattack_minicrits"
@@ -146,7 +146,7 @@
 			"hidden"	"0"
 			"effect_type"	"positive"
 		}
-		"9016"
+		"9015"
 		{
 			"name"	"disable backstabs"
 			"attribute_class"	"disable_backstabs"
@@ -1016,16 +1016,6 @@
 					"attribute_class"	"disable_backstabs"
 					"value" "1"
 				}	
-				"melee range multiplier"
-				{
-					"attribute_class"	"melee_range_multiplier"
-					"value"	"1.5"
-				}
-				"melee bounds multiplier"
-				{
-					"attribute_class"	"melee_bounds_multiplier"
-					"value"	"1.25"
-				}
 				"hide enemy health"
 				{
 					"attribute_class"	"hide_enemy_health"

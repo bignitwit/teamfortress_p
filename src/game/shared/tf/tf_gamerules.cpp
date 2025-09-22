@@ -6289,11 +6289,12 @@ bool CTFGameRules::ApplyOnDamageModifyRules( CTakeDamageInfo &info, CBaseEntity 
 				
 				// Get minicrit range based on attributes
 				float fMiniCritRange = iMiniCritBackAttackFar ? 2560.0f : 512.0f;
+				Msg("CRIT RANGES CLOSE: %i; FAR: %i \n", iMiniCritBackAttack, iMiniCritBackAttackFar);
 
 				Vector toEnt = pVictim->GetAbsOrigin() - pTFAttacker->GetAbsOrigin();
 				if ( (iMiniCritBackAttack == 1 || iMiniCritBackAttackFar == 1) && toEnt.LengthSqr() < Square( fMiniCritRange ) )
 				{
-					Msg("Valid");
+					Msg("Valid\n");
 					Vector entForward;
 					AngleVectors( pVictim->EyeAngles(), &entForward );
 					toEnt.z = 0;

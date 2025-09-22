@@ -193,7 +193,7 @@ void CTFKnife::PrimaryAttack( void )
 #endif
 
 	trace_t trace;
-	if ( DoSwingTrace( trace ) == true )
+	if ( DoSwingTrace( trace ) == true && CanBackstab())
 	{
 		// we will hit something with the attack
 		if( trace.m_pEnt && trace.m_pEnt->IsPlayer() )
@@ -214,7 +214,7 @@ void CTFKnife::PrimaryAttack( void )
 		} 
 	}
 #ifdef GAME_DLL
-	if ( TFGameRules() && TFGameRules()->IsPowerupMode() && m_hBackstabVictim )
+	if ( TFGameRules() && TFGameRules()->IsPowerupMode() && m_hBackstabVictim && CanBackstab())
 	{
 		iBackstabVictimHealth = Max( ( m_hBackstabVictim->GetHealth() - m_hBackstabVictim->GetRuneHealthBonus() ), 75 );
 	}
@@ -240,7 +240,7 @@ void CTFKnife::PrimaryAttack( void )
 	C_CTF_GameStats.Event_PlayerFiredWeapon( pPlayer, IsCurrentAttackACrit() );
 #endif
 
-	bool bSuccessfulBackstab = IsBackstab() && !m_hBackstabVictim->IsAlive();
+	bool bSuccessfulBackstab = IsBackstab() && !m_hBackstabVictim->IsAlive() && CanBackstab();
 
 	ETFFlagType ignoreTypes[] = { TF_FLAGTYPE_PLAYER_DESTRUCTION };
 	if ( ShouldDisguiseOnBackstab() && bSuccessfulBackstab && !pPlayer->HasTheFlag( ignoreTypes, ARRAYSIZE( ignoreTypes ) ) )
@@ -352,9 +352,10 @@ float CTFKnife::GetMeleeDamage( CBaseEntity *pTarget, int* piDamageType, int* pi
 	if ( !pTFOwner )
 		return false;
 
+
 	if ( pTarget->IsPlayer() )
 	{
-		if ( IsBackstab() )
+		if ( IsBackstab() && CanBackstab())
 		{
 			CTFPlayer *pTFTarget = ToTFPlayer( pTarget );
 			// Special rules in modes where player power grows significantly
@@ -399,20 +400,11 @@ float CTFKnife::GetMeleeDamage( CBaseEntity *pTarget, int* piDamageType, int* pi
 bool CTFKnife::CanPerformBackstabAgainstTarget( CTFPlayer *pTarget )
 {
 
-	// Can this knife backstab?
-	int iBackstabsDisabled = 0;
-	CALL_ATTRIB_HOOK_INT(iBackstabsDisabled, disable_backstabs);
-	if (iBackstabsDisabled)
+	if (!CanBackstab())
 		return false;
 
 
 	if ( !pTarget )
-		return false;
-
-	// Immune?
-	int iNoBackstab = 0;
-	CALL_ATTRIB_HOOK_INT_ON_OTHER( pTarget, iNoBackstab, cannot_be_backstabbed );
-	if ( iNoBackstab )
 		return false;
 
 	// Can't backstab if attached to someone with grapple or if the victim is flying fast by grapple
@@ -458,6 +450,9 @@ bool CTFKnife::IsBehindAndFacingTarget( CTFPlayer *pTarget )
 	if ( !pOwner )
 		return false;
 
+	if (!CanBackstab())
+		return false;
+
 	// Get a vector from owner origin to target origin
 	Vector vecToTarget;
 	vecToTarget = pTarget->WorldSpaceCenter() - pOwner->WorldSpaceCenter();
@@ -495,6 +490,9 @@ bool CTFKnife::IsBehindAndFacingTarget( CTFPlayer *pTarget )
 bool CTFKnife::CalcIsAttackCriticalHelper( void )
 {
 	// Always crit from behind, never from front
+	if (!CanBackstab())
+		return false;
+
 	return IsBackstab();
 }
 
@@ -504,6 +502,10 @@ bool CTFKnife::CalcIsAttackCriticalHelper( void )
 bool CTFKnife::CalcIsAttackCriticalHelperNoCrits( void )
 {
 	// Always crit from behind, never from front
+
+	if (!CanBackstab())
+		return false;
+
 	return IsBackstab();
 }
 
@@ -528,6 +530,9 @@ void CTFKnife::SendPlayerAnimEvent( CTFPlayer *pPlayer )
 //-----------------------------------------------------------------------------
 bool CTFKnife::CanDeploy( void )
 {
+	Msg("Can backstab: %d \n", CanBackstab());
+
+
 	m_bKnifeExists = ( gpGlobals->curtime - m_flKnifeMeltTimestamp > m_flKnifeRegenerateDuration );
 
 	if ( m_bKnifeExists == false )
@@ -651,6 +656,9 @@ void CTFKnife::BackstabVMThink( void )
 	if ( pPlayer->GetActiveWeapon() != this )
 		return;
 
+	if (!CanBackstab())
+		return;
+
 	// Don't do this if we are doing something other than idling.
 //	int iIdealActivity = GetIdealActivity();
 //	if ( (iIdealActivity != ACT_VM_IDLE) && (iIdealActivity != ACT_BACKSTAB_VM_IDLE) )
@@ -664,7 +672,7 @@ void CTFKnife::BackstabVMThink( void )
 
 	// Are we in backstab range and not cloaked?
 	trace_t trace;
-	if ( DoSwingTrace( trace ) == true && CanAttack() )
+	if ( DoSwingTrace( trace ) == true && CanAttack())
 	{
 		// We will hit something if we attack.
 		if( trace.m_pEnt && trace.m_pEnt->IsPlayer() )
