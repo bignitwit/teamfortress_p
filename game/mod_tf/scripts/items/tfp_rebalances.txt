@@ -1,6 +1,13 @@
 
 "items_game"
 {
+	"colors"
+	{
+		"desc_attrib_rebalance"
+		{
+			"color_name"	"ItemAttribRebalance"
+		}
+	}
 	"prefabs"
 	{
 		"hidden_by_rebalance"
