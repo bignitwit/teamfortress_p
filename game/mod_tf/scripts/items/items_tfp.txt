@@ -11,7 +11,7 @@
 
 // Shared Stuff
 // dont put much in here
-// Use Ids 10000???
+// Use Ids 8000???
 "items_game"
 {
 

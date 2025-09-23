@@ -56,13 +56,13 @@ public:
 	bool				IsBehindAndFacingTarget( CTFPlayer *pTarget );
 	bool				IsBackstab( void ) 
 	{ 
-		if (!CanBackstab()) 
-		{
-			return false;
+		if (CanBackstab()) {
+			return (m_hBackstabVictim.Get() != NULL);
 		}
-		return (m_hBackstabVictim.Get() != NULL); 
+
+		return false;
 	}
-	bool				CanBackstab(void) const { int iBackstabsDisabled = 0; CALL_ATTRIB_HOOK_INT( iBackstabsDisabled, disable_backstabs ); return !iBackstabsDisabled; };
+	bool				CanBackstab(void);
 	void				BackstabBlocked( void );
 	bool				ShouldDisguiseOnBackstab( void );
 	void				DisguiseOnKill();

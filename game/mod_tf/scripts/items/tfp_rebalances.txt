@@ -70,7 +70,7 @@
 		}
 
 		// Hot hand rebalance
-		"10001"
+		"7001"
 		{
 			"enabled"	"1"
 			"auto_unlock"	"1"

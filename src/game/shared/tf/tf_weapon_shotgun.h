@@ -23,6 +23,7 @@
 #define CTFPEPBrawlerBlaster C_TFPEPBrawlerBlaster
 #define CTFShotgunBuildingRescue C_TFShotgunBuildingRescue
 #define CTFLeech C_TFLeech
+#define CTFShotgun_RevengeSecondary C_TFShotgun_RevengeSecondary
 #endif
 
 // Reload Modes
@@ -196,5 +197,24 @@ public:
 	virtual float   GetProjectileGravity( void );
 	virtual bool	IsViewModelFlipped( void );
 };
+
+class CTFShotgun_RevengeSecondary : public CTFShotgun_Revenge
+{
+public:
+	DECLARE_CLASS(CTFShotgun_RevengeSecondary, CTFShotgun_Revenge);
+	DECLARE_NETWORKCLASS();
+	DECLARE_PREDICTABLE();
+
+	virtual int			GetWeaponID(void) const { return TF_WEAPON_SHOTGUN_REVENGE_SECONDARY; }
+
+	void				Precache() { CTFShotgun::Precache(); }
+
+#ifdef CLIENT_DLL
+	virtual void		SetWeaponVisible(bool visible) { CTFShotgun::SetWeaponVisible(visible); }
+	virtual int			GetWorldModelIndex(void) { return CTFShotgun::GetWorldModelIndex(); }
+#endif
+
+};
+
 
 #endif // TF_WEAPON_SHOTGUN_H

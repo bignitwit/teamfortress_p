@@ -6283,18 +6283,22 @@ bool CTFGameRules::ApplyOnDamageModifyRules( CTakeDamageInfo &info, CBaseEntity 
 				int iMiniCritBackAttack = 0;
 				CALL_ATTRIB_HOOK_INT_ON_OTHER( pWeapon, iMiniCritBackAttack, closerange_backattack_minicrits );
 
-				// MiniCrit a victims back at far range
-				int iMiniCritBackAttackFar = 0;
-				CALL_ATTRIB_HOOK_INT_ON_OTHER(pWeapon, iMiniCritBackAttackFar, farrange_backattack_minicrits);
 				
-				// Get minicrit range based on attributes
-				float fMiniCritRange = iMiniCritBackAttackFar ? 2560.0f : 512.0f;
-				Msg("CRIT RANGES CLOSE: %i; FAR: %i \n", iMiniCritBackAttack, iMiniCritBackAttackFar);
+				// Custom mini-crit range attribute
+				int iMiniCritBackAttackCustomRange = 0;
+				CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pWeapon, iMiniCritBackAttackCustomRange, custom_range_backattack_minicrits);
+				
 
-				Vector toEnt = pVictim->GetAbsOrigin() - pTFAttacker->GetAbsOrigin();
-				if ( (iMiniCritBackAttack == 1 || iMiniCritBackAttackFar == 1) && toEnt.LengthSqr() < Square( fMiniCritRange ) )
+				float fMiniCritRange = 512.0f;
+
+				if (iMiniCritBackAttackCustomRange > 0) 
 				{
-					Msg("Valid\n");
+					fMiniCritRange = iMiniCritBackAttackCustomRange;
+				}
+				
+				Vector toEnt = pVictim->GetAbsOrigin() - pTFAttacker->GetAbsOrigin();
+				if ((iMiniCritBackAttack || iMiniCritBackAttackCustomRange > 0) && (toEnt.LengthSqr() < Square(fMiniCritRange)))
+				{
 					Vector entForward;
 					AngleVectors( pVictim->EyeAngles(), &entForward );
 					toEnt.z = 0;
