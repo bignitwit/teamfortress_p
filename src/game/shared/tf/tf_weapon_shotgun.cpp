@@ -36,7 +36,18 @@ CREATE_SIMPLE_WEAPON_TABLE( TFShotgun_Revenge, tf_weapon_sentry_revenge )
 CREATE_SIMPLE_WEAPON_TABLE( TFSodaPopper, tf_weapon_soda_popper )
 CREATE_SIMPLE_WEAPON_TABLE( TFPEPBrawlerBlaster, tf_weapon_pep_brawler_blaster )
 CREATE_SIMPLE_WEAPON_TABLE( TFShotgunBuildingRescue, tf_weapon_shotgun_building_rescue )
-CREATE_SIMPLE_WEAPON_TABLE( TFShotgun_RevengeSecondary, tf_weapon_shotgun_revenge_secondary)
+
+IMPLEMENT_NETWORKCLASS_ALIASED(TFShotgun_Revenge_Secondary, DT_TFShotgun_Revenge_Secondary)
+
+BEGIN_NETWORK_TABLE(CTFShotgun_Revenge_Secondary, DT_TFShotgun_Revenge_Secondary)
+END_NETWORK_TABLE()
+
+BEGIN_PREDICTION_DATA(CTFShotgun_Revenge_Secondary)
+END_PREDICTION_DATA()
+
+LINK_ENTITY_TO_CLASS(tf_weapon_shotgun_revenge_secondary, CTFShotgun_Revenge_Secondary);
+PRECACHE_WEAPON_REGISTER(tf_weapon_shotgun_revenge_secondary);
+
 
 
 
@@ -593,4 +604,10 @@ float CTFShotgunBuildingRescue::GetProjectileGravity( void )
 bool CTFShotgunBuildingRescue::IsViewModelFlipped( void )
 {
 	return !BaseClass::IsViewModelFlipped(); // Invert because arrows are backwards by default.
+}
+
+
+CTFShotgun_Revenge_Secondary::CTFShotgun_Revenge_Secondary()
+{
+	Msg("constructor \n");
 }

@@ -23,7 +23,7 @@
 #define CTFPEPBrawlerBlaster C_TFPEPBrawlerBlaster
 #define CTFShotgunBuildingRescue C_TFShotgunBuildingRescue
 #define CTFLeech C_TFLeech
-#define CTFShotgun_RevengeSecondary C_TFShotgun_RevengeSecondary
+#define CTFShotgun_Revenge_Secondary C_TFShotgun_Revenge_Secondary
 #endif
 
 // Reload Modes
@@ -198,20 +198,23 @@ public:
 	virtual bool	IsViewModelFlipped( void );
 };
 
-class CTFShotgun_RevengeSecondary : public CTFShotgun_Revenge
+class CTFShotgun_Revenge_Secondary : public CTFShotgun_Revenge
 {
 public:
-	DECLARE_CLASS(CTFShotgun_RevengeSecondary, CTFShotgun_Revenge);
+	DECLARE_CLASS(CTFShotgun_Revenge_Secondary, CTFShotgun_Revenge);
 	DECLARE_NETWORKCLASS();
 	DECLARE_PREDICTABLE();
 
+	CTFShotgun_Revenge_Secondary();
+
+	 
 	virtual int			GetWeaponID(void) const { return TF_WEAPON_SHOTGUN_REVENGE_SECONDARY; }
 
-	void				Precache() { CTFShotgun::Precache(); }
+	void Precache() { CTFShotgun::Precache(); }
 
 #ifdef CLIENT_DLL
-	virtual void		SetWeaponVisible(bool visible) { CTFShotgun::SetWeaponVisible(visible); }
-	virtual int			GetWorldModelIndex(void) { return CTFShotgun::GetWorldModelIndex(); }
+	virtual void SetWeaponVisible(bool visible) { CTFShotgun::SetWeaponVisible(visible); }
+	virtual int  GetWorldModelIndex(void) { return CTFShotgun::GetWorldModelIndex(); }
 #endif
 
 };
