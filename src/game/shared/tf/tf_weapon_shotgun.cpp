@@ -597,5 +597,5 @@ bool CTFShotgunBuildingRescue::IsViewModelFlipped( void )
 
 CTFShotgun_Revenge_Secondary::CTFShotgun_Revenge_Secondary()
 {
-	Msg("constructor \n");
+
 }

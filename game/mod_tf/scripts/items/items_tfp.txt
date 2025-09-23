@@ -154,7 +154,7 @@
 		}
 		"9016"
 		{
-			"name"	"ragdolls become cloaked"
+			"name"	"ragdolls become cloaked HIDDEN"
 			"attribute_class"	"ragdolls_become_cloaked"
 			"description_format"	"value_is_additive"
 			"hidden"	"1"
@@ -941,7 +941,7 @@
 					"attribute_class"	"set_silent_killer"
 					"value" "1"
 				}
-				"ragdolls become cloaked"
+				"ragdolls become cloaked HIDDEN"
 				{
 					"attribute_class"	"ragdolls_become_cloaked"
 					"value" "1"

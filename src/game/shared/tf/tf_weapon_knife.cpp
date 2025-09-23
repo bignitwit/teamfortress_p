@@ -180,14 +180,6 @@ void CTFKnife::PrimaryAttack( void )
 	if ( !CanAttack() )
 		return;
 
-
-	if (!CanBackstab()) 
-	{
-		BaseClass::PrimaryAttack();
-		return;
-	}
-
-
 	// Set the weapon usage mode - primary, secondary.
 	m_iWeaponMode = TF_WEAPON_PRIMARY_MODE;
 
@@ -379,12 +371,6 @@ float CTFKnife::GetMeleeDamage( CBaseEntity *pTarget, int* piDamageType, int* pi
 	if ( !pTFOwner )
 		return false;
 
-	if (!CanBackstab())
-	{
-		return flBaseDamage;
-	}
-
-
 	if ( pTarget->IsPlayer() && CanBackstab())
 	{
 		if ( IsBackstab() )
@@ -479,12 +465,6 @@ bool CTFKnife::IsBehindAndFacingTarget( CTFPlayer *pTarget )
 	CTFPlayer *pOwner = ToTFPlayer( GetPlayerOwner() );
 	if ( !pOwner )
 		return false;
-
-
-	if (!CanBackstab()) 
-	{
-		return false;
-	}
 
 	// Get a vector from owner origin to target origin
 	Vector vecToTarget;
