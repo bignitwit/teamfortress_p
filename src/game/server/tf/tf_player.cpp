@@ -12710,11 +12710,21 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 		}
 	}
 
+
+	// Cloak Corpse if the knife should disguise its user on backstab, or if its not a knife and is a silent killer
 	bool bCloakedCorpse = false;
 	if ( pKillerWeapon && pKillerWeapon->GetWeaponID() == TF_WEAPON_KNIFE )
 	{
 		CTFKnife *pKnife = dynamic_cast<CTFKnife*>( pKillerWeapon );
 		if ( pKnife && pKnife->ShouldDisguiseOnBackstab() )
+		{
+			bCloakedCorpse = true;
+		}
+	}
+	else
+	{
+		
+		if (pKillerWeapon && pKillerWeapon->IsSilentKiller())
 		{
 			bCloakedCorpse = true;
 		}
@@ -12730,6 +12740,12 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 	if ( info.GetWeapon() )
 	{
 		CALL_ATTRIB_HOOK_INT_ON_OTHER( info.GetWeapon(), iRagdollsBecomeAsh, ragdolls_become_ash );
+	}
+
+	int iRagdollsBecomeCloaked = 0;
+	if ( info.GetWeapon() )
+	{
+		CALL_ATTRIB_HOOK_INT_ON_OTHER(info.GetWeapon(), iRagdollsBecomeCloaked, ragdolls_become_cloaked);
 	}
 
 	int iRagdollsPlasmaEffect = 0;
@@ -12762,7 +12778,7 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 // 			}
 // 		}
 
-		CreateRagdollEntity( bGib, bBurning, bElectrocuted, bOnGround, bCloakedCorpse, iGoldRagdoll != 0, iIceRagdoll != 0, iRagdollsBecomeAsh != 0, iCustomDamage, ( iCritOnHardHit != 0 ) );
+		CreateRagdollEntity( bGib, bBurning, bElectrocuted, bOnGround, iRagdollsBecomeCloaked || bCloakedCorpse, iGoldRagdoll != 0, iIceRagdoll != 0, iRagdollsBecomeAsh != 0, iCustomDamage, ( iCritOnHardHit != 0 ) );
 	}
 
 
@@ -15261,8 +15277,12 @@ void CTFPlayer::DeathSound( const CTakeDamageInfo &info )
 	if ( pAttacker )
 	{
 		CTFWeaponBase *pWpn = pAttacker->GetActiveTFWeapon();
-		if ( pWpn && pWpn->IsSilentKiller() )
+		if (pWpn && pWpn->IsSilentKiller()) 
+		{
+			Msg("Dont make death sounds cuz silent killer!");
 			return;
+		}
+
 	}
 
 	int nDeathSoundOffset = DEATH_SOUND_FIRST;

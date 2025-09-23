@@ -2,7 +2,7 @@
 #base items_game.txt
 
 // Load rebalances overtop - Ids 7000
-#base tfp_rebalances.txt
+//#base tfp_rebalances.txt
 
 
 "items_game"
@@ -123,7 +123,7 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"0"
 		}
-		"9013" // needs implementation
+		"8013" // needs implementation
 		{
 			"name"	"silent killer revolver"
 			"attribute_class"	"set_silent_killer"
@@ -143,7 +143,7 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"0"
 		}
-		"9015" // no work, fix
+		"9015"
 		{
 			"name"	"disable backstabs"
 			"attribute_class"	"disable_backstabs"
@@ -151,6 +151,14 @@
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"negative"
+		}
+		"9016"
+		{
+			"name"	"ragdolls become cloaked"
+			"attribute_class"	"ragdolls_become_cloaked"
+			"description_format"	"value_is_additive"
+			"hidden"	"1"
+			"effect_type"	"positive"
 		}
 	}
 	"items"
@@ -809,7 +817,7 @@
 		// HotSauce
 		"9009"
 		{
-			"enabled"	"1"
+			"enabled"	"0"
 			"auto_unlock"	"1"
 			"show_in_armory"	"1"
 
@@ -933,10 +941,15 @@
 					"attribute_class"	"set_silent_killer"
 					"value" "1"
 				}
+				"ragdolls become cloaked"
+				{
+					"attribute_class"	"ragdolls_become_cloaked"
+					"value" "1"
+				}
 				"custom range backattack minicrits"
 				{
 					"attribute_class"	"custom_range_backattack_minicrits"
-					"value"	"2048.0"
+					"value"	"1536"
 				}
 				"cloak regen rate decreased"
 				{

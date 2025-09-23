@@ -12809,7 +12809,7 @@ void CTFGameRules::DeathNotice( CBasePlayer *pVictim, const CTakeDamageInfo &inf
 	if ( pAttacker )
 	{
 		CTFWeaponBase *pWpn = pAttacker->GetActiveTFWeapon();
-		if ( pWpn && pWpn->IsSilentKiller() && ( info.GetDamageCustom() == TF_DMG_CUSTOM_BACKSTAB ) )
+		if ( pWpn && pWpn->IsSilentKiller() )
 			bSilentKill = true;
 	}
 

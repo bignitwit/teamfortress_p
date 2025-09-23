@@ -6101,6 +6101,7 @@ bool CTFWeaponBase::IsSilentKiller()
 {
 	int iSilentKiller = 0;
 	CALL_ATTRIB_HOOK_INT( iSilentKiller, set_silent_killer );
+
 	if ( iSilentKiller == 1 )
 		return true;
 	else

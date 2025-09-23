@@ -389,7 +389,6 @@ float CTFKnife::GetMeleeDamage( CBaseEntity *pTarget, int* piDamageType, int* pi
 	{
 		if ( IsBackstab() )
 		{
-			Msg("Backstabbed\n");
 			CTFPlayer *pTFTarget = ToTFPlayer( pTarget );
 			// Special rules in modes where player power grows significantly
 			if ( !pTFOwner->IsBot() && pTFTarget && pTFTarget->IsMiniBoss() )
@@ -484,7 +483,6 @@ bool CTFKnife::IsBehindAndFacingTarget( CTFPlayer *pTarget )
 
 	if (!CanBackstab()) 
 	{
-		Msg("Can't backstab, so not fail behind and facing check");
 		return false;
 	}
 
@@ -560,8 +558,6 @@ void CTFKnife::SendPlayerAnimEvent( CTFPlayer *pPlayer )
 //-----------------------------------------------------------------------------
 bool CTFKnife::CanDeploy( void )
 {
-	Msg("Can backstab: %d \n", CanBackstab());
-
 
 	m_bKnifeExists = ( gpGlobals->curtime - m_flKnifeMeltTimestamp > m_flKnifeRegenerateDuration );
 

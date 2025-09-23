@@ -95,6 +95,8 @@ public:
 
 	virtual void	Misfire(void);
 	virtual bool	CheckReloadMisfire(void) OVERRIDE;
+	bool			m_bIsOverloading;
+
 
 #ifdef CLIENT_DLL
 	void		BombHighlightThink( void );
@@ -114,7 +116,7 @@ protected:
 	int				m_iPipebombCount;
 	float			m_flNextBombCheckTime;
 	bool			m_bBombThinking;
-	bool			m_bIsOverloading;
+
 #endif
 
 	// List of active pipebombs
