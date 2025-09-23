@@ -1751,6 +1751,21 @@ wpntranslation_class_weapons_t pszWpnEntTranslationList[] =
 			"tf_weapon_revolver_secondary",		// TF_CLASS_ENGINEER,		
 		}
 	},
+	{
+		"tf_weapon_shotgun_revenge",
+		{
+			"",											// TF_CLASS_UNDEFINED = 0,
+			"",			// TF_CLASS_SCOUT,
+			"",			// TF_CLASS_SNIPER,
+			"tf_weapon_shotgun_revenge_secondary",			// TF_CLASS_SOLDIER,
+			"",				// TF_CLASS_DEMOMAN,
+			"",			// TF_CLASS_MEDIC,
+			"tf_weapon_shotgun_revenge_secondary",			// TF_CLASS_HEAVYWEAPONS
+			"tf_weapon_shotgun_revenge_secondary",			// TF_CLASS_PYRO,
+			"",				// TF_CLASS_SPY,
+			"tf_weapon_sentry_revenge",		// TF_CLASS_ENGINEER,		
+		}
+	},
 };
 
 //-----------------------------------------------------------------------------
