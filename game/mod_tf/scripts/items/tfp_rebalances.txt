@@ -12,6 +12,7 @@
 	{
 		"hidden_by_rebalance"
 		{
+
 			"public_prefab"			"1"
 			"name"	"#TFP_Rebalance_Rebalanced"
 			"enabled"	"0"
@@ -37,7 +38,6 @@
 					"value"	"1"
 				}
 			}
-
 		}
 	}
 	"attributes" 

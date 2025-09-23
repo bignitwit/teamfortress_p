@@ -2,11 +2,28 @@
 #base items_game.txt
 
 // Load rebalances overtop - Ids 7000
-//#base tfp_rebalances.txt
+#base tfp_rebalances.txt
 
 
 "items_game"
 {
+	"prefabs"
+	{
+		"tfp"
+		{
+			"public_prefab"			"1"
+
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
+		}
+		"tfp_customitem"
+		{
+			"prefab"	"tfp"
+			"public_prefab"			"1"
+
+		}
+	}
 	"attributes" 
 	{
 		"9001"
@@ -166,9 +183,7 @@
 		// HL2 Shotgun
 		"9001"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"HL2Shotgun"
@@ -245,9 +260,7 @@
 		// Frenzy Wrench
 		"9002"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"FrenzyWrench"
@@ -391,6 +404,8 @@
 			"enabled"	"1"
 			"auto_unlock"	"1"
 			"show_in_armory"	"1"
+
+
 			"prefab"	"weapon_detonator"
 
 			// Base def
