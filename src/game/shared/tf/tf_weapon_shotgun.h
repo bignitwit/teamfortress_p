@@ -85,7 +85,7 @@ public:
 
 	void				Precache();
 	virtual void		PrimaryAttack();
-	virtual void		AvengeKilled( int iKills );
+	virtual void		AvengeKilled( int iKills , int iRevengeSource);
 	virtual bool		Holster( CBaseCombatWeapon *pSwitchingTo = NULL );
 	virtual bool		Deploy( void );
 	virtual int         GetCustomDamageType() const;
@@ -207,17 +207,8 @@ public:
 
 	CTFShotgun_Revenge_Secondary();
 
-	 
 	virtual int			GetWeaponID(void) const { return TF_WEAPON_SHOTGUN_REVENGE_SECONDARY; }
 	virtual int			GetSlot(void) const;
-
-	void Precache() { CTFShotgun::Precache(); }
-
-#ifdef CLIENT_DLL
-	virtual void SetWeaponVisible(bool visible) { CTFShotgun::SetWeaponVisible(visible); }
-	virtual int  GetWorldModelIndex(void) { return CTFShotgun::GetWorldModelIndex(); }
-#endif
-
 };
 
 

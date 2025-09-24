@@ -11788,8 +11788,6 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 		float flMinChargeLevel = pMedigun ? pMedigun->GetMinChargeAmount() : 1.f;
 		bool bCharged = flChargeLevel >= flMinChargeLevel;
 
-
-		/* -- FIX
 		CTFPlayer* pHealTarget = nullptr;
 		if (pMedigun->GetHealTarget())
 		{
@@ -11801,7 +11799,7 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 
 
 		// Revenge Crits
-		if (pHealTarget) 
+		if (pHealTarget)
 		{
 
 			CTFShotgun_Revenge* pShotgunPrimary = dynamic_cast<CTFShotgun_Revenge*>(pHealTarget->Weapon_OwnsThisID(TF_WEAPON_SENTRY_REVENGE));
@@ -11809,24 +11807,25 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 
 			if (pShotgunPrimary || pShotgunSecondary)
 			{
+				// - Uber is rewarded based on Uber amount, if med is fully charged. 2 + 1 for each 25% + 2 if charged
+
 				int iBaseMedKilledCrits = 2;
-				int iUberIncrementCrits = RoundFloatToInt((flChargeLevel * 100) / 25) + (bCharged ? 2 : 0);
+				int iUberIncrementCrits = Floor2Int((flChargeLevel * 100) / 25) + (bCharged ? 2 : 0);
 
 				int iRewardedCrits = iBaseMedKilledCrits + iUberIncrementCrits;
 
 				Msg("Awarding Med Revenge: %i ; Percent = %f \n", iRewardedCrits, flChargeLevel);
 
 				if (pShotgunPrimary) {
-					pShotgunPrimary->AvengeKilled(iRewardedCrits);
+					pShotgunPrimary->AvengeKilled(iRewardedCrits, 1);
 					Msg("Has Primary ver \n");
 				}
 				if (pShotgunSecondary) {
-					pShotgunSecondary->AvengeKilled(iRewardedCrits);
+					pShotgunSecondary->AvengeKilled(iRewardedCrits, 1);
 					Msg("Has Secondary ver \n");
 				}
 			}
 		}
-		*/
 
 		if ( bCharged )
 		{

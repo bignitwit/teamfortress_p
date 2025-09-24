@@ -2653,7 +2653,12 @@ float CWeaponMedigun::GetOverHealBonus( CTFPlayer *pTFTarget )
 	CALL_ATTRIB_HOOK_FLOAT( flMod, mult_medigun_overheal_amount );
 	// Anything on the patient?
 	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pTFTarget, flMod, mult_patient_overheal_penalty );
+
+	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pTFTarget, flMod, mult_patient_overheal_bonus);
+
+
 	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pTFTarget->GetActiveTFWeapon(), flMod, mult_patient_overheal_penalty_active );
+
 	if ( flMod >= 1.0f )
 	{
 		flOverhealBonus += flMod;
@@ -2691,9 +2696,16 @@ float CWeaponMedigun::GetOverHealBonus( CTFPlayer *pTFTarget )
 //-----------------------------------------------------------------------------
 float CWeaponMedigun::GetOverHealDecayMult( CTFPlayer *pTFTarget )
 {
-	float flOverhealDecayMult = 1.f;
-	CALL_ATTRIB_HOOK_FLOAT( flOverhealDecayMult, mult_medigun_overheal_decay );
-	flOverhealDecayMult = Max( flOverhealDecayMult, flOverhealDecayMult + ( m_flOverHealExpert / 2 ) );
+	float flOverhealDecayMultMedigun = 1.f;
+	CALL_ATTRIB_HOOK_FLOAT(flOverhealDecayMultMedigun, mult_medigun_overheal_decay );
+
+	float flOverhealDecayMultTarget = 1.f;
+	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(pTFTarget, flOverhealDecayMultTarget, mult_medigun_overheal_decay);
+
+
+	float flOverhealDecayMult = flOverhealDecayMultMedigun * flOverhealDecayMultTarget;
+
+	flOverhealDecayMult = Max(flOverhealDecayMult, flOverhealDecayMult + ( m_flOverHealExpert / 2 ) );
 	return flOverhealDecayMult;
 }
 

@@ -141,30 +141,67 @@ void CTFShotgun_Revenge::PrimaryAttack()
 	if ( !CanAttack() )
 		return;
 
+
+
+
+
+
 	BaseClass::PrimaryAttack();
 
+	CTFPlayer* pOwner = ToTFPlayer(GetPlayerOwner());
 	// Do this after the attack, so that we know if we are doing custom damage
-	CTFPlayer *pOwner = ToTFPlayer( GetPlayerOwner() );
 	if ( pOwner )
 	{
+		// Subtract crit after use
 		int iRevengeCrits = pOwner->m_Shared.GetRevengeCrits();
 		pOwner->m_Shared.SetRevengeCrits( iRevengeCrits-1 );
+
+
+		// After attack, check if should still be critboosted
+
+		iRevengeCrits = pOwner->m_Shared.GetRevengeCrits();
+
+		if (iRevengeCrits == 0 && pOwner->m_Shared.InCond(TF_COND_CRITBOOSTED))
+			pOwner->m_Shared.RemoveCond(TF_COND_CRITBOOSTED);
+		else if (iRevengeCrits > 0 && !pOwner->m_Shared.InCond(TF_COND_CRITBOOSTED))
+			pOwner->m_Shared.AddCond(TF_COND_CRITBOOSTED);
 	}
 }
 
 //-----------------------------------------------------------------------------
-// Purpose:
+// Purpose:	Get Revenge crits from sources -- TODO: Expand iRevengeSource to enum if more revenge-based items that aren't shotguns
 //-----------------------------------------------------------------------------
-void CTFShotgun_Revenge::AvengeKilled( int iCrits )
+void CTFShotgun_Revenge::AvengeKilled( int iCrits , int iRevengeSource)
 {
-	int val1 = 0;
-	CALL_ATTRIB_HOOK_INT( val1, sentry_killed_revenge );
+	bool bShouldAvenge = false;
 
-	int val2 = 0;
-	CALL_ATTRIB_HOOK_INT(val2, medic_killed_revenge);
+	switch (iRevengeSource) {
+		case 0: // Sentry source
+		{
+			int iSentry = 0;
+			CALL_ATTRIB_HOOK_INT(iSentry, sentry_killed_revenge);
+			bShouldAvenge = iSentry;
+			break;
+		}
+		case 1: // Medic source
+		{
+			int iMedic = 0;
+			CALL_ATTRIB_HOOK_INT(iMedic, medic_killed_revenge);
+			bShouldAvenge = iMedic;
+			break;
+		}
+		default:
+		{
+			bShouldAvenge = false;
+		}
+	}
+
+
+
+
 
 	// If can get revenge then get crits
-	if ( val1 == 1 || val2 == 1)
+	if ( bShouldAvenge )
 	{
 		CTFPlayer *pOwner = ToTFPlayer( GetPlayerOwner() );
 		if ( pOwner )
@@ -216,6 +253,14 @@ int CTFShotgun_Revenge::GetCustomDamageType() const
 	if ( pOwner )
 	{
 		int iRevengeCrits = pOwner->m_Shared.GetRevengeCrits();
+
+		// Bonus check just to make sure no iffy behavior w/ alt revenge shotguns
+		if (iRevengeCrits == 0 && pOwner->m_Shared.InCond(TF_COND_CRITBOOSTED))
+			pOwner->m_Shared.RemoveCond(TF_COND_CRITBOOSTED);
+		else if (iRevengeCrits > 0 && !pOwner->m_Shared.InCond(TF_COND_CRITBOOSTED))
+			pOwner->m_Shared.AddCond(TF_COND_CRITBOOSTED);
+
+
 		return iRevengeCrits > 0 ? TF_DMG_CUSTOM_SHOTGUN_REVENGE_CRIT : TF_DMG_CUSTOM_NONE;
 	}
 	return TF_DMG_CUSTOM_NONE;

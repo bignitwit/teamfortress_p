@@ -185,6 +185,17 @@
 			"hidden"	"0"
 			"effect_type"	"negative"
 		}
+		"9018"
+		{
+			"name"	"patient overheal bonus"
+			"attribute_class"	"mult_patient_overheal_bonus"
+			"description_string"	"#TFP_ATR_PatientOverhealBonus"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"armory_desc"	"on_wearer"
+			"stored_as_integer"	"0"
+		}
 	}
 	"items"
 	{
@@ -808,10 +819,10 @@
 					"attribute_class"	"medic_killed_revenge"
 					"value"	"1"
 				}
-				"overheal decay bonus"
+				"patient overheal bonus"
 				{
-					"attribute_class"	"mult_medigun_overheal_decay"
-					"value"	"0.67"
+					"attribute_class"	"mult_patient_overheal_bonus"
+					"value"	"1.1"
 				}
 				"lose revenge crits on death DISPLAY ONLY"
 				{
@@ -826,7 +837,7 @@
 				"clip size penalty"
 				{
 					"attribute_class"	"mult_clipsize"
-					"value" "0.5"
+					"value" "0.33"
 				}
 			}
 
