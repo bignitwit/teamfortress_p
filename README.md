@@ -11,6 +11,7 @@ Credits: [**Model**](https://steamcommunity.com/sharedfiles/filedetails/?id=3168
 
 * Hard hitting, best for up-close combat or finishing enemies off
 * Double-shot on Alt-fire(NYI)
+* Part of the **Combine Cleanup** set
 
 ### Frenzy Wrench \[Temp Name]
 
@@ -29,20 +30,22 @@ Type: **Crowbar** Classes: **Soldier**
 
 * Swings fast but deals less damage
 * Effective against engineer buildings
+* Part of the **Raving Rebel** set
 
-### Detonator Jumper
+### the Detonator Jumper
 
 Type: **Flare Gun** Classes: **Pyro**  
 
 * Jumper version of the Detonator
 
-### Stunstick \[Temp Name]
+### the Stunstick \[Temp Name]
 
 Type: **Stun Baton** Classes: **Pyro**  
 
 * Deals less damage, but applies a slow effect on hit
-
-### One-Man Army
+* Part of the **Combine Cleanup** set
+  
+### the One-Man Army
 
 Type: **Minigun** Classes: **Heavy**  
 Credits: [**Model**](https://steamcommunity.com/sharedfiles/filedetails/?id=697431003))
@@ -59,6 +62,24 @@ Type: **Shotgun** Classes: **Heavy**
 * Gain revenge crits when the Medic healing you dies, depending on how much Über your Medic had (2 base + 2 if Über is full + 1 for each 25%)
 * +33% overheal bonus 
 * -50% clip size
+
+### the Missing-In-Action
+
+Type: **Revolver** Classes: **Spy**  
+
+* Silent Killer: Killed enemies are cloaked
+* Mini-crits targets from behind (3x backscatter range)
+* No random crits
+* -15% cloak regen rate
+
+### the Duelist
+
+Type: **Knife** Classes: **Spy**  
+
+* +62% damage bonus (on par with most stock melees)
+* +25 max health on wearer
+* Used is unable to see enemy health
+* No backstabs
 
 ## Rebalances
 
