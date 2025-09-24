@@ -6,7 +6,7 @@ As the name of the mod implies, most of the weapons or rebalances in this mod ar
 
 ### Spas-12 \[Temp Name]
 
-Type: **Shotgun** Classes: **Soldier, Pyro, Heavy, Engineer**  
+Type: **Shotgun** Classes: **Soldier, Pyro**  
 Credits: [**Model**](https://steamcommunity.com/sharedfiles/filedetails/?id=3168872482)
 
 * Hard hitting, best for up-close combat or finishing enemies off
@@ -30,6 +30,12 @@ Type: **Crowbar** Classes: **Soldier**
 * Swings fast but deals less damage
 * Effective against engineer buildings
 
+### Detonator Jumper
+
+Type: **Flare Gun** Classes: **Pyro**  
+
+* Jumper version of the Detonator
+
 ### Stunstick \[Temp Name]
 
 Type: **Stun Baton** Classes: **Pyro**  
@@ -50,7 +56,7 @@ Credits: [**Model**](https://steamcommunity.com/sharedfiles/filedetails/?id=6974
 
 Type: **Shotgun** Classes: **Heavy**  
 
-* Gain revenge crits when the Medic healing you dies; depending on how much Über your Medic had (2 base + 2 if Über is full + 1 for each 25%)
+* Gain revenge crits when the Medic healing you dies, depending on how much Über your Medic had (2 base + 2 if Über is full + 1 for each 25%)
 * +33% overheal bonus 
 * -50% clip size
 
