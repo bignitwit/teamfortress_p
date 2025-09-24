@@ -177,6 +177,14 @@
 			"hidden"	"1"
 			"effect_type"	"positive"
 		}
+		"9017"
+		{
+			"name"	"jar self soak"
+			"attribute_class"	"jar_self_soak"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"negative"
+		}
 	}
 	"items"
 	{

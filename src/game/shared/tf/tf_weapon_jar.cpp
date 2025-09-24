@@ -316,7 +316,12 @@ void JarExplode( int iEntIndex, CTFPlayer *pAttacker, CBaseEntity *pOriginalWeap
 	CBaseEntity::EmitSound( soundFilter, iEntIndex, pszExplodeSound, &vecOrigin );
 
 	// Treat this trace exactly like radius damage
-	CTraceFilterIgnorePlayers traceFilter( pAttacker, COLLISION_GROUP_PROJECTILE );
+
+	int iSelfSoak = 1;
+	//CALL_ATTRIB_HOOK_INT_ON_OTHER(pOriginalWeapon, iSelfSoak, jar_self_soak);
+
+	CTraceFilterIgnorePlayers traceFilter(NULL, COLLISION_GROUP_PROJECTILE);
+
 
 	// Splash pee on everyone nearby.
 	CBaseEntity *pListOfEntities[MAX_PLAYERS_ARRAY_SAFE];
@@ -337,7 +342,7 @@ void JarExplode( int iEntIndex, CTFPlayer *pAttacker, CBaseEntity *pOriginalWeap
 				continue;
 
 			// Drench the target.
-			if ( pPlayer->GetTeamNumber() != iTeam )
+			if ( pPlayer->GetTeamNumber() != iTeam || pPlayer == pAttacker)
 			{
 				if ( TFGameRules() && TFGameRules()->IsTruceActive() )
 					continue;
