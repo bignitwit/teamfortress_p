@@ -522,3 +522,6 @@ FodyWeavers.xsd
 /game/mod_tf/maps/graphs
 /game/mod_tf/ServerConfig.vdf
 /game/mod_tf/screenshots
+/game/mod_tf/cfg/server_blacklist.txt
+/game/platform/config/InGameDialogConfig.vdf
+/game/platform/config/ServerBrowser.vdf
