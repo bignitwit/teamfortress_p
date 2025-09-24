@@ -11786,10 +11786,47 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 		CWeaponMedigun* pMedigun = assert_cast<CWeaponMedigun*>( Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );
 		float flChargeLevel = pMedigun ? pMedigun->GetChargeLevel() : 0.f;
 		float flMinChargeLevel = pMedigun ? pMedigun->GetMinChargeAmount() : 1.f;
-		CTFPlayer* pHealTarget = ToTFPlayer(pMedigun->GetHealTarget());
-		Msg("Heal target on death %p", pHealTarget->GetPlayerName());
-
 		bool bCharged = flChargeLevel >= flMinChargeLevel;
+
+
+		/* -- FIX
+		CTFPlayer* pHealTarget = nullptr;
+		if (pMedigun->GetHealTarget())
+		{
+			if (pMedigun->GetHealTarget()->IsPlayer()) 
+			{
+				pHealTarget = ToTFPlayer(pMedigun->GetHealTarget());
+			}
+		}
+
+
+		// Revenge Crits
+		if (pHealTarget) 
+		{
+
+			CTFShotgun_Revenge* pShotgunPrimary = dynamic_cast<CTFShotgun_Revenge*>(pHealTarget->Weapon_OwnsThisID(TF_WEAPON_SENTRY_REVENGE));
+			CTFShotgun_Revenge_Secondary* pShotgunSecondary = dynamic_cast<CTFShotgun_Revenge_Secondary*>(pHealTarget->Weapon_OwnsThisID(TF_WEAPON_SHOTGUN_REVENGE_SECONDARY));
+
+			if (pShotgunPrimary || pShotgunSecondary)
+			{
+				int iBaseMedKilledCrits = 2;
+				int iUberIncrementCrits = RoundFloatToInt((flChargeLevel * 100) / 25) + (bCharged ? 2 : 0);
+
+				int iRewardedCrits = iBaseMedKilledCrits + iUberIncrementCrits;
+
+				Msg("Awarding Med Revenge: %i ; Percent = %f \n", iRewardedCrits, flChargeLevel);
+
+				if (pShotgunPrimary) {
+					pShotgunPrimary->AvengeKilled(iRewardedCrits);
+					Msg("Has Primary ver \n");
+				}
+				if (pShotgunSecondary) {
+					pShotgunSecondary->AvengeKilled(iRewardedCrits);
+					Msg("Has Secondary ver \n");
+				}
+			}
+		}
+		*/
 
 		if ( bCharged )
 		{
@@ -11848,22 +11885,6 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 
 			gameeventmanager->FireEvent( event );
 		}
-
-		// Revenge Crits
-		if (pHealTarget) {
-
-			CTFShotgun_Revenge* pShotgun = dynamic_cast<CTFShotgun_Revenge*>(pHealTarget->Weapon_OwnsThisID(TF_WEAPON_SENTRY_REVENGE));
-			if (pShotgun)
-			{
-				int iBaseMedKilledCrits = 2;
-				int iUberIncrementCrits = RoundFloatToInt((flChargeLevel * 100) / 25);
-				Msg("Awarding Med Revenge");
-				pShotgun->AvengeKilled(iBaseMedKilledCrits + iUberIncrementCrits);
-			}
-		}
-
-
-
 	}
 	else if ( IsPlayerClass( TF_CLASS_SOLDIER ) || IsPlayerClass( TF_CLASS_DEMOMAN ) )
 	{

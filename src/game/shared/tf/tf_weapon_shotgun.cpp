@@ -118,8 +118,6 @@ CTFShotgun_Revenge::CTFShotgun_Revenge()
 
 bool CTFShotgun_Revenge::CanDeploy(void)
 {
-	return true;
-
 	return BaseClass::CanDeploy();
 }
 
@@ -174,9 +172,6 @@ void CTFShotgun_Revenge::AvengeKilled( int iCrits )
 			pOwner->m_Shared.SetRevengeCrits( pOwner->m_Shared.GetRevengeCrits() + iCrits );
 		}
 	}
-
-
-
 }
 
 //-----------------------------------------------------------------------------
@@ -598,4 +593,9 @@ bool CTFShotgunBuildingRescue::IsViewModelFlipped( void )
 CTFShotgun_Revenge_Secondary::CTFShotgun_Revenge_Secondary()
 {
 
+}
+
+int CTFShotgun_Revenge_Secondary::GetSlot(void) const
+{
+	return 1;
 }

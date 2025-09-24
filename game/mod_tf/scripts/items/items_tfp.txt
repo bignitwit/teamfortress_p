@@ -765,7 +765,7 @@
 			// Base def
 			"name"	"MedRevengeShotgun"
 			"item_name"		"#TFP_WEP_MedRevengeShotgun"
-			"item_class"	"tf_weapon_shotgun_revenge"
+			"item_class"	"tf_weapon_shotgun_revenge_secondary"
 			"item_type_name"	"#TF_Weapon_Shotgun"
 			"item_logname"	"shotgun_medicrevenge"
 			"item_iconname"	"frontier_kill"

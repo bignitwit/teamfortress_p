@@ -209,6 +209,7 @@ public:
 
 	 
 	virtual int			GetWeaponID(void) const { return TF_WEAPON_SHOTGUN_REVENGE_SECONDARY; }
+	virtual int			GetSlot(void) const;
 
 	void Precache() { CTFShotgun::Precache(); }
 

@@ -1007,13 +1007,30 @@ void CHudItemEffectMeter_Weapon< CTFMinigun >::Update( C_TFPlayer* pPlayer )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose: Specialization for engineer revenge count.
+// Purpose: Specialization for primary shotgun revenge count.
 //-----------------------------------------------------------------------------
 template <>
 int CHudItemEffectMeter_Weapon<CTFShotgun_Revenge>::GetCount( void )
 {
 	CTFShotgun_Revenge *pWeapon = GetWeapon();
 	if ( pWeapon )
+	{
+		return pWeapon->GetCount();
+	}
+	else
+	{
+		return 0.f;
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Specialization for secondary shotgun revenge count.
+//-----------------------------------------------------------------------------
+template <>
+int CHudItemEffectMeter_Weapon<CTFShotgun_Revenge_Secondary>::GetCount(void)
+{
+	CTFShotgun_Revenge_Secondary* pWeapon = GetWeapon();
+	if (pWeapon)
 	{
 		return pWeapon->GetCount();
 	}
