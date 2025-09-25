@@ -712,6 +712,71 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 		}
 	}
 #endif
+
+
+	int iStickiesAttachToPlayers = 0;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(GetLauncher(), iStickiesAttachToPlayers, stickies_attach_to_players);
+
+	if (pOther->IsPlayer() && iStickiesAttachToPlayers)
+	{
+		Msg("Touched Player \n");
+
+		CTFPlayer* pOwner = ToTFPlayer(GetThrower());
+		CTFPlayer* pTouchedPlayer = ToTFPlayer(pOther);
+		CBaseEntity* pCurrentParent = GetParent();
+
+
+		// if Touched is not the owner of the bomb
+		if (pTouchedPlayer != pOwner) 
+		{
+			// If bomb already has a parent and it is a player
+			if (pCurrentParent && pCurrentParent->IsPlayer())
+			{
+				Msg("Has Player parent \n");
+
+				CTFPlayer* pParentPlayer = ToTFPlayer(pCurrentParent);
+
+				// If touched player is different team to the bomb's team
+				if (pTouchedPlayer->TeamID() != TeamID())
+				{
+					Msg("Touched player is on enemy team of bomb, so stickin to em \n");
+
+					// Set parent to touched player of different team
+					m_bTouched = true;
+					VPhysicsGetObject()->EnableMotion(false);
+
+					Vector vecOrigin = GetAbsOrigin();
+					QAngle ang = GetAbsAngles();
+					SetAbsOrigin(vecOrigin);
+					SetAbsAngles(ang);
+
+					SetParent(pOther);
+					return;
+				}
+			}
+			else
+			{
+				// if bomb has no parent yet
+				Msg("No Parent, so should give em one \n");
+
+
+				m_bTouched = true;
+				VPhysicsGetObject()->EnableMotion(false);
+
+				Vector vecOrigin = GetAbsOrigin();
+				QAngle ang = GetAbsAngles();
+				SetAbsOrigin(vecOrigin);
+				SetAbsAngles(ang);
+
+				SetParent(pOther);
+				return;
+			}
+		}
+		else 
+		{
+			Msg("Stickyied Player is owner, no sticky! \n");
+		}
+	}
 #endif
 }
 
@@ -1236,6 +1301,12 @@ void CTFGrenadePipebombProjectile::Deflected( CBaseEntity *pDeflectedBy, Vector&
 		}
 		Vector vecForce = vecDir * flForceMultiplier * CTFWeaponBase::DeflectionForce( WorldAlignSize(), 90, 12.0f );
 		
+		// Remove parent
+		m_bTouched = false;
+		VPhysicsGetObject()->EnableMotion(true);
+		SetParent(NULL, -1);
+
+
 		pOldOwner = ToTFPlayer( GetThrower() );
 		info.SetAttacker( pDeflectedBy );
 		info.SetDamageForce( vecForce );

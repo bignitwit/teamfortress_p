@@ -11781,6 +11781,27 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 		ClearBurnFromBehindAttackers();
 	}
 
+
+	// Remove all stuck stickies on death
+	CBaseEntity* pChild = FirstMoveChild();
+	while (pChild)
+	{
+		CBaseEntity* pNext = pChild->NextMovePeer();
+
+		CTFGrenadePipebombProjectile* pSticky = dynamic_cast<CTFGrenadePipebombProjectile*>(pChild);
+		if (pSticky)
+		{
+			pSticky->m_bTouched = false;
+			pSticky->VPhysicsGetObject()->EnableMotion(true);
+			SetParent(NULL, -1);
+
+			pSticky->Fizzle();
+		}
+
+		pChild = pNext;
+	}
+
+
 	if ( IsPlayerClass( TF_CLASS_MEDIC ) )
 	{
 		CWeaponMedigun* pMedigun = assert_cast<CWeaponMedigun*>( Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );

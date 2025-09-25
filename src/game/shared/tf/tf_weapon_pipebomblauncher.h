@@ -95,7 +95,6 @@ public:
 
 	virtual void	Misfire(void);
 	virtual bool	CheckReloadMisfire(void) OVERRIDE;
-	bool			m_bIsOverloading;
 
 
 #ifdef CLIENT_DLL
@@ -105,6 +104,7 @@ public:
 #ifdef GAME_DLL
 	void			UpdateOnRemove( void );
 	virtual void	ApplyPostHitEffects( const CTakeDamageInfo &inputInfo, CTFPlayer *pPlayer );
+	bool			m_bIsOverloading;
 
 protected:
 

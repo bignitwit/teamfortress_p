@@ -660,17 +660,6 @@ bool CTFPipebombLauncher::Reload( void )
 	if ( m_flChargeBeginTime > 0 )
 		return false;
 
-	CTFPlayer* pPlayer = GetTFPlayerOwner();
-
-	if (AutoFiresFullClip())
-	{
-		if (Clip1() >= GetMaxClip1() || (Clip1() > 0 && pPlayer && pPlayer->GetAmmoCount(m_iSecondaryAmmoType) == 0))
-		{
-			Misfire();
-		}
-	}
-
-
 	return BaseClass::Reload();
 }
 
@@ -678,12 +667,9 @@ void CTFPipebombLauncher::Misfire(void)
 {
 	BaseClass::Misfire();
 
-	Msg("Try misfire!!!!!!");
-
 #ifdef GAME_DLL
 	if (CanOverload())
 	{
-		Msg("Misfire!!");
 		CTFPlayer* pPlayer = ToTFPlayer(GetPlayerOwner());
 		if (!pPlayer)
 			return;
@@ -721,7 +707,7 @@ bool CTFPipebombLauncher::CheckReloadMisfire(void)
 			m_bIsOverloading = false;
 		}
 	}
-	else if (Clip1() >= GetMaxClip1() || (Clip1() > 0 && pPlayer && pPlayer->GetAmmoCount(m_iSecondaryAmmoType) == 0))
+	else if (Clip1() >= GetMaxClip1() || (Clip1() > 0 && pPlayer && pPlayer->GetAmmoCount(m_iPrimaryAmmoType) == 0))
 	{
 		Misfire();
 		m_bIsOverloading = true;

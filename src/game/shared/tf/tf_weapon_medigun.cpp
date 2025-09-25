@@ -2654,6 +2654,7 @@ float CWeaponMedigun::GetOverHealBonus( CTFPlayer *pTFTarget )
 	// Anything on the patient?
 	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pTFTarget, flMod, mult_patient_overheal_penalty );
 
+	// Make sure works
 	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pTFTarget, flMod, mult_patient_overheal_bonus);
 
 
