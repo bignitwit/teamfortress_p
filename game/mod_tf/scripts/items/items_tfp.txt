@@ -130,7 +130,7 @@
 			"effect_type"	"negative"
 			"stored_as_integer"	"0"
 		}
-		"9012" // no work
+		"9012"
 		{
 			"name"	"mod medic killed revenge CUSTOM"
 			"attribute_class"	"medic_killed_revenge"
@@ -140,7 +140,7 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"0"
 		}
-		"8013" // needs implementation
+		"9013"
 		{
 			"name"	"silent killer revolver"
 			"attribute_class"	"set_silent_killer"
@@ -205,6 +205,24 @@
 			"hidden"	"0"
 			"effect_type"	"positive"
 			"stored_as_integer"	"1"
+		}
+		"9020"
+		{
+			"name"	"push force increased"
+			"attribute_class"	"mult_push_force"
+			"description_string"	"#TFP_ATR_MultDamageForceIncreased"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9021"
+		{
+			"name"	"push force decreased"
+			"attribute_class"	"mult_push_force"
+			"description_string"	"#TFP_ATR_MultDamageForceDecreased"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"positive"
 		}
 	}
 	"items"
@@ -1153,7 +1171,12 @@
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
-					"value"	"0.85"
+					"value"	"0.80"
+				}
+				"push force increased"
+				{
+					"attribute_class"	"mult_push_force"
+					"value"	"2"
 				}
 				"sticky arm time penalty"
 				{

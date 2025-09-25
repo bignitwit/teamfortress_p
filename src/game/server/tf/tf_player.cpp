@@ -10226,8 +10226,14 @@ void CTFPlayer::ApplyPushFromDamage( const CTakeDamageInfo &info, Vector vecDir 
 	if ( m_bIsTargetDummy )
 		return;
 
+
 	Vector vecForce;
 	vecForce.Init();
+
+
+
+
+
 	if ( info.GetAttacker() == this )
 	{
 		Vector vecSize = WorldAlignSize();
@@ -10424,6 +10430,12 @@ void CTFPlayer::ApplyPushFromDamage( const CTakeDamageInfo &info, Vector vecDir 
 			}
 		}
 
+		float flPushMult = 1.0;
+		CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(info.GetWeapon(), flPushMult, mult_push_force);
+
+		vecForce *= flPushMult;
+
+
 		if ( TFGameRules()->GameModeUsesUpgrades() )
 		{
 			if ( GetTeamNumber() == TF_TEAM_PVE_INVADERS )
@@ -10463,7 +10475,7 @@ void CTFPlayer::ApplyPushFromDamage( const CTakeDamageInfo &info, Vector vecDir 
 	{
 		m_bTakenBlastDamageSinceLastMovement = true;
 	}
-}
+}3
 
 //-----------------------------------------------------------------------------
 // Purpose: 

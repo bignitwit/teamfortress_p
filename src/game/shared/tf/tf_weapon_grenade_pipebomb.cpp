@@ -750,6 +750,9 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 					SetAbsOrigin(vecOrigin);
 					SetAbsAngles(ang);
 
+					RemoveEffects(EF_NODRAW);
+					SetRenderMode(kRenderNormal);
+
 					SetParent(pOther);
 					return;
 				}
@@ -767,6 +770,9 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 				QAngle ang = GetAbsAngles();
 				SetAbsOrigin(vecOrigin);
 				SetAbsAngles(ang);
+
+				RemoveEffects(EF_NODRAW);
+				SetRenderMode(kRenderNormal);
 
 				SetParent(pOther);
 				return;
@@ -1464,6 +1470,10 @@ int CTFGrenadePipebombProjectile::UpdateTransmitState()
 	if ( m_bDefensiveBomb )
 	{
 		return SetTransmitState( FL_EDICT_ALWAYS );
+	}
+	if (m_bTouched) 
+	{
+		return SetTransmitState(FL_EDICT_ALWAYS);
 	}
 
 	return BaseClass::UpdateTransmitState();
