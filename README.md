@@ -81,6 +81,17 @@ Type: **Knife** Classes: **Spy**
 * Used is unable to see enemy health
 * No backstabs
 
+### the Carpet Bomber
+
+Type: **Stickybomb Launcher** Classes: **Demoman**  
+
+* Hold Fire to load up to 6 stickybombs
+* Release Fire to unleash the barrage
+* Overloading the launcher will cause a misfire and detonate all placed stickies
+* -15% explosion radius
+* +3 degrees random projectile variance
+* No ammo from dispensers when active
+
 ## Rebalances
 
 ### Hot Hand
