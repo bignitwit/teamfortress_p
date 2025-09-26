@@ -1264,7 +1264,20 @@ void CTFPlayerAnimState::DoAnimationEvent( PlayerAnimEvent_t event, int nData )
 //-----------------------------------------------------------------------------
 bool CTFPlayerAnimState::HandleSwimming( Activity &idealActivity )
 {
+	int iCannotSwim = 0;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(m_pTFPlayer, iCannotSwim, cannot_swim);
+
+	// if cannot swim, then just play normal anim
+	if (iCannotSwim)
+	{
+		return false;
+	}
+
+
 	bool bInWater = BaseClass::HandleSwimming( idealActivity );
+
+
+
 
 	if ( bInWater )
 	{
@@ -1285,6 +1298,8 @@ bool CTFPlayerAnimState::HandleSwimming( Activity &idealActivity )
 			}
 		}
 	}
+
+
 
 	return bInWater;
 }

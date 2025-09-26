@@ -378,6 +378,8 @@ void CTFGrenadePipebombProjectile::Simulate( void )
 //-----------------------------------------------------------------------------
 int CTFGrenadePipebombProjectile::DrawModel( int flags )
 {
+
+
 	if ( gpGlobals->curtime < ( m_flCreationTime + 0.1 ) )
 		return 0;
 

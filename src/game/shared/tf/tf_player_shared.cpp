@@ -1111,6 +1111,33 @@ void CTFPlayerShared::AddCond( ETFCond eCond, float flDuration /* = PERMANENT_CO
 			return;
 	}
 
+	int iRepelsFluid = 0;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(m_pOuter, iRepelsFluid, repels_fluids );
+
+	// Block select status effects if should repel fluid
+	if (iRepelsFluid) 
+	{
+		switch (eCond) 
+		{
+			case TF_COND_MAD_MILK: 
+			{
+				return;
+			}
+			case TF_COND_URINE:
+			{
+				return;
+			}
+			case TF_COND_GAS:
+			{
+				return;
+			}
+			default: 
+			{
+
+			}
+		}
+	}
+
 	// Which bitfield are we tracking this condition variable in? Which bit within
 	// that variable will we track it as?
 	CConditionVars<int> cPlayerCond( m_nPlayerCond.m_Value, m_nPlayerCondEx.m_Value, m_nPlayerCondEx2.m_Value, m_nPlayerCondEx3.m_Value, m_nPlayerCondEx4.m_Value, eCond );

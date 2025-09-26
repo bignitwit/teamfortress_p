@@ -1559,8 +1559,8 @@ void CTFGameMovement::WaterMove( void )
 	CALL_ATTRIB_HOOK_INT_ON_OTHER( m_pTFPlayer, iCannotSwim, cannot_swim );
 	if ( iCannotSwim )
 	{
-		vecWishVelocity[0] *= 0.1;
-		vecWishVelocity[1] *= 0.1;
+		vecWishVelocity[0] *= 1;
+		vecWishVelocity[1] *= 1;
 		vecWishVelocity[2] = -60;
 	}
 	// Check for upward velocity (JUMP).
@@ -1596,16 +1596,19 @@ void CTFGameMovement::WaterMove( void )
 	// Slow us down a bit.
 	int iSwimmingMastery = 0;
 	CALL_ATTRIB_HOOK_INT_ON_OTHER( m_pTFPlayer, iSwimmingMastery, swimming_mastery );
-	if ( iSwimmingMastery == 0 )
+	if ( iSwimmingMastery == 0 || iCannotSwim)
 	{
 		wishspeed *= 0.8;
 	}
 	
+
 	// Water friction
 	VectorCopy( mv->m_vecVelocity, temp );
 	speed = VectorNormalize( temp );
 	if ( speed )
 	{
+
+
 		newspeed = speed - gpGlobals->frametime * speed * sv_friction.GetFloat() * player->m_surfaceFriction;
 		if ( newspeed < 0.1f )
 		{
@@ -1661,7 +1664,7 @@ void CTFGameMovement::WaterMove( void )
 	}
 
 	VectorAdd (mv->m_vecVelocity, player->GetBaseVelocity(), mv->m_vecVelocity);
-
+	
 	// Now move
 	// assume it is a stair or a slope, so press down from stepheight above
 	VectorMA (mv->GetAbsOrigin(), gpGlobals->frametime, mv->m_vecVelocity, dest);

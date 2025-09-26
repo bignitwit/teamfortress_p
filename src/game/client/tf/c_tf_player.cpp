@@ -4537,6 +4537,12 @@ void C_TFPlayer::OnDataChanged( DataUpdateType_t updateType )
 
 	int nNewWaterLevel = GetWaterLevel();
 
+	int iRepelsFluid = 0;
+	CALL_ATTRIB_HOOK_INT(iRepelsFluid, repels_fluids);
+
+	Msg("Repels: %i", iRepelsFluid);
+
+
 	if ( nNewWaterLevel != m_nOldWaterLevel )
 	{
 		if ( ( m_nOldWaterLevel == WL_NotInWater ) && ( nNewWaterLevel > WL_NotInWater ) )
@@ -4548,15 +4554,24 @@ void C_TFPlayer::OnDataChanged( DataUpdateType_t updateType )
 		// If player is now up to his eyes in water and has entered the water very recently (not just bobbing eyes in and out), play a bubble effect.
 		if ( ( nNewWaterLevel == WL_Eyes ) && ( gpGlobals->curtime - m_flWaterEntryTime ) < 0.5f ) 
 		{
-			CNewParticleEffect *pEffect = ParticleProp()->Create( "water_playerdive", PATTACH_ABSORIGIN_FOLLOW );
-			ParticleProp()->AddControlPoint( pEffect, 1, NULL, PATTACH_WORLDORIGIN, NULL, WorldSpaceCenter() );
+			if (!iRepelsFluid)
+			{
+				Msg("add bubblies");
+				CNewParticleEffect *pEffect = ParticleProp()->Create( "water_playerdive", PATTACH_ABSORIGIN_FOLLOW );
+				ParticleProp()->AddControlPoint( pEffect, 1, NULL, PATTACH_WORLDORIGIN, NULL, WorldSpaceCenter() );
+			}
 		}		
 		// If player was up to his eyes in water and is now out to waist level or less, play a water drip effect
 		else if ( m_nOldWaterLevel == WL_Eyes && ( nNewWaterLevel < WL_Eyes ) && !bJustSpawned )
 		{
-			CNewParticleEffect *pWaterExitEffect = ParticleProp()->Create( "water_playeremerge", PATTACH_ABSORIGIN_FOLLOW );
-			ParticleProp()->AddControlPoint( pWaterExitEffect, 1, this, PATTACH_ABSORIGIN_FOLLOW );
-			m_bWaterExitEffectActive = true;
+			if (!iRepelsFluid) 
+			{
+				Msg("add drippys");
+				CNewParticleEffect* pWaterExitEffect = ParticleProp()->Create("water_playeremerge", PATTACH_ABSORIGIN_FOLLOW);
+				ParticleProp()->AddControlPoint(pWaterExitEffect, 1, this, PATTACH_ABSORIGIN_FOLLOW);
+				m_bWaterExitEffectActive = true;
+			}
+
 		}
 	}
 

@@ -5954,9 +5954,14 @@ bool CTFGameRules::ApplyOnDamageModifyRules( CTakeDamageInfo &info, CBaseEntity 
 			}
 		}
 
+		int iRepelsFluid = 0;
+		CALL_ATTRIB_HOOK_INT_ON_OTHER( pVictim, iRepelsFluid, repels_fluids);
+
+
+		// Don't crit vs wet if the guy should not get wet
 		int iCritVsWet = 0;
 		CALL_ATTRIB_HOOK_INT_ON_OTHER( pWeapon, iCritVsWet, crit_vs_wet_players );
-		if ( iCritVsWet )
+		if ( iCritVsWet && !iRepelsFluid )
 		{
 			float flWaterExitTime = pVictim->GetWaterExitTime();
 

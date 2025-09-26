@@ -10475,7 +10475,7 @@ void CTFPlayer::ApplyPushFromDamage( const CTakeDamageInfo &info, Vector vecDir 
 	{
 		m_bTakenBlastDamageSinceLastMovement = true;
 	}
-}3
+}
 
 //-----------------------------------------------------------------------------
 // Purpose: 
