@@ -13053,12 +13053,12 @@ bool CTFPlayer::CanMoveDuringTaunt()
 //-----------------------------------------------------------------------------
 bool CTFPlayer::ShouldStopTaunting()
 {
-	int iBreathesUnderwater = 0;
-	CALL_ATTRIB_HOOK_INT(iBreathesUnderwater, can_breathe_under_water);
+	int iRepelsFluid = 0;
+	CALL_ATTRIB_HOOK_INT(iRepelsFluid, repels_fluids);
 
 
-	// stop taunt if we're under water (if we can't breathe underwater)
-	if ( GetWaterLevel() > WL_Waist && !iBreathesUnderwater)
+	// stop taunt if we're under water
+	if ( GetWaterLevel() > WL_Waist && !iRepelsFluid)
 		return true;
 
 	if ( IsViewingCYOAPDA() )
