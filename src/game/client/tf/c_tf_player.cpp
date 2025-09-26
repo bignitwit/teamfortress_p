@@ -4540,9 +4540,6 @@ void C_TFPlayer::OnDataChanged( DataUpdateType_t updateType )
 	int iRepelsFluid = 0;
 	CALL_ATTRIB_HOOK_INT(iRepelsFluid, repels_fluids);
 
-	Msg("Repels: %i", iRepelsFluid);
-
-
 	if ( nNewWaterLevel != m_nOldWaterLevel )
 	{
 		if ( ( m_nOldWaterLevel == WL_NotInWater ) && ( nNewWaterLevel > WL_NotInWater ) )
@@ -4556,7 +4553,6 @@ void C_TFPlayer::OnDataChanged( DataUpdateType_t updateType )
 		{
 			if (!iRepelsFluid)
 			{
-				Msg("add bubblies");
 				CNewParticleEffect *pEffect = ParticleProp()->Create( "water_playerdive", PATTACH_ABSORIGIN_FOLLOW );
 				ParticleProp()->AddControlPoint( pEffect, 1, NULL, PATTACH_WORLDORIGIN, NULL, WorldSpaceCenter() );
 			}
@@ -4566,7 +4562,6 @@ void C_TFPlayer::OnDataChanged( DataUpdateType_t updateType )
 		{
 			if (!iRepelsFluid) 
 			{
-				Msg("add drippys");
 				CNewParticleEffect* pWaterExitEffect = ParticleProp()->Create("water_playeremerge", PATTACH_ABSORIGIN_FOLLOW);
 				ParticleProp()->AddControlPoint(pWaterExitEffect, 1, this, PATTACH_ABSORIGIN_FOLLOW);
 				m_bWaterExitEffectActive = true;

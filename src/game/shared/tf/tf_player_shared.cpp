@@ -2759,6 +2759,9 @@ void CTFPlayerShared::ConditionGameRulesThink( void )
 		}
 	}
 
+	int iRepelsFluids = 0;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(m_pOuter, iRepelsFluids, repels_fluids);
+
 	// Taunt
 	if ( InCond( TF_COND_TAUNTING ) )
 	{
@@ -2776,7 +2779,7 @@ void CTFPlayerShared::ConditionGameRulesThink( void )
 		else if ( m_flAfterburnDuration <= 0.f || m_pOuter->GetWaterLevel() >= WL_Waist )
 		{
 			// If we're underwater, put the fire out
-			if ( m_pOuter->GetWaterLevel() >= WL_Waist )
+			if ( m_pOuter->GetWaterLevel() >= WL_Waist && !iRepelsFluids)
 			{
 				// General achievement for jumping into water while you're on fire
 				m_pOuter->AwardAchievement( ACHIEVEMENT_TF_FIRE_WATERJUMP );
@@ -13053,8 +13056,12 @@ bool CTFPlayer::CanMoveDuringTaunt()
 //-----------------------------------------------------------------------------
 bool CTFPlayer::ShouldStopTaunting()
 {
-	// stop taunt if we're under water
-	if ( GetWaterLevel() > WL_Waist )
+	int iBreathesUnderwater = 0;
+	CALL_ATTRIB_HOOK_INT(iBreathesUnderwater, can_breathe_under_water);
+
+
+	// stop taunt if we're under water (if we can't breathe underwater)
+	if ( GetWaterLevel() > WL_Waist && !iBreathesUnderwater)
 		return true;
 
 	if ( IsViewingCYOAPDA() )
