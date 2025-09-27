@@ -273,6 +273,16 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"1"
 		}
+		"9026" 
+		{
+			"name"	"shotgun doubleshot"
+			"attribute_class"	"shotgun_doubleshot"
+			"description_string"	"#TFP_ATR_ShotgunDoubleShot"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"1"
+		}
 	}
 	"items"
 	{
@@ -318,6 +328,11 @@
 				{
 					"attribute_class"	"mult_dmg"
 					"value"	"1.25"
+				}
+				"shotgun doubleshot"
+				{
+					"attribute_class"	"shotgun_doubleshot"
+					"value"	"1"
 				}
 				"weapon spread bonus"
 				{

@@ -102,7 +102,7 @@ void CTFShotgun::SecondaryAttack()
 	if (!CanAttack())
 		return;
 
-	if (m_iClip1 < GetMaxClip1() - 1) 
+	if (m_iClip1 < GetMaxClip1()) 
 	{
 		return;
 	}

@@ -51,6 +51,7 @@ public:
 
 	virtual int		GetWeaponID( void ) const			{ return TF_WEAPON_SHOTGUN_PRIMARY; }
 	virtual void	PrimaryAttack();
+	virtual void	SecondaryAttack();
 	virtual void	PlayWeaponShootSound( void );
 
 #ifdef GAME_DLL
