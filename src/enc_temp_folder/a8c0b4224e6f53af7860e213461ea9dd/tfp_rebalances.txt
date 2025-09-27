@@ -169,7 +169,7 @@
 		// Sandman Disabler
 		"44" 
 		{
-			//"prefab"	"hidden_by_rebalance"
+			"prefab"	"hidden_by_rebalance"
 		}
 
 		// ID 10002 taken
@@ -177,9 +177,9 @@
 		// Sandman rebalance
 		"9020"
 		{
-			"enabled"	"0"
-			"auto_unlock"	"0"
-			"show_in_armory"	"0"
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
 
 
 			"name"	"The Sandman (Rebalanced)"

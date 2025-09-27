@@ -64,6 +64,11 @@ public:
 
 	virtual float	GetMeleeDamage( CBaseEntity *pTarget, int* piDamageType, int* piCustomDamage );
 
+	virtual bool	HasMeleeCombo( void );
+	virtual int		MeleeComboCount( void );
+
+
+
 #ifndef CLIENT_DLL
 	virtual float	GetForceScale( void );
 	virtual int		GetDamageCustom( void ) { return TF_DMG_CUSTOM_NONE; }
@@ -100,6 +105,11 @@ protected:
 private:
 	bool DoSwingTraceInternal( trace_t &trace, bool bCleave, CUtlVector< trace_t >* pTargetTraceVector );
 	bool OnSwingHit( trace_t &trace );
+
+	int					m_iComboCount;
+	float				m_flLastComboHit;
+	bool				m_bBigHit;
+
 
 	CTFWeaponBaseMelee( const CTFWeaponBaseMelee & ) {}
 };

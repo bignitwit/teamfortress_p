@@ -478,6 +478,7 @@ void CTFRobotArm::PrimaryAttack()
 
 	if ( m_iComboCount == 2 && CanAttack() )
 	{
+
 		pPlayer->m_Shared.SetNextMeleeCrit( MELEE_CRIT );
 	}
 

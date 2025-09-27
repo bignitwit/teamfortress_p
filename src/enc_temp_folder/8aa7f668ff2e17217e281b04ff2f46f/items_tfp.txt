@@ -263,7 +263,7 @@
 			"armory_desc"	"on_wearer"
 			"stored_as_integer"	"1"
 		}
-		"9025" // FIX ME
+		"9025"
 		{
 			"name"	"melee combo generic"
 			"attribute_class"	"melee_combo"

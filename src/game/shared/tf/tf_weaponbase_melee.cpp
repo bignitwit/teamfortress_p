@@ -25,6 +25,10 @@
 
 ConVar tf_weapon_criticals_melee( "tf_weapon_criticals_melee", "1", FCVAR_REPLICATED | FCVAR_NOTIFY, "Controls random crits for melee weapons. 0 - Melee weapons do not randomly crit. 1 - Melee weapons can randomly crit only if tf_weapon_criticals is also enabled. 2 - Melee weapons can always randomly crit regardless of the tf_weapon_criticals setting." );
 
+
+// Maximum time between melee hits to continue the combo
+#define MELEE_COMBO_TIMEOUT 5.0f
+
 //=============================================================================
 //
 // TFWeaponBase Melee tables.
@@ -78,6 +82,11 @@ void CTFWeaponBaseMelee::WeaponReset( void )
 	m_flSmackTime = -1.0f;
 	m_bConnected = false;
 	m_bMiniCrit = false;
+
+	m_iComboCount = 0;
+	m_flLastComboHit = 0.f;
+	m_bBigHit = false;
+
 }
 
 // -----------------------------------------------------------------------------
@@ -171,7 +180,7 @@ int	CTFWeaponBaseMelee::GetSwingRange( void )
 	else
 	{
 		int iIsSword = 0;
-		CALL_ATTRIB_HOOK_INT( iIsSword, is_a_sword )
+		CALL_ATTRIB_HOOK_INT(iIsSword, is_a_sword);
 		if ( iIsSword )
 		{
 			return 72; // swords are typically 72
@@ -213,6 +222,23 @@ void CTFWeaponBaseMelee::PrimaryAttack()
 	{
 		m_bMiniCrit = false;
 	}
+
+
+	if (HasMeleeCombo())
+	{
+		if (gpGlobals->curtime - m_flLastComboHit > MELEE_COMBO_TIMEOUT)
+		{
+			Msg("Lost combo :( \n");
+			m_iComboCount = 0;
+		}
+
+		if (m_iComboCount == (MeleeComboCount() - 1))
+		{
+			Msg("Next hit crit! \n");
+			pPlayer->m_Shared.SetNextMeleeCrit(MELEE_CRIT);
+		}
+	}
+
 
 
 #if !defined( CLIENT_DLL ) 
@@ -701,6 +727,7 @@ bool CTFWeaponBaseMelee::OnSwingHit( trace_t &trace )
 // -----------------------------------------------------------------------------
 void CTFWeaponBaseMelee::Smack( void )
 {
+
 	trace_t trace;
 
 	CTFPlayer *pPlayer = GetTFPlayerOwner();
@@ -762,6 +789,37 @@ void CTFWeaponBaseMelee::Smack( void )
 			}
 		}
 	}
+
+
+	// Combo stuff
+	
+	if (HasMeleeCombo()) 
+	{
+		trace_t trace;
+		bool btrace = DoSwingTrace(trace);
+		if (btrace && trace.DidHitNonWorldEntity() && trace.m_pEnt && trace.m_pEnt->IsPlayer() &&
+			trace.m_pEnt->GetTeamNumber() != pPlayer->GetTeamNumber())
+		{
+			m_iComboCount++;
+			m_flLastComboHit = gpGlobals->curtime;
+
+			Msg("Hit; with combo %i \n", m_iComboCount);
+
+			if (m_iComboCount == MeleeComboCount())
+			{
+				Msg("Got big hit! \n");
+				m_iComboCount = 0;
+				m_bBigHit = true;
+			}
+		}
+		else
+		{
+			m_iComboCount = 0;
+		}
+	}
+
+	m_bBigHit = false;
+	
 
 #if !defined (CLIENT_DLL)
 
@@ -973,6 +1031,13 @@ void CTFWeaponBaseMelee::DoMeleeDamage( CBaseEntity* ent, trace_t& trace, float 
 //-----------------------------------------------------------------------------
 float CTFWeaponBaseMelee::GetForceScale( void )
 {
+	if (HasMeleeCombo() && m_bBigHit)
+	{
+		return tf_meleeattackforcescale.GetFloat() * 5;
+	}
+
+
+
 	return tf_meleeattackforcescale.GetFloat();
 }
 #endif
@@ -1150,3 +1215,33 @@ char const *CTFWeaponBaseMelee::GetShootSound( int iIndex ) const
 
 	return BaseClass::GetShootSound(iIndex);
 }
+
+
+//-----------------------------------------------------------------------------
+// Purpose: Allow all melee weapons to potentially have the Gunslinger's 3 hit combo punch
+//-----------------------------------------------------------------------------
+bool CTFWeaponBaseMelee::HasMeleeCombo() 
+{
+	int iMeleeCombo = 0;
+	CALL_ATTRIB_HOOK_INT(iMeleeCombo, melee_combo);
+
+	return iMeleeCombo > 0;
+}
+//-----------------------------------------------------------------------------
+// Purpose: Get Melee Combo required hit count 
+//-----------------------------------------------------------------------------
+int CTFWeaponBaseMelee::MeleeComboCount()
+{
+	int iMeleeCombo = 0;
+	CALL_ATTRIB_HOOK_INT(iMeleeCombo, melee_combo);
+
+	if (iMeleeCombo == 0) 
+	{
+		Warning("Getting melee combo big hit count on a weapon that doesn't get combos \n");
+		return -1;
+	}
+
+	return iMeleeCombo;
+}
+
+
