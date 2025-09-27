@@ -15,8 +15,9 @@
 
 			"public_prefab"			"1"
 			"name"	"#TFP_Rebalance_Rebalanced"
-			"enabled"	"0"
-			"hidden"	"1"
+				
+			"rebalanced"	"1"
+
 			"show_in_armory"	"0"
 			"item_slot"	"misc"
 			"item_class"		"no_entity"
@@ -24,11 +25,6 @@
 			{
 
 			}
-
-			"image_inventory"	""
-			"mouse_pressed_sound"	"vo/k_lab/kl_fiddlesticks.wav"
-			"drop_sound"		"vo/k_lab/kl_fiddlesticks.wav"
-			"model_player"	"models/error.mdl"
 
 			"attributes"
 			{
@@ -38,11 +34,17 @@
 					"value"	"1"
 				}
 			}
+			"image_inventory"	""
+			"mouse_pressed_sound"	"vo/k_lab/kl_fiddlesticks.wav"
+			"drop_sound"		"vo/k_lab/kl_fiddlesticks.wav"
+			"model_player"	"models/error.mdl"
+
+
 		}
 	}
 	"attributes" 
 	{
-		"7000"
+		"10001"
 		{
 			"name"	"rebalanced disable"
 			"attribute_class"	"disable"
@@ -51,7 +53,7 @@
 			"hidden"	"0"
 			"effect_type"	"unusual"
 		}
-		"7001"
+		"10002"
 		{
 			"name"	"hot hand rebalance desc"
 			"attribute_class"	"rebalance"
@@ -63,14 +65,13 @@
 	}
 	"items"
 	{
-		// Hot hand disablers
+		// Hot hand disabler
 		"1181" 
 		{
 			"prefab"	"hidden_by_rebalance"
 		}
-
 		// Hot hand rebalance
-		"7001"
+		"10001"
 		{
 			"enabled"	"1"
 			"auto_unlock"	"1"
@@ -79,7 +80,7 @@
 			"name"	"The Hot Hand (Rebalanced)"
 			"capabilities"
 			{
-				"nameable"		"1"
+				"nameable"		"0"
 			}
 			"tags"
 			{
@@ -165,7 +166,5 @@
 				"sound_special2"	"Weapon_Slap.SwingFireCrit"
 			}
 		}
-
-
 	}
 }

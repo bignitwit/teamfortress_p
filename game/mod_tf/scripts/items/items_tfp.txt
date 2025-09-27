@@ -1,7 +1,7 @@
 // Load base tf2 items
 #base items_game.txt
 
-// Load rebalances overtop - Ids 7000
+// Load rebalances overtop - Ids 10000
 #base tfp_rebalances.txt
 
 
@@ -21,6 +21,12 @@
 		{
 			"prefab"	"tfp"
 			"public_prefab"			"1"
+
+			"capabilities"
+			{
+				"nameable"	"0"
+			}
+
 
 		}
 	}
@@ -278,10 +284,7 @@
 			// Usage
 			"item_quality"	"unique"
 
-			"capabilities"
-			{
-				"nameable"	"0"
-			}
+
 			"used_by_classes"
 			{
 				"soldier"	"secondary"
@@ -411,9 +414,7 @@
 		// HL2 Crowbar
 		"9003"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"HL2Crowbar"
@@ -571,9 +572,7 @@
 		// HL2 Stunstick 
 		"9005"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"HL2Stunstick"
@@ -648,9 +647,7 @@
 		// One-Man Army
 		"9006"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"ArtilleryMinigun"
@@ -739,9 +736,7 @@
 		// CarpetBomber
 		"9007"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"CarpetBomber"
@@ -843,9 +838,7 @@
 		// Med Revenge Shotgun 
 		"9008"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"MedRevengeShotgun"
@@ -917,9 +910,7 @@
 		// HotSauce
 		"9009"
 		{
-			"enabled"	"0"
-			"auto_unlock"	"0"
-			"show_in_armory"	"1"
+
 
 			// Base def
 			"name"	"HotSauce"
@@ -999,9 +990,7 @@
 		// The MIA
 		"9010"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"The Missing In Action"
@@ -1080,9 +1069,7 @@
 		// Duelist
 		"9011"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"The Duelist"
@@ -1153,9 +1140,7 @@
 		// Trojan Horse
 		"9012"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+			"prefab"	"tfp_customitem"
 
 			// Base def
 			"name"	"TrojanHorse"
@@ -1227,9 +1212,7 @@
 		// The Slick Suit 
 		"9013"
 		{
-			"enabled"	"1"
-			"auto_unlock"	"1"
-			"show_in_armory"	"1"
+
 
 			// Base def
 			"name"	"The Slick Suit"
@@ -1302,8 +1285,9 @@
 			"mouse_pressed_sound" 	"ui/item_hat_pickup.wav"
 			"drop_sound" 			"ui/item_hat_drop.wav"
 
-
 		}
+		
+
 	}
 
 	"item_sets" 
@@ -1327,3 +1311,4 @@
 		}
 	}
 }
+

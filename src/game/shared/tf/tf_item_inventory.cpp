@@ -364,6 +364,15 @@ int	CTFInventoryManager::GetAllUsableItemsForSlot(int iClass, int iSlot, CUtlVec
 		if (IsUnacknowledged(pItem->GetInventoryPosition()))
 			continue;
 
+		// Ignore Rebalanced items
+		if (pItemData->IsRebalancedItem()) 
+		{
+			Msg("%s \n", pItemData->GetItemDefinitionName());
+			continue;
+		}
+
+
+
 		pList->AddToTail(m_LocalInventory.GetItem(i));
 	}
 

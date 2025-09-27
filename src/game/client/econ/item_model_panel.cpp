@@ -2900,6 +2900,9 @@ void CItemModelPanel::SetNoItemText( const wchar_t *pwszTitleOverride, const wch
 	static CSchemaColorDefHandle pColorDef_DescAttribPositive( "desc_attrib_positive" );
 	static CSchemaColorDefHandle pColorDef_DescAttribNegative( "ItemAttribNegative" );
 
+	static CSchemaColorDefHandle pColorDef_DescAttribRebalance("desc_attrib_rebalance");
+
+
 	CleanupNoItemWChars();
 
 	m_pwcNoItemText = CloneWString( pwszTitleOverride );
@@ -2927,6 +2930,12 @@ void CItemModelPanel::SetNoItemText( const wchar_t *pwszTitleOverride, const wch
 				{
 					Color col = pScheme->GetColor( pColorDef_DescAttribNegative->GetColorName(), Color(255,255,255,255) );
 					m_pItemAttribLabel->GetTextImage()->AddColorChange( col, iNegAttribsBegin );
+				}
+
+				if (pColorDef_DescAttribRebalance)
+				{
+					Color col = pScheme->GetColor(pColorDef_DescAttribRebalance->GetColorName(), Color(255, 255, 255, 255));
+					m_pItemAttribLabel->GetTextImage()->AddColorChange(col, iNegAttribsBegin);
 				}
 			}
 		}
