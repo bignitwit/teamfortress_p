@@ -10,7 +10,7 @@ Type: **Shotgun** Classes: **Soldier, Pyro**
 Credits: [**Model**](https://steamcommunity.com/sharedfiles/filedetails/?id=3168872482)
 
 * Hard hitting, best for up-close combat or finishing enemies off
-* Double-shot on Alt-fire(NYI)
+* Double-shot on Alt-fire
 * Part of the **Combine Cleanup** set
 
 ### Frenzy Wrench \[Temp Name]
@@ -24,7 +24,7 @@ Credits: [**Model**](https://steamcommunity.com/sharedfiles/filedetails/?id=3168
 * Deal damage with your weapons or your sentry to fill a Frenzy meter
 * Taunt with the Wrench to activate Frenzy Mode. Move faster, hit quicker, and gain damage resistances to push through harsh situations!(NYI)
 
-### Ol' Reliable \[Temp Name]
+### Ol' Reliable
 
 Type: **Crowbar** Classes: **Soldier**  
 
@@ -91,6 +91,16 @@ Type: **Stickybomb Launcher** Classes: **Demoman**
 * -15% explosion radius
 * +3 degrees random projectile variance
 * No ammo from dispensers when active
+
+### the Trojan Horse
+
+Type: **Stickybomb Launcher** Classes: **Demoman**  
+
+* Stickybombs stick to enemies and teammates
+* +100% damage force
+* -20% damage penalty
+* +0.4 sec arm time
+* Minicrits whenever it would usually crit
 
 ## Rebalances
 
