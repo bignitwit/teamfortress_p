@@ -626,23 +626,6 @@ bool CTFRocketLauncher_Mortar::Holster(CBaseCombatWeapon* pSwitchingTo)
 	{
 		DestroySniperDot();
 	}
-
-	// Remove all control from rockets on holster
-	if (m_vecRockets.Count() > 0)
-	{ 
-		FOR_EACH_VEC_BACK(m_vecRockets, i)
-		{
-			CBaseEntity* pRocket = m_vecRockets[i].Get();
-	
-			if (pRocket && pRocket->GetOwnerEntity() == GetOwnerEntity())
-			{
-				m_vecRockets.Remove(i);
-				continue;
-			}
-
-		}
-	}
-
 #endif
 
 	return BaseClass::Holster(pSwitchingTo);

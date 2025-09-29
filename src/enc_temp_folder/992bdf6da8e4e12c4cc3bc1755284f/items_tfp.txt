@@ -1389,7 +1389,7 @@
 				"Projectile speed decreased"
 				{
 					"attribute_class"	"mult_projectile_speed"
-					"value" "0.50"
+					"value" "0.67"
 				}
 				"Blast radius decreased"
 				{
