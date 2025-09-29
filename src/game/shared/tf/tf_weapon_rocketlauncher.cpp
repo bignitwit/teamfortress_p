@@ -28,7 +28,9 @@
 
 
 #define BOMBARDMENT_ROCKET_MODEL "models/buildables/sentry3_rockets.mdl"
+
 #define TF_ROCKETLAUNCHER_MORTAR_LOSECONTROL_SECONDS 5.0f
+#define TF_ROCKETLAUNCHER_MORTAR_HIDEDOT_SECONDS 0.3f
 
 #define MORTAR_DOT_SPRITE_RED		"effects/sniperdot_red.vmt"
 #define MORTAR_DOT_SPRITE_BLUE		"effects/sniperdot_blue.vmt"
@@ -651,8 +653,8 @@ void CTFRocketLauncher_Mortar::ItemPostFrame( void )
 {
 #ifdef GAME_DLL
 
-	//gpGlobals->curtime >= m_flNextRedirectCheck
-	if (true)
+	// only update if have no active rockets
+	if (gpGlobals->curtime >= m_flNextRedirectCheck && m_vecRockets.Count() > 0)
 	{
 		RedirectRockets();
 		m_flNextRedirectCheck = gpGlobals->curtime + 0.03f;
@@ -661,7 +663,27 @@ void CTFRocketLauncher_Mortar::ItemPostFrame( void )
 	// Update the sniper dot position if we have one
 	if (m_hSniperDot)
 	{
+		
 		UpdateSniperDot();
+
+		// if we don't have rockets, remove the dot
+		if (m_vecRockets.Count() <= 0)
+		{
+			// only destroy dot if enough time has elapsed since we lost all rockets
+			if (gpGlobals->curtime >= m_flNextRedirectCheck + TF_ROCKETLAUNCHER_MORTAR_HIDEDOT_SECONDS)
+			{
+				DestroySniperDot();
+			}
+		}
+
+	}
+	else
+	{
+		// if we have rockets and don't have a dot, create one
+		if (m_vecRockets.Count() > 0) 
+		{
+			CreateSniperDot();
+		}
 	}
 
 #endif

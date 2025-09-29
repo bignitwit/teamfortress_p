@@ -1394,7 +1394,12 @@
 				"Blast radius decreased"
 				{
 					"attribute_class"	"mult_projectile_speed"
-					"value" "0.67"
+					"value" "0.50"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value" "0.75"
 				}
 			}
 
@@ -1414,6 +1419,7 @@
 			"name"	"#TFP_Set_HL2Soldier"
 			"items"
 			{
+				"HL2RocketLauncher"				"1"
 				"HL2Crowbar"				"1"
 			}
 		}

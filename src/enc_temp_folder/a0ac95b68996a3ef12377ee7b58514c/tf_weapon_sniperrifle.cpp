@@ -1641,6 +1641,7 @@ int CSniperDot::DrawModel( int flags )
 	// Tracked Rocketlauncher special case
 	if (pPlayer->Weapon_OwnsThisID(TF_WEAPON_ROCKETLAUNCHER))
 	{
+		Msg("is Rocketlauncher! \n");
 		flSize *= 3;
 		flStrength = 1;
 	}
