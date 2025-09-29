@@ -62,6 +62,16 @@
 			"hidden"	"0"
 			"effect_type"	"unusual"
 		}
+		"10003"
+		{
+			"name"	"balllaunching replenish on combo"
+			"attribute_class"	"desc"
+			"description_string"	"#TFP_Rebalance_SandmanCombo"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		
 	}
 	"items"
 	{
@@ -169,7 +179,8 @@
 		// Sandman Disabler
 		"44" 
 		{
-			//"prefab"	"hidden_by_rebalance"
+			"prefab"	"hidden_by_rebalance"
+			"rebalanced"	"1"
 		}
 
 		// ID 10002 taken
@@ -250,10 +261,20 @@
 					"attribute_class"	"set_weapon_mode"
 					"value"	"1"
 				}
+				"balllaunching replenish on combo"
+				{
+					"attribute_class"	"desc"
+					"value"	"1"
+				}
 				"melee combo generic"
 				{
 					"attribute_class"	"melee_combo"
 					"value"	"3"
+				}
+				"fire rate penalty"
+				{
+					"attribute_class"	"mult_postfiredelay"
+					"value"	"1.2"
 				}
 				"special taunt"
 				{

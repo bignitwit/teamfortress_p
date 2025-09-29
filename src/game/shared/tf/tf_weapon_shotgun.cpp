@@ -102,7 +102,7 @@ void CTFShotgun::SecondaryAttack()
 	if (!CanAttack())
 		return;
 
-	if (m_iClip1 < GetMaxClip1() - 1) 
+	if (m_iClip1 < 2) 
 	{
 		return;
 	}
@@ -126,7 +126,7 @@ void CTFShotgun::SecondaryAttack()
 	pProj = FireProjectile(pPlayer);
 	ModifyProjectile(pProj);
 
-	m_iClip1 = 1;
+	//m_iClip1 = 1;
 
 	m_flNextPrimaryAttack = gpGlobals->curtime + m_pWeaponInfo->GetWeaponData(m_iWeaponMode).m_flTimeFireDelay * 1.4;
 

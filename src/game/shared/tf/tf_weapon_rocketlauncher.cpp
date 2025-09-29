@@ -10,6 +10,7 @@
 #include "in_buttons.h"
 #include "tf_gamerules.h"
 
+
 // Client specific.
 #ifdef CLIENT_DLL
 #include "c_tf_player.h"
@@ -25,7 +26,13 @@
 
 #endif
 
+
 #define BOMBARDMENT_ROCKET_MODEL "models/buildables/sentry3_rockets.mdl"
+#define TF_ROCKETLAUNCHER_MORTAR_LOSECONTROL_SECONDS 5.0f
+
+#define MORTAR_DOT_SPRITE_RED		"effects/sniperdot_red.vmt"
+#define MORTAR_DOT_SPRITE_BLUE		"effects/sniperdot_blue.vmt"
+
 
 //=============================================================================
 //
@@ -114,6 +121,8 @@ END_NETWORK_TABLE()
 BEGIN_PREDICTION_DATA( CTFRocketLauncher_Mortar )
 END_PREDICTION_DATA()
 
+LINK_ENTITY_TO_CLASS(tf_weapon_rocketlauncher_mortar, CTFRocketLauncher_Mortar);
+PRECACHE_WEAPON_REGISTER(tf_weapon_rocketlauncher_mortar);
 
 // Server specific.
 #ifndef CLIENT_DLL
@@ -571,10 +580,55 @@ int CTFRocketLauncher_AirStrike::GetCount( void )
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 // CTFRocketLauncher_Mortar BEGIN
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-//CTFRocketLauncher_Mortar::CTFRocketLauncher_Mortar()
-//{
-//	
-//}
+CTFRocketLauncher_Mortar::CTFRocketLauncher_Mortar()
+{
+#ifdef GAME_DLL
+	m_flNextRedirectCheck = 0;
+	m_hSniperDot = NULL;
+#endif
+}
+
+CTFRocketLauncher_Mortar::~CTFRocketLauncher_Mortar()
+{
+	// Server specific.
+#ifdef GAME_DLL
+	DestroySniperDot();
+#endif
+}
+
+void CTFRocketLauncher_Mortar::Precache()
+{
+	BaseClass::Precache();
+	PrecacheModel(MORTAR_DOT_SPRITE_RED);
+	PrecacheModel(MORTAR_DOT_SPRITE_BLUE);
+
+}
+
+bool CTFRocketLauncher_Mortar::Deploy()
+{
+#ifdef GAME_DLL
+	if (!m_hSniperDot)
+	{
+		CreateSniperDot();
+	}
+#endif
+
+	return BaseClass::Deploy();
+
+}
+
+bool CTFRocketLauncher_Mortar::Holster(CBaseCombatWeapon* pSwitchingTo)
+{
+#ifdef GAME_DLL
+	if (m_hSniperDot)
+	{
+		DestroySniperDot();
+	}
+#endif
+
+	return BaseClass::Holster(pSwitchingTo);
+}
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 CBaseEntity *CTFRocketLauncher_Mortar::FireProjectile( CTFPlayer *pPlayer )
 {
@@ -596,12 +650,20 @@ void CTFRocketLauncher_Mortar::SecondaryAttack( void )
 void CTFRocketLauncher_Mortar::ItemPostFrame( void )
 {
 #ifdef GAME_DLL
-	CBasePlayer *pOwner = ToBasePlayer( GetOwner() );
-	if ( pOwner && pOwner->m_nButtons & IN_ATTACK2 )
+
+	//gpGlobals->curtime >= m_flNextRedirectCheck
+	if (true)
 	{
-		// If allowed
 		RedirectRockets();
+		m_flNextRedirectCheck = gpGlobals->curtime + 0.03f;
 	}
+
+	// Update the sniper dot position if we have one
+	if (m_hSniperDot)
+	{
+		UpdateSniperDot();
+	}
+
 #endif
 	BaseClass::ItemPostFrame();
 }
@@ -609,14 +671,6 @@ void CTFRocketLauncher_Mortar::ItemPostFrame( void )
 //-----------------------------------------------------------------------------
 void CTFRocketLauncher_Mortar::ItemBusyFrame( void )
 {
-#ifdef GAME_DLL
-	CBasePlayer *pOwner = ToBasePlayer( GetOwner() );
-	if ( pOwner && pOwner->m_nButtons & IN_ATTACK2 )
-	{
-		// If allowed
-		RedirectRockets();
-	}
-#endif
 	BaseClass::ItemBusyFrame();
 }
 
@@ -639,6 +693,10 @@ void CTFRocketLauncher_Mortar::RedirectRockets( void )
 	trace_t tr;
 	UTIL_TraceLine( vecEye, vecEye + vecForward * MAX_TRACE_LENGTH, MASK_SOLID, pOwner, COLLISION_GROUP_NONE, &tr );
 	float flVel = 1100.0f;
+	CALL_ATTRIB_HOOK_FLOAT(flVel, mult_projectile_speed);
+
+	float flRocketControlTime = 1.0f;
+	CALL_ATTRIB_HOOK_FLOAT(flRocketControlTime, mult_rocketcontrol_duration);
 
 	FOR_EACH_VEC_BACK( m_vecRockets, i )
 	{
@@ -649,6 +707,19 @@ void CTFRocketLauncher_Mortar::RedirectRockets( void )
 			m_vecRockets.Remove( i );
 			continue;
 		}
+		
+
+		CTFBaseRocket* pRocketR = assert_cast<CTFBaseRocket*>(pRocket);
+		// Remove rockets from tracking that have been active for too long
+		if (pRocketR && gpGlobals->curtime - pRocketR->m_flRocketSpawnTime > TF_ROCKETLAUNCHER_MORTAR_LOSECONTROL_SECONDS * flRocketControlTime)
+		{
+			//Msg("Too long!!! \n");
+			pOwner->EmitSound("Player.DenyWeaponSelection");
+
+			m_vecRockets.Remove(i);
+			continue;
+		}
+		
 
 		// Give the rocket a new target
 		Vector vecDir = pRocket->WorldSpaceCenter() - tr.endpos;
@@ -661,9 +732,89 @@ void CTFRocketLauncher_Mortar::RedirectRockets( void )
 		QAngle newAngles;
 		VectorAngles( -vecDir, newAngles );
 		pRocket->SetAbsAngles( newAngles );
-
-		m_vecRockets.Remove( i );
 	}
+#endif
+}
+
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+void CTFRocketLauncher_Mortar::CreateSniperDot(void)
+{
+	// Server specific.
+#ifdef GAME_DLL
+
+	// Check to see if we have already been created?
+	if (m_hSniperDot)
+		return;
+
+	// Get the owning player (make sure we have one).
+	CBaseCombatCharacter* pPlayer = GetOwner();
+	if (!pPlayer)
+		return;
+
+	// Create the sniper dot, but do not make it visible yet.
+	m_hSniperDot = CSniperDot::Create(GetAbsOrigin(), pPlayer, true);
+	m_hSniperDot->ChangeTeam(pPlayer->GetTeamNumber());
+
+#endif
+}
+
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+void CTFRocketLauncher_Mortar::DestroySniperDot(void)
+{
+	// Server specific.
+#ifdef GAME_DLL
+
+	// Destroy the sniper dot.
+	if (m_hSniperDot)
+	{
+		UTIL_Remove(m_hSniperDot);
+		m_hSniperDot = NULL;
+	}
+
+#endif
+}
+
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+void CTFRocketLauncher_Mortar::UpdateSniperDot(void)
+{
+	// Server specific.
+#ifdef GAME_DLL
+
+	CBasePlayer* pPlayer = ToBasePlayer(GetOwner());
+	if (!pPlayer)
+		return;
+
+	// Get the start and endpoints.
+	Vector vecMuzzlePos = pPlayer->Weapon_ShootPosition();
+	Vector forward;
+	pPlayer->EyeVectors(&forward);
+	Vector vecEndPos = vecMuzzlePos + (forward * MAX_TRACE_LENGTH);
+
+	trace_t	trace;
+	UTIL_TraceLine(vecMuzzlePos, vecEndPos, (MASK_SHOT & ~CONTENTS_WINDOW), GetOwner(), COLLISION_GROUP_NONE, &trace);
+
+	// Update the sniper dot.
+	if (m_hSniperDot)
+	{
+		CBaseEntity* pEntity = NULL;
+		if (trace.DidHitNonWorldEntity())
+		{
+			pEntity = trace.m_pEnt;
+			if (!pEntity || !pEntity->m_takedamage)
+			{
+				pEntity = NULL;
+			}
+		}
+
+		m_hSniperDot->Update(pEntity, trace.endpos, trace.plane.normal);
+	}
+
 #endif
 }
 

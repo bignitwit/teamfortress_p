@@ -32,6 +32,7 @@ public:
 	virtual const char *GetTrailParticleName( void );
 	bool			IsCritical() const { return m_bCritical; }
 
+
 private:
 	bool	m_bCritical;
 

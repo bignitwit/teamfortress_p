@@ -12,6 +12,8 @@
 #include "tf_weapon_pipebomblauncher.h"
 #include "tf_weapon_grenadelauncher.h"
 
+
+
 // Client specific.
 #ifdef CLIENT_DLL
 #include "c_tf_player.h"
@@ -715,13 +717,12 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 	}
 #endif
 
-
 	int iStickiesAttachToPlayers = 0;
 	CALL_ATTRIB_HOOK_INT_ON_OTHER(GetLauncher(), iStickiesAttachToPlayers, stickies_attach_to_players);
 
 	if (pOther->IsPlayer() && iStickiesAttachToPlayers)
 	{
-		Msg("Touched Player \n");
+		//Msg("Touched Player \n");
 
 		CTFPlayer* pOwner = ToTFPlayer(GetThrower());
 		CTFPlayer* pTouchedPlayer = ToTFPlayer(pOther);
@@ -729,19 +730,19 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 
 
 		// if Touched is not the owner of the bomb
-		if (pTouchedPlayer != pOwner) 
+		if (pTouchedPlayer != pOwner)
 		{
 			// If bomb already has a parent and it is a player
 			if (pCurrentParent && pCurrentParent->IsPlayer())
 			{
-				Msg("Has Player parent \n");
+				//Msg("Has Player parent \n");
 
 				CTFPlayer* pParentPlayer = ToTFPlayer(pCurrentParent);
 
 				// If touched player is different team to the bomb's team
 				if (pTouchedPlayer->TeamID() != TeamID())
 				{
-					Msg("Touched player is on enemy team of bomb, so stickin to em \n");
+					//Msg("Touched player is on enemy team of bomb, so stickin to em \n");
 
 					// Set parent to touched player of different team
 					m_bTouched = true;
@@ -762,7 +763,7 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 			else
 			{
 				// if bomb has no parent yet
-				Msg("No Parent, so should give em one \n");
+				//Msg("No Parent, so should give em one \n");
 
 
 				m_bTouched = true;
@@ -780,9 +781,9 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 				return;
 			}
 		}
-		else 
+		else
 		{
-			Msg("Stickyied Player is owner, no sticky! \n");
+			//Msg("Stickyied Player is owner, no sticky! \n");
 		}
 	}
 #endif

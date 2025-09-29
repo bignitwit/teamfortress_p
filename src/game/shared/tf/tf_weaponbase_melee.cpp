@@ -27,7 +27,7 @@ ConVar tf_weapon_criticals_melee( "tf_weapon_criticals_melee", "1", FCVAR_REPLIC
 
 
 // Maximum time between melee hits to continue the combo
-#define MELEE_COMBO_TIMEOUT 5.0f
+#define MELEE_COMBO_TIMEOUT 1.0f
 
 //=============================================================================
 //
@@ -203,6 +203,23 @@ void CTFWeaponBaseMelee::PrimaryAttack()
 	if ( !CanAttack() )
 		return;
 
+	if (HasMeleeCombo())
+	{
+		if (gpGlobals->curtime - m_flLastComboHit > MELEE_COMBO_TIMEOUT)
+		{
+			//Msg("Lost combo :( \n");
+			m_iComboCount = 0;
+		}
+
+		if (m_iComboCount == (MeleeComboCount() - 1))
+		{
+			//Msg("Next hit crit! \n");
+			pPlayer->m_Shared.SetNextMeleeCrit(MELEE_CRIT);
+			//Msg("Next hit is Melee Crit: %d \n", pPlayer->m_Shared.GetNextMeleeCrit() == MELEE_CRIT);
+		}
+	}
+
+
 	// Set the weapon usage mode - primary, secondary.
 	m_iWeaponMode = TF_WEAPON_PRIMARY_MODE;
 	m_bConnected = false;
@@ -222,24 +239,6 @@ void CTFWeaponBaseMelee::PrimaryAttack()
 	{
 		m_bMiniCrit = false;
 	}
-
-
-	if (HasMeleeCombo())
-	{
-		if (gpGlobals->curtime - m_flLastComboHit > MELEE_COMBO_TIMEOUT)
-		{
-			Msg("Lost combo :( \n");
-			m_iComboCount = 0;
-		}
-
-		if (m_iComboCount == (MeleeComboCount() - 1))
-		{
-			Msg("Next hit crit! \n");
-			pPlayer->m_Shared.SetNextMeleeCrit(MELEE_CRIT);
-		}
-	}
-
-
 
 #if !defined( CLIENT_DLL ) 
 	pPlayer->SpeakWeaponFire();
@@ -803,13 +802,15 @@ void CTFWeaponBaseMelee::Smack( void )
 			m_iComboCount++;
 			m_flLastComboHit = gpGlobals->curtime;
 
-			Msg("Hit; with combo %i \n", m_iComboCount);
+			//Msg("Hit; with combo %i \n", m_iComboCount);
 
 			if (m_iComboCount == MeleeComboCount())
 			{
-				Msg("Got big hit! \n");
+				//Msg("Got big hit! \n");
 				m_iComboCount = 0;
 				m_bBigHit = true;
+
+				OnSuccessfulCombo();
 			}
 		}
 		else
@@ -1242,6 +1243,13 @@ int CTFWeaponBaseMelee::MeleeComboCount()
 	}
 
 	return iMeleeCombo;
+}
+//-----------------------------------------------------------------------------
+// Purpose: For other weapons to do stuff on a combo
+//-----------------------------------------------------------------------------
+void CTFWeaponBaseMelee::OnSuccessfulCombo(void)
+{
+
 }
 
 

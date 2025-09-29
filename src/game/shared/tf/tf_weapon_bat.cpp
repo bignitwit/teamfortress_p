@@ -468,7 +468,7 @@ void CTFBat_Wood::LaunchBall( void )
 	if ( !pBall )
 		return;
 
-	if ( IsCurrentAttackACrit() )
+	if ( IsCurrentAttackACrit() || (HasMeleeCombo() && pPlayer->m_Shared.GetNextMeleeCrit() == MELEE_CRIT))
 	{
 		WeaponSound( BURST );
 	}
@@ -510,6 +510,11 @@ CBaseEntity* CTFBat_Wood::CreateBall( void )
 		return NULL;
 
 	CalcIsAttackCritical();
+	// support for melee combo stuff
+	if (HasMeleeCombo() && pPlayer->m_Shared.GetNextMeleeCrit() == MELEE_CRIT) 
+	{
+		m_bCurrentAttackIsCrit = true;
+	}
 
 	pBall->m_iOriginalOwnerID = m_iEnemyBallID;
 	m_iEnemyBallID = 0;
@@ -1322,3 +1327,20 @@ void CTFBall_Ornament::Explode( trace_t *pTrace, int bitsDamageType )
 
 #endif
 
+// Reward successful melee combo with replenish
+void CTFBat_Wood::OnSuccessfulCombo() 
+{
+	if (!HasMeleeCombo())
+		return;
+
+
+	//Msg("Successful combo called on Bat! \n");
+	CTFPlayer* pOwner = ToTFPlayer(GetOwnerEntity());
+	if (!pOwner)
+		return;
+
+#if GAME_DLL
+	//Msg("Replenished ball! \n");
+	pOwner->GiveAmmo(1, TF_AMMO_GRENADES1);
+#endif
+}

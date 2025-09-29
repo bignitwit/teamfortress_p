@@ -91,6 +91,8 @@ public:
 	virtual float		InternalGetEffectBarRechargeTime( void ) { return 10.f; }
 	virtual int			GetEffectBarAmmo( void ) { return TF_AMMO_GRENADES1; }
 
+	virtual void		OnSuccessfulCombo(void) OVERRIDE;
+
 #ifdef GAME_DLL
 	virtual void		GetBallDynamics( Vector& vecLoc, QAngle& vecAngles, Vector& vecVelocity, AngularImpulse& angImpulse, CTFPlayer* pPlayer );
 #endif

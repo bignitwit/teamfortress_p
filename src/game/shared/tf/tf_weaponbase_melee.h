@@ -66,8 +66,7 @@ public:
 
 	virtual bool	HasMeleeCombo( void );
 	virtual int		MeleeComboCount( void );
-
-
+	virtual void	OnSuccessfulCombo( void );
 
 #ifndef CLIENT_DLL
 	virtual float	GetForceScale( void );

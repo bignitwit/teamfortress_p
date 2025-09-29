@@ -57,6 +57,8 @@ public:
 	void			ResetDeflected( void ) { m_iDeflected = 0; }
 	int				GetDeflected( void ) { return m_iDeflected; }
 
+	float	m_flRocketSpawnTime;
+
 protected:
 
 	// Networked.

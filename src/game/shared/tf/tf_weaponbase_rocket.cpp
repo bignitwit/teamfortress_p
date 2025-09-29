@@ -82,6 +82,7 @@ CTFBaseRocket::CTFBaseRocket()
 {
 	m_vInitialVelocity.Init();
 	m_iDeflected = 0;
+	m_flRocketSpawnTime = 0.0f;
 	
 // Client specific.
 #ifdef CLIENT_DLL
@@ -128,6 +129,8 @@ void CTFBaseRocket::Spawn( void )
 	Precache();
 	UseClientSideAnimation();
 	
+	m_flRocketSpawnTime = gpGlobals->curtime;
+
 	if ( GetLauncher() )
 	{
 		int iMiniRocket = 0;

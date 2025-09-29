@@ -283,6 +283,33 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"1"
 		}
+		"9027" 
+		{
+			"name"	"rocket control duration Increased"
+			"attribute_class"	"mult_rocketcontrol_duration"
+			"description_string"	"#TFP_ATR_RocketControlDurationIncreased"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9028" 
+		{
+			"name"	"rocket control duration Decreased"
+			"attribute_class"	"mult_rocketcontrol_duration"
+			"description_string"	"#TFP_ATR_RocketControlDurationDecreased"
+			"description_format"	"value_is_inverted_percentage"
+			"hidden"	"0"
+			"effect_type"	"negative"
+		}
+		"9029" 
+		{
+			"name"	"rocket control desc"
+			"attribute_class"	"desc_rocketlauncher_mortar"
+			"description_string"	"#TFP_ATR_RocketLauncherMortarDesc"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
 	}
 	"items"
 	{
@@ -1310,7 +1337,72 @@
 			"drop_sound" 			"ui/item_hat_drop.wav"
 
 		}
-		
+		// HL2Launcher
+		"9014"
+		{
+			"prefab"	"tfp_customitem"
+
+			// Base def
+			"name"	"HL2RocketLauncher"
+			"item_name"		"#TFP_WEP_HL2RocketLauncher"
+			"item_class"	"tf_weapon_rocketlauncher_mortar"
+			"item_logname"	"hl2_rocketlauncher"
+			"item_iconname"	"skull_tf"
+			"propername"	"0"
+
+			// Usage
+			"item_slot"		"primary"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"soldier"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"		"1"
+				"can_deal_gib_damage"	"1"
+				"can_be_equipped_by_soldier_or_demo"	"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+			"attributes"
+			{
+				"rocket control desc"
+				{
+					"attribute_class"	"desc_rocketlauncher_mortar"
+					"value" "1"
+				}
+				"clip size bonus"
+				{
+					"attribute_class"	"mult_clipsize"
+					"value" "1.5"
+				}
+				"Projectile speed decreased"
+				{
+					"attribute_class"	"mult_projectile_speed"
+					"value" "0.75"
+				}
+				"Blast radius decreased"
+				{
+					"attribute_class"	"mult_projectile_speed"
+					"value" "0.67"
+				}
+			}
+
+			"anim_slot"	"primary"
+			"model_player"	"models/weapons/c_models/c_stickybomb_launcher/c_stickybomb_launcher.mdl"
+
+			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
+			"drop_sound"		"ui/item_heavy_gun_drop.wav"
+		}
 
 	}
 

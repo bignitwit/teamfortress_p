@@ -142,7 +142,10 @@ public:
 	DECLARE_DATADESC();
 #endif
 
-	//CTFRocketLauncher_Mortar();
+	CTFRocketLauncher_Mortar();
+
+	virtual ~CTFRocketLauncher_Mortar();
+
 
 	virtual int		GetWeaponID( void ) const			{ return TF_WEAPON_ROCKETLAUNCHER; }
 
@@ -152,12 +155,29 @@ public:
 	virtual void	ItemPostFrame( void );
 	virtual void	ItemBusyFrame( void );
 
+	virtual bool	Deploy(void);
+	virtual bool	Holster(CBaseCombatWeapon* pSwitchingTo = NULL) OVERRIDE;
+
+	virtual void Precache() OVERRIDE;
+
+
 private:
 	
 	void			RedirectRockets();
 
 #ifdef GAME_DLL
 	CUtlVector< EHANDLE > m_vecRockets;
+	float m_flNextRedirectCheck;
+#endif // GAME_DLL
+
+protected:
+
+	void CreateSniperDot(void);
+	void DestroySniperDot(void);
+	void UpdateSniperDot(void);
+
+#ifdef GAME_DLL
+	CHandle<CSniperDot>		m_hSniperDot;
 #endif // GAME_DLL
 
 };
