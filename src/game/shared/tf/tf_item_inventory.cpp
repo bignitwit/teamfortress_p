@@ -367,7 +367,7 @@ int	CTFInventoryManager::GetAllUsableItemsForSlot(int iClass, int iSlot, CUtlVec
 		// Ignore Rebalanced items
 		if (pItemData->IsRebalancedItem()) 
 		{
-			Msg("%s \n", pItemData->GetItemDefinitionName());
+			//Msg("%s \n", pItemData->GetItemDefinitionName());
 			continue;
 		}
 

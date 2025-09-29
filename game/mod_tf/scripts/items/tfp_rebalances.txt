@@ -53,7 +53,7 @@
 			"hidden"	"0"
 			"effect_type"	"unusual"
 		}
-		"10002"
+		"10002" // Overwrite
 		{
 			"name"	"hot hand rebalance desc"
 			"attribute_class"	"rebalance"
@@ -71,7 +71,6 @@
 			"hidden"	"0"
 			"effect_type"	"positive"
 		}
-		
 	}
 	"items"
 	{
@@ -136,11 +135,6 @@
 					"attribute_class"	"speed_buff_ally"
 					"value"	"1"
 				}
-				"hot hand rebalance desc"
-				{
-					"attribute_class"	"rebalance"
-					"value"	"1"
-				}
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
@@ -183,14 +177,12 @@
 			"rebalanced"	"1"
 		}
 
-		// ID 10002 taken
-
 		// Sandman rebalance
-		"9020"
+		"10000"
 		{
-			"enabled"	"0"
-			"auto_unlock"	"0"
-			"show_in_armory"	"0"
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
 
 
 			"name"	"The Sandman (Rebalanced)"
@@ -291,9 +283,55 @@
 			"mouse_pressed_sound"	"ui/item_wood_pole_pickup.wav"
 			"drop_sound"		"ui/item_wood_pole_drop.wav"
 		}
+		
+		// Jarate
+		"58" 
+		{
+			"name"	"Jarate (Rebalanced)"
 
 
+			"attributes"
+			{
+				"jar self soak"
+				{
+					"attribute_class"	"jar_self_soak"
+					"value"	"1"
+				}
+			}
 
+		}
+
+		// Mad milk
+		"222"
+		{
+			"name"	"Mad Milk (Rebalanced)"
+
+
+			"attributes"
+			{
+				"jar self soak"
+				{
+					"attribute_class"	"jar_self_soak"
+					"value"	"1"
+				}
+			}
+		}
+
+		// Gas Passer - full rework later
+		"1180"
+		{
+			"name"	"Gas Passer (Rebalanced)"
+
+			"attributes"
+			{
+				"jar self soak"
+				{
+					"attribute_class"	"jar_self_soak"
+					"value"	"1"
+				}
+			}
+		}
+		
 
 
 	}

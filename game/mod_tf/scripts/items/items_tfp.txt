@@ -186,6 +186,7 @@
 		"9017"
 		{
 			"name"	"jar self soak"
+			"description_string"	"#TFP_ATR_JarSelfSoak"
 			"attribute_class"	"jar_self_soak"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
@@ -263,7 +264,7 @@
 			"armory_desc"	"on_wearer"
 			"stored_as_integer"	"1"
 		}
-		"9025" // FIX ME
+		"9025"
 		{
 			"name"	"melee combo generic"
 			"attribute_class"	"melee_combo"
@@ -513,7 +514,7 @@
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
-					"value"	"0.8"
+					"value"	"0.5"
 				}
 			}
 
