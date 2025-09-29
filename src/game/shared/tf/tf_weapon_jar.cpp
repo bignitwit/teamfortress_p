@@ -317,10 +317,12 @@ void JarExplode( int iEntIndex, CTFPlayer *pAttacker, CBaseEntity *pOriginalWeap
 
 	// Treat this trace exactly like radius damage
 
-	int iSelfSoak = 1;
-	//CALL_ATTRIB_HOOK_INT_ON_OTHER(pOriginalWeapon, iSelfSoak, jar_self_soak);
 
-	CTraceFilterIgnorePlayers traceFilter(NULL, COLLISION_GROUP_PROJECTILE);
+	// Allow for self soaking attribute
+	int iSelfSoak = 1;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(pOriginalWeapon, iSelfSoak, jar_self_soak);
+
+	CTraceFilterIgnorePlayers traceFilter(iSelfSoak ? NULL : pAttacker, COLLISION_GROUP_PROJECTILE);
 
 
 	// Splash pee on everyone nearby.
