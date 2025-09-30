@@ -17,6 +17,9 @@
 #define CTFWrench C_TFWrench
 #define CTFRobotArm C_TFRobotArm
 #define CTFWearableRobotArm C_TFWearableRobotArm
+#define CTFWrench_Frenzy C_TFWrench_Frenzy
+
+
 #endif
 
 //=============================================================================
@@ -106,6 +109,30 @@ class CTFWearableRobotArm : public CTFWearable
 public:
 	DECLARE_CLASS( CTFWearableRobotArm, CTFWearable );
 	DECLARE_NETWORKCLASS();
+};
+
+//=============================================================================
+//
+// Frenzy chargeup Wrench
+//
+class CTFWrench_Frenzy : public CTFWrench
+{
+public:
+	DECLARE_CLASS(CTFWrench_Frenzy, CTFWrench);
+	DECLARE_NETWORKCLASS();
+	DECLARE_PREDICTABLE();
+
+	virtual void	SecondaryAttack(void);
+
+	void			UseRage(void);
+
+	float			GetProgress(void);
+	bool			IsRageFull(void); // same as GetProgress() without the division by 100.0f
+	const char*		GetEffectLabelText(void) { return "#TFP_WEP_FrenzyWrench_Meter"; }
+	bool			EffectMeterShouldFlash(void);
+
+	void			ApplyRageEffect(void);
+
 };
 
 #endif // TF_WEAPON_WRENCH_H

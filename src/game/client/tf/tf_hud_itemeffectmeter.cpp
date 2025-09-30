@@ -35,6 +35,7 @@
 #include "tf_weapon_rocketpack.h"
 #include "tf_weapon_bonesaw.h"
 #include "tf_weapon_slap.h"
+#include "tf_weapon_wrench.h"
 
 #include <vgui_controls/ImagePanel.h>
 
@@ -330,6 +331,8 @@ void CHudItemEffectMeter::CreateHudElementsForClass( C_TFPlayer* pPlayer, CUtlVe
 		DECLARE_ITEM_EFFECT_METER( CTFShotgun_Revenge, TF_WEAPON_SENTRY_REVENGE, false, "resource/UI/HUDItemEffectMeter_Engineer.res" );
 		DECLARE_ITEM_EFFECT_METER( CTFDRGPomson, TF_WEAPON_DRG_POMSON, false, "resource/UI/HUDItemEffectMeter_Pomson.res" );
 		DECLARE_ITEM_EFFECT_METER( CTFRevolver, TF_WEAPON_REVOLVER, false, "resource/UI/HUDItemEffectMeter_Spy.res" );
+		DECLARE_ITEM_EFFECT_METER( CTFWrench_Frenzy, TF_WEAPON_WRENCH, false, NULL);
+
 		break;
 
 	case TF_CLASS_PYRO:
@@ -926,6 +929,29 @@ bool CHudItemEffectMeter_Weapon< CTFMinigun >::IsEnabled( void )
 
 	return bVisible;
 }
+
+//-----------------------------------------------------------------------------
+// Frenzy Wrench flash
+//-----------------------------------------------------------------------------
+template <>
+bool CHudItemEffectMeter_Weapon<CTFWrench_Frenzy>::ShouldFlash(void)
+{
+	if (!m_pPlayer)
+		return false;
+
+	CTFWrench_Frenzy* pWeapon = GetWeapon();
+	if (!pWeapon)
+		return false;
+
+	return pWeapon->EffectMeterShouldFlash();
+}
+
+template <>
+bool CHudItemEffectMeter_Weapon<CTFWrench_Frenzy>::ShouldAutoAdjustPosition(void) const
+{
+	return true;
+}
+
 
 //-----------------------------------------------------------------------------
 // Purpose:

@@ -112,6 +112,8 @@
 #include "player_resource.h"
 #include "tf_player_resource.h"
 #include "gcsdk/gcclient_sharedobjectcache.h"
+#include "tf_weapon_wrench.h"
+
 #include "tf_party.h"
 
 #ifdef TF_RAID_MODE
@@ -8755,7 +8757,7 @@ void HandleRageGain( CTFPlayer *pPlayer, unsigned int iRequiredBuffFlags, float 
 	{
 		if ( pPlayer->IsPlayerClass( TF_CLASS_ENGINEER ) && ( kRageBuffFlag_OnDamageDealt & iRequiredBuffFlags ) )
 		{
-			pPlayer->m_Shared.ModifyRage( flDamage );
+			pPlayer->m_Shared.ModifyRage( 0.5f * flDamage / fInverseRageGainScale);
 		}
 		else if ( pPlayer->IsPlayerClass( TF_CLASS_HEAVYWEAPONS ) && ( kRageBuffFlag_OnDamageDealt & iRequiredBuffFlags ) )
 		{
@@ -17979,8 +17981,7 @@ void CTFPlayer::Taunt( taunts_t iTauntIndex, int iTauntConcept )
 	if ( iTauntIndex == TAUNT_BASE_WEAPON )
 	{
 		// phlogistinator
-		if ( IsPlayerClass( TF_CLASS_PYRO ) && m_Shared.GetRageMeter() >= 100.0f && 
-			 StringHasPrefix( szResponse, "scenes/player/pyro/low/taunt01" ) )
+		if ( IsPlayerClass( TF_CLASS_PYRO ) && m_Shared.GetRageMeter() >= 100.0f && StringHasPrefix( szResponse, "scenes/player/pyro/low/taunt01" ) )
 		{
 			// Pyro Rage!
 			CBaseCombatWeapon *pWeapon = GetActiveWeapon();
@@ -18025,6 +18026,14 @@ void CTFPlayer::Taunt( taunts_t iTauntIndex, int iTauntConcept )
 				{
 					AwardAchievement( ACHIEVEMENT_TF_HEAVY_EAT_SANDWICHES );
 				}
+			}
+		}
+		else if (IsPlayerClass(TF_CLASS_ENGINEER) && m_Shared.GetRageMeter() >= 100.0f && StringHasPrefix(szResponse, "scenes/player/engineer/low/taunt_drg_melee.vcd"))
+		{
+			CTFWrench_Frenzy* pWrench = (CTFWrench_Frenzy*)pActiveWeapon;
+			if (pWrench)
+			{
+				pWrench->ApplyRageEffect();
 			}
 		}
 	}

@@ -403,7 +403,7 @@
 			"item_name"		"#TFP_WEP_FrenzyWrench"
 			"item_description"	"#TFP_WEP_FrenzyWrench_Desc"
 			"item_type_name"	"#TF_Weapon_Wrench"
-			"item_class"	"tf_weapon_wrench"
+			"item_class"	"tf_weapon_wrench_frenzy"
 			"item_logname"	"frenzy_wrench"
 			"propername"	"0"
 
@@ -446,8 +446,13 @@
 					"value"	"0.8"
 				}
 				"special taunt"
-				{
+				{6
 					"attribute_class"	"special_taunt"
+					"value" "1"
+				}
+				"generate rage on damage"
+				{
+					"attribute_class"	"generate_rage_on_dmg"
 					"value" "1"
 				}
 
@@ -1389,7 +1394,7 @@
 				"Projectile speed decreased"
 				{
 					"attribute_class"	"mult_projectile_speed"
-					"value" "0.50"
+					"value" "0.60"
 				}
 				"Blast radius decreased"
 				{

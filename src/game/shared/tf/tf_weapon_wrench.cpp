@@ -31,6 +31,12 @@
 // Maximum time between robo arm hits to maintain the three-hit-combo
 #define ROBOARM_COMBO_TIMEOUT 1.0f
 
+#define WRENCH_FRENZY_EFFECT_TIME 8.0f 
+#define WRENCH_FRENZY_DMG_RESISTANCE 0.7f
+#define WRENCH_FRENZY_MOVESPEED_BONUS 1.2f
+#define WRENCH_FRENZY_ATTACKSPEED_BONUS 2.0f
+
+
 //=============================================================================
 //
 // Weapon Wrench tables.
@@ -77,6 +83,23 @@ BEGIN_NETWORK_TABLE( CTFWearableRobotArm, DT_TFWearableRobotArm )
 END_NETWORK_TABLE()
 
 LINK_ENTITY_TO_CLASS( tf_wearable_robot_arm, CTFWearableRobotArm );
+
+//=============================================================================
+//
+// Weapon Wrench Frenzy tables.
+//
+IMPLEMENT_NETWORKCLASS_ALIASED(TFWrench_Frenzy, DT_TFWeaponWrench_Frenzy)
+
+BEGIN_NETWORK_TABLE(CTFWrench_Frenzy, DT_TFWeaponWrench_Frenzy)
+END_NETWORK_TABLE()
+
+BEGIN_PREDICTION_DATA(CTFWrench_Frenzy)
+END_PREDICTION_DATA()
+
+LINK_ENTITY_TO_CLASS(tf_weapon_wrench_frenzy, CTFWrench_Frenzy);
+PRECACHE_WEAPON_REGISTER(tf_weapon_wrench_frenzy);
+
+
 
 //=============================================================================
 //
@@ -591,4 +614,104 @@ void CTFRobotArm::WeaponIdle( void )
 #endif
 
 	BaseClass::WeaponIdle();
+}
+
+
+//-----------------------------------------------------------------------------
+// Purpose: UI Progress
+//-----------------------------------------------------------------------------
+float CTFWrench_Frenzy::GetProgress(void)
+{
+	CTFPlayer* pPlayer = GetTFPlayerOwner();
+	if (!pPlayer)
+		return 0.f;
+
+	return pPlayer->m_Shared.GetRageMeter() / 100.0f;
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: UI Progress (same as GetProgress() without the division by 100.0f)
+//-----------------------------------------------------------------------------
+bool CTFWrench_Frenzy::IsRageFull(void)
+{
+	CTFPlayer* pPlayer = GetTFPlayerOwner();
+	if (!pPlayer)
+		return false;
+
+	return (pPlayer->m_Shared.GetRageMeter() >= 100.0f);
+}
+
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+bool CTFWrench_Frenzy::EffectMeterShouldFlash(void)
+{
+	CTFPlayer* pPlayer = GetTFPlayerOwner();
+	if (!pPlayer)
+		return false;
+
+	if (pPlayer && (IsRageFull() || pPlayer->m_Shared.IsRageDraining()))
+		return true;
+	else
+		return false;
+}
+
+void CTFWrench_Frenzy::ApplyRageEffect(void) 
+{
+
+	CTFPlayer* pPlayer = ToTFPlayer(GetOwner());
+#ifdef GAME_DLL
+	if (pPlayer)
+	{
+		// ADD EFFECTS
+		pPlayer->AddCustomAttribute("fire rate bonus", WRENCH_FRENZY_ATTACKSPEED_BONUS, WRENCH_FRENZY_EFFECT_TIME);
+		pPlayer->AddCustomAttribute("move speed bonus", WRENCH_FRENZY_MOVESPEED_BONUS, WRENCH_FRENZY_EFFECT_TIME);
+
+		pPlayer->AddCustomAttribute("dmg taken from fire reduced", WRENCH_FRENZY_DMG_RESISTANCE, WRENCH_FRENZY_EFFECT_TIME);
+		pPlayer->AddCustomAttribute("dmg taken from blast reduced", WRENCH_FRENZY_DMG_RESISTANCE, WRENCH_FRENZY_EFFECT_TIME);
+		pPlayer->AddCustomAttribute("dmg taken from bullets reduced", WRENCH_FRENZY_DMG_RESISTANCE, WRENCH_FRENZY_EFFECT_TIME);
+	}
+#endif // GAME_DLL7
+
+}
+
+void CTFWrench_Frenzy::UseRage(void)
+{
+	if (!IsRageFull())
+		return;
+
+	CTFPlayer* pPlayer = GetTFPlayerOwner();
+	if (!pPlayer)
+		return;
+
+	if (!pPlayer->IsAllowedToTaunt())
+		return;
+
+	float flNextAttack = m_flNextSecondaryAttack;
+
+#if GAME_DLL
+	// Do a taunt so everyone has a chance to run
+	pPlayer->Taunt(TAUNT_BASE_WEAPON);
+	if (pPlayer->m_Shared.IsRageDraining())
+	{
+		// taunt succeeded
+		Msg("Succeeded \n");
+		flNextAttack = gpGlobals->curtime + 1.0f;
+	}
+#else
+	flNextAttack = gpGlobals->curtime + 1.0f;
+#endif
+
+	Msg("Passed \n");
+
+
+	m_flNextSecondaryAttack = flNextAttack;
+}
+
+void CTFWrench_Frenzy::SecondaryAttack(void) 
+{
+	BaseClass::SecondaryAttack();
+
+
+	ApplyRageEffect();
 }
