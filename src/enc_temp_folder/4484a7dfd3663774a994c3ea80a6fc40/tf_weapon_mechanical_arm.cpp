@@ -799,10 +799,10 @@ void CTFProjectile_MechanicalArmOrb::CheckForPlayers( int nNumToZap )
 		EmitSound("TFPlayer.MedicChargedDeath");
 	}
 
-	// If the owner is close and the ball has been alive long enough to not hurt the owner on spawn, zao them
-	if ((pTFOwner->GetAbsOrigin() - GetAbsOrigin()).LengthSqr() < Square(80.f) && gpGlobals->curtime - m_flRocketSpawnTime > 0.05f)
+	// If the owner is close and the ball has been alive long enough to not hurt the owner on spawn, zap them
+	if ((pTFOwner->GetAbsOrigin() - GetAbsOrigin()).LengthSqr() < Square(80.f) && gpGlobals->curtime - m_flRocketSpawnTime > 0.025f)
 	{
-		Msg("Zapping owner \n");
+		//Msg("Zapping owner \n");
 
 		trace_t trace;
 		UTIL_TraceLine(GetAbsOrigin(), pTFOwner->GetAbsOrigin(), (MASK_SHOT & ~(CONTENTS_HITBOX)), &tracefilter, &trace);

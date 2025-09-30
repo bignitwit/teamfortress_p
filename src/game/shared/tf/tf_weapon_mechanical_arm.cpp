@@ -657,10 +657,8 @@ void CTFProjectile_MechanicalArmOrb::RocketTouch( CBaseEntity *pOther )
 		return;
 
 	const trace_t *pTrace = &CBaseEntity::GetTouchTrace();
-	//
 	if (pTrace->surface.flags && SURF_SKY )
 	{
-		Msg(" hit surface or sky \n");
 		ExplodeAndRemove();
 		//UTIL_Remove( this );
 		return;
@@ -670,7 +668,6 @@ void CTFProjectile_MechanicalArmOrb::RocketTouch( CBaseEntity *pOther )
 		return;
 
 	// End if we run into something
-	Msg(" explode! \n");
 	ExplodeAndRemove();
 }
 
@@ -799,8 +796,8 @@ void CTFProjectile_MechanicalArmOrb::CheckForPlayers( int nNumToZap )
 		EmitSound("TFPlayer.MedicChargedDeath");
 	}
 
-	// If the owner is close and the ball has been alive long enough to not hurt the owner on spawn, zao them
-	if ((pTFOwner->GetAbsOrigin() - GetAbsOrigin()).LengthSqr() < Square(80.f) && gpGlobals->curtime - m_flRocketSpawnTime > 0.05f)
+	// If the owner is close and the ball has been alive long enough to not hurt the owner on spawn, zap them
+	if ((pTFOwner->GetAbsOrigin() - GetAbsOrigin()).LengthSqr() < Square(80.f) && gpGlobals->curtime - m_flRocketSpawnTime > 0.025f)
 	{
 		//Msg("Zapping owner \n");
 
