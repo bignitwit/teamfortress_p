@@ -31,10 +31,6 @@
 // Maximum time between robo arm hits to maintain the three-hit-combo
 #define ROBOARM_COMBO_TIMEOUT 1.0f
 
-#define WRENCH_FRENZY_EFFECT_TIME 8.0f 
-#define WRENCH_FRENZY_DMG_RESISTANCE 0.7f
-#define WRENCH_FRENZY_MOVESPEED_BONUS 1.2f
-#define WRENCH_FRENZY_ATTACKSPEED_BONUS 2.0f
 
 
 //=============================================================================
@@ -658,20 +654,26 @@ bool CTFWrench_Frenzy::EffectMeterShouldFlash(void)
 
 void CTFWrench_Frenzy::ApplyRageEffect(void) 
 {
+#define WRENCH_FRENZY_EFFECT_TIME 8.0f 
+#define WRENCH_FRENZY_DMG_RESISTANCE 0.85f
+#define WRENCH_FRENZY_MOVESPEED_BONUS 1.25f
+#define WRENCH_FRENZY_ATTACKSPEED_BONUS 0.75f
+
 
 	CTFPlayer* pPlayer = ToTFPlayer(GetOwner());
 #ifdef GAME_DLL
 	if (pPlayer)
 	{
 		// ADD EFFECTS
-		pPlayer->AddCustomAttribute("fire rate bonus", WRENCH_FRENZY_ATTACKSPEED_BONUS, WRENCH_FRENZY_EFFECT_TIME);
+		
+		//pPlayer->AddCustomAttribute("fire rate bonus", WRENCH_FRENZY_ATTACKSPEED_BONUS, WRENCH_FRENZY_EFFECT_TIME);
 		pPlayer->AddCustomAttribute("move speed bonus", WRENCH_FRENZY_MOVESPEED_BONUS, WRENCH_FRENZY_EFFECT_TIME);
 
 		pPlayer->AddCustomAttribute("dmg taken from fire reduced", WRENCH_FRENZY_DMG_RESISTANCE, WRENCH_FRENZY_EFFECT_TIME);
 		pPlayer->AddCustomAttribute("dmg taken from blast reduced", WRENCH_FRENZY_DMG_RESISTANCE, WRENCH_FRENZY_EFFECT_TIME);
 		pPlayer->AddCustomAttribute("dmg taken from bullets reduced", WRENCH_FRENZY_DMG_RESISTANCE, WRENCH_FRENZY_EFFECT_TIME);
 	}
-#endif // GAME_DLL7
+#endif // GAME_DLL
 
 }
 
@@ -690,7 +692,6 @@ void CTFWrench_Frenzy::UseRage(void)
 	float flNextAttack = m_flNextSecondaryAttack;
 
 #if GAME_DLL
-	// Do a taunt so everyone has a chance to run
 	pPlayer->Taunt(TAUNT_BASE_WEAPON);
 	if (pPlayer->m_Shared.IsRageDraining())
 	{
@@ -712,6 +713,6 @@ void CTFWrench_Frenzy::SecondaryAttack(void)
 {
 	BaseClass::SecondaryAttack();
 
-
+	Msg("Test rage! \n");
 	ApplyRageEffect();
 }

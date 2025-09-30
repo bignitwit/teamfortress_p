@@ -446,7 +446,7 @@
 					"value"	"0.8"
 				}
 				"special taunt"
-				{6
+				{
 					"attribute_class"	"special_taunt"
 					"value" "1"
 				}

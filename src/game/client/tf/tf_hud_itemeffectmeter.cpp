@@ -331,7 +331,7 @@ void CHudItemEffectMeter::CreateHudElementsForClass( C_TFPlayer* pPlayer, CUtlVe
 		DECLARE_ITEM_EFFECT_METER( CTFShotgun_Revenge, TF_WEAPON_SENTRY_REVENGE, false, "resource/UI/HUDItemEffectMeter_Engineer.res" );
 		DECLARE_ITEM_EFFECT_METER( CTFDRGPomson, TF_WEAPON_DRG_POMSON, false, "resource/UI/HUDItemEffectMeter_Pomson.res" );
 		DECLARE_ITEM_EFFECT_METER( CTFRevolver, TF_WEAPON_REVOLVER, false, "resource/UI/HUDItemEffectMeter_Spy.res" );
-		DECLARE_ITEM_EFFECT_METER( CTFWrench_Frenzy, TF_WEAPON_WRENCH, false, NULL);
+		DECLARE_ITEM_EFFECT_METER( CTFWrench_Frenzy, TF_WEAPON_WRENCH, false, "resource/UI/HudItemEffectMeter_SodaPopper_mod.res");
 
 		break;
 
