@@ -105,13 +105,15 @@ public:
 
 	const char*			GetEffectLabelText(void) { return "#TFP_Rebalance_Caber_Meter"; }
 
+	virtual int			GetEffectBarAmmo(void) { return TF_AMMO_GRENADES1; }
 	float				GetProgress(void) { return GetEffectBarProgress(); }
-	virtual float		InternalGetEffectBarRechargeTime(void) { return 10.1; }
+	virtual float		InternalGetEffectBarRechargeTime(void) { return 20.1; }
 
+	void				RefreshBomb(void);
 
 protected:
 
-	void			EffectBarRegenFinished(void);
+	void				EffectBarRegenFinished(void);
 
 private:
 

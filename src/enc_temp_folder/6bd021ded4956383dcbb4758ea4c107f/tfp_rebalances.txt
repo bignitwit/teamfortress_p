@@ -361,7 +361,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_StickBomb"
 			"item_name"	"#TFP_Rebalance_Caber_Name"
-			"item_description"	"#TFP_Rebalance_Caber_Desc"
+			"item_description"	"#TF_UllapoolCaber_Desc"
 			"item_logname"	"ullapool_caber"
 			"item_iconname"	"ullapool_caber"
 			"item_slot"	"melee"

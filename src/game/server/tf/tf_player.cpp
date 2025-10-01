@@ -11566,6 +11566,33 @@ void CTFPlayer::OnKilledOther_Effects( CBaseEntity *pVictim, const CTakeDamageIn
 		}
 	}
 
+	int iHealOnKillExplosive = 0;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(pWeapon, iHealOnKillExplosive, heal_on_kill_explosive);
+
+	Msg("Heal on kill explosive: %i", iHealOnKillExplosive);
+
+	if (iHealOnKillExplosive > 0 && info.GetDamageType() & DMG_BLAST)
+	{
+		Msg("Kill type explosive \n");
+		int iHealthToAdd = MIN(iHealOnKillExplosive, m_Shared.GetMaxBuffedHealth() - m_iHealth);
+		TakeHealth(iHealthToAdd, DMG_GENERIC);
+		//m_iHealth += iHealthToAdd;
+
+		IGameEvent* event = gameeventmanager->CreateEvent("player_healonhit");
+		if (event)
+		{
+			event->SetInt("amount", iHealthToAdd);
+			event->SetInt("entindex", entindex());
+			item_definition_index_t healingItemDef = INVALID_ITEM_DEF_INDEX;
+			if (pWeapon->GetAttributeContainer() && pWeapon->GetAttributeContainer()->GetItem())
+			{
+				healingItemDef = pWeapon->GetAttributeContainer()->GetItem()->GetItemDefIndex();
+			}
+			event->SetInt("weapon_def_index", healingItemDef);
+			gameeventmanager->FireEvent(event);
+		}
+	}
+
 	int iSpeedBoostOnKill = 0;
 	CALL_ATTRIB_HOOK_INT_ON_OTHER( pWeapon, iSpeedBoostOnKill, speed_boost_on_kill );
 	if ( iSpeedBoostOnKill )

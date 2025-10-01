@@ -232,11 +232,12 @@ void CTFStickBomb::Smack( void )
 		m_bBroken = true;
 		SwitchBodyGroups();
 
-		Msg("det \n");
+		//Msg("det \n");
 
-		pPlayer->m_Shared.SetItemChargeMeter(LOADOUT_POSITION_MELEE, 0.f);
+		pPlayer->RemoveAmmo(1, TF_AMMO_GRENADES1);
 
 		StartEffectBarRegen();
+	
 
 
 #ifdef GAME_DLL
@@ -282,7 +283,7 @@ void CTFStickBomb::WeaponReset( void )
 {
 	BaseClass::WeaponReset();
 
-	m_iDetonated = 0;
+	RefreshBomb();
 
 	SwitchBodyGroups();
 }
@@ -291,7 +292,7 @@ void CTFStickBomb::WeaponRegenerate( void )
 {
 	BaseClass::WeaponRegenerate();
 
-	m_iDetonated = 0;
+	RefreshBomb();
 
 	SetContextThink( &CTFStickBomb::SwitchBodyGroups, gpGlobals->curtime + 0.01f, "SwitchBodyGroups" );
 }
@@ -359,11 +360,28 @@ void RecvProxy_Detonated( const CRecvProxyData *pData, void *pStruct, void *pOut
 
 #endif
 
-
+// Regen stickbomb when meter is full
 void CTFStickBomb::EffectBarRegenFinished(void) 
 {
 	BaseClass::EffectBarRegenFinished();
 
-	Msg("Regen bar finished \n");
-	WeaponRegenerate();
+	//Msg("Regen bar finished \n");
+	RefreshBomb();
+}
+
+// Handle Refreshing the bomb on the fly
+void CTFStickBomb::RefreshBomb(void)
+{
+	CTFPlayer* pPlayer = ToTFPlayer(GetPlayerOwner());
+	if (!pPlayer)
+		return;
+
+#if GAME_DLL
+	pPlayer->GiveAmmo(1, TF_AMMO_GRENADES1);
+#endif
+
+	SwitchBodyGroups();
+	SetContextThink(&CTFStickBomb::SwitchBodyGroups, gpGlobals->curtime + 0.01f, "SwitchBodyGroups");
+
+	m_iDetonated = 0;
 }

@@ -654,9 +654,9 @@ protected:
 	virtual int		GetEffectBarAmmo( void ) { return m_iPrimaryAmmoType; }
 	virtual float	InternalGetEffectBarRechargeTime( void ) { return 0; }	// Time it takes for this regeneration bar to fully recharge from 0 to full.
 
-	void			StartEffectBarRegen( void );						// Call this when you want your bar to start recharging (usually when you've deployed your action)
-	void			EffectBarRegenFinished( void );
-	void			CheckEffectBarRegen( void );
+	virtual void			StartEffectBarRegen( void );						// Call this when you want your bar to start recharging (usually when you've deployed your action)
+	virtual void			EffectBarRegenFinished( void );
+	virtual void			CheckEffectBarRegen( void );
 
 private:
 	CNetworkVar(	float, m_flEffectBarRegenTime );	// The time Regen is scheduled to complete

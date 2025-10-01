@@ -1416,6 +1416,11 @@
 					"attribute_class"	"mult_dmg"
 					"value" "0.75"
 				}
+				"heal on kill explosive"
+				{
+					"attribute_class"	"heal_on_kill_explosive"
+					"value"	"50.0"
+				}
 			}
 
 			"anim_slot"	"primary"
