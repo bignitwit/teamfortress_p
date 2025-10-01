@@ -1520,6 +1520,7 @@ float CHudItemEffectMeter_Weapon< CTFLunchBox >::GetProgress( void )
 template <>
 float CHudItemEffectMeter_Weapon<CTFStickBomb>::GetProgress(void)
 {
+	Msg("get progress \n");
 	if (m_pPlayer)
 		return m_pPlayer->m_Shared.GetItemChargeMeter( LOADOUT_POSITION_MELEE ) / 100.0f;
 	return 0;

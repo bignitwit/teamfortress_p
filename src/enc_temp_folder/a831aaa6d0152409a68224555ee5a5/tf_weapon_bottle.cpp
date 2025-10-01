@@ -282,6 +282,7 @@ void CTFStickBomb::WeaponReset( void )
 {
 	BaseClass::WeaponReset();
 
+
 	m_iDetonated = 0;
 
 	SwitchBodyGroups();

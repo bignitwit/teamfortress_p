@@ -12805,7 +12805,10 @@ bool CTFPlayer::CanGetWet( void ) const
 	int iWetImmune = 0;
 	CALL_ATTRIB_HOOK_INT( iWetImmune, wet_immunity );
 	
-	return iWetImmune ? false : true;
+	int iRepelsFluids = 0;
+	CALL_ATTRIB_HOOK_INT(iRepelsFluids, repels_fluids);
+
+	return (iWetImmune || iRepelsFluids) ? false : true;
 }
 
 

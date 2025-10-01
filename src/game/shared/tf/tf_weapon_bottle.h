@@ -103,6 +103,16 @@ public:
 	void				SetDetonated( int iVal ) { m_iDetonated = iVal; }
 	int					GetDetonated( void ) { return m_iDetonated; }
 
+	const char*			GetEffectLabelText(void) { return "#TFP_Rebalance_Caber_Meter"; }
+
+	float				GetProgress(void) { return GetEffectBarProgress(); }
+	virtual float		InternalGetEffectBarRechargeTime(void) { return 10.1; }
+
+
+protected:
+
+	void			EffectBarRegenFinished(void);
+
 private:
 
 	CNetworkVar( int,	m_iDetonated ); // int, not bool so we can use a recv proxy
