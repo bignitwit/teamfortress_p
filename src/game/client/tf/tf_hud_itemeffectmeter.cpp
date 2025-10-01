@@ -305,7 +305,7 @@ void CHudItemEffectMeter::CreateHudElementsForClass( C_TFPlayer* pPlayer, CUtlVe
 	case TF_CLASS_DEMOMAN:
 		DECLARE_ITEM_EFFECT_METER( CTFSword, TF_WEAPON_SWORD, false, "resource/UI/HudItemEffectMeter_Demoman.res" );
 		
-		DECLARE_ITEM_EFFECT_METER( CTFStickBomb, TF_WEAPON_STICKBOMB, true, "resource/UI/HudItemEffectMeter_Cleaver.res");
+		DECLARE_ITEM_EFFECT_METER( CTFStickBomb, TF_WEAPON_STICKBOMB, true, "resource/UI/HudItemEffectMeter_Caber.res");
 
 		break;
 

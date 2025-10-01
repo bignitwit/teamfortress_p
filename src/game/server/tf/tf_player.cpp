@@ -11569,11 +11569,8 @@ void CTFPlayer::OnKilledOther_Effects( CBaseEntity *pVictim, const CTakeDamageIn
 	int iHealOnKillExplosive = 0;
 	CALL_ATTRIB_HOOK_INT_ON_OTHER(pWeapon, iHealOnKillExplosive, heal_on_kill_explosive);
 
-	Msg("Heal on kill explosive: %i", iHealOnKillExplosive);
-
-	if (iHealOnKillExplosive > 0 && info.GetDamageType() & DMG_BLAST)
+	if (iHealOnKillExplosive > 0 && (info.GetDamageType() & DMG_BLAST || info.GetDamageCustom() & TF_DMG_CUSTOM_STICKBOMB_EXPLOSION))
 	{
-		Msg("Kill type explosive \n");
 		int iHealthToAdd = MIN(iHealOnKillExplosive, m_Shared.GetMaxBuffedHealth() - m_iHealth);
 		TakeHealth(iHealthToAdd, DMG_GENERIC);
 		//m_iHealth += iHealthToAdd;
