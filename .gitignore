@@ -525,3 +525,4 @@ FodyWeavers.xsd
 /game/mod_tf/cfg/server_blacklist.txt
 /game/platform/config/InGameDialogConfig.vdf
 /game/platform/config/ServerBrowser.vdf
+/game/mod_tf/cfg/user.scr
