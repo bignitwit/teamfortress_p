@@ -654,8 +654,8 @@ bool CTFWrench_Frenzy::EffectMeterShouldFlash(void)
 
 void CTFWrench_Frenzy::ApplyRageEffect(void) 
 {
-#define WRENCH_FRENZY_EFFECT_TIME 8.0f 
-#define WRENCH_FRENZY_DMG_RESISTANCE 0.85f
+#define WRENCH_FRENZY_EFFECT_TIME 10.0f 
+#define WRENCH_FRENZY_DMG_RESISTANCE 0.75f
 #define WRENCH_FRENZY_MOVESPEED_BONUS 1.25f
 #define WRENCH_FRENZY_ATTACKSPEED_BONUS 0.75f
 
@@ -692,19 +692,13 @@ void CTFWrench_Frenzy::UseRage(void)
 	float flNextAttack = m_flNextSecondaryAttack;
 
 #if GAME_DLL
-	pPlayer->Taunt(TAUNT_BASE_WEAPON);
-	if (pPlayer->m_Shared.IsRageDraining())
-	{
-		// taunt succeeded
-		Msg("Succeeded \n");
-		flNextAttack = gpGlobals->curtime + 1.0f;
-	}
-#else
-	flNextAttack = gpGlobals->curtime + 1.0f;
+	Msg("Taunt \n");
+	pPlayer->Taunt(TAUNT_SPECIAL, MP_CONCEPT_TAUNT_EUREKA_EFFECT_TELEPORT);
 #endif
+	flNextAttack = gpGlobals->curtime + 1.0f;
 
-	Msg("Passed \n");
-
+	pPlayer->m_Shared.StartRageDrain();
+	ApplyRageEffect();
 
 	m_flNextSecondaryAttack = flNextAttack;
 }
@@ -713,6 +707,18 @@ void CTFWrench_Frenzy::SecondaryAttack(void)
 {
 	BaseClass::SecondaryAttack();
 
-	Msg("Test rage! \n");
-	ApplyRageEffect();
+
+	if (IsRageFull())
+	{
+		UseRage();
+	}
+	else
+	{
+#ifdef CLIENT_DLL
+		C_TFPlayer* pLocalPlayer = C_TFPlayer::GetLocalTFPlayer();
+
+		//pLocalPlayer->EmitSound("Player.DenyWeaponSelection");
+#endif
+	}
+	
 }

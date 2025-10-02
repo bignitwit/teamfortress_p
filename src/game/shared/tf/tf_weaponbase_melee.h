@@ -62,11 +62,15 @@ public:
 	virtual void	DoMeleeDamage( CBaseEntity* ent, trace_t& trace );
 	virtual void	DoMeleeDamage( CBaseEntity* ent, trace_t& trace, float flDamageMod );
 
+	virtual float	ApplyFireDelay(float flDelay);
+
 	virtual float	GetMeleeDamage( CBaseEntity *pTarget, int* piDamageType, int* piCustomDamage );
 
 	virtual bool	HasMeleeCombo( void );
 	virtual int		MeleeComboCount( void );
 	virtual void	OnSuccessfulCombo( void );
+
+
 
 #ifndef CLIENT_DLL
 	virtual float	GetForceScale( void );

@@ -268,7 +268,7 @@
 		{
 			"name"	"melee combo generic"
 			"attribute_class"	"melee_combo"
-			"description_string"	"#TFP_ATR_MeleeComboGenericThird"
+			"description_string"	"#TFP_ATR_MeleeCombo_Generic_Third"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
@@ -320,6 +320,63 @@
 			"hidden"	"0"
 			"effect_type"	"positive"
 			"stored_as_integer"	"0"
+		}
+		"9031" 
+		{
+			"name"	"melee combo firing speed bonus"
+			"attribute_class"	"melee_combo_mult_firing_speed"
+			"description_string"	"#TFP_ATR_MeleeCombo_FiringSpeedBonus"
+			"description_format"	"value_is_inverted_percentage"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9032" 
+		{
+			"name"	"melee combo duration bonus"
+			"attribute_class"	"melee_combo_duration_mod"
+			"description_string"	"#TFP_ATR_MeleeCombo_DurationBonus"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9033" 
+		{
+			"name"	"melee combo duration penalty"
+			"attribute_class"	"melee_combo_duration_mod"
+			"description_string"	"#TFP_ATR_MeleeCombo_DurationPenalty"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"negative"
+		}
+		"9034" // Use value of <0 for potentially infinite combos
+		{
+			"name"	"melee combo infinite scaling HIDDEN"
+			"attribute_class"	"melee_combo"
+			"description_string"	"#TFP_ATR_MeleeCombo_InfiniteScaling"
+			"description_format"	"value_is_additive"
+			"hidden"	"1"
+			"effect_type"	"positive"
+			"stored_as_integer"	"1"
+		}
+		"9035"
+		{
+			"name"	"melee combo disable loss on miss HIDDEN"
+			"attribute_class"	"melee_combo_disable_loss_on_miss"
+			"description_string"	"#TFP_ATR_MeleeCombo_DisableLossOnMiss"
+			"description_format"	"value_is_additive"
+			"hidden"	"1"
+			"effect_type"	"positive"
+			"stored_as_integer"	"1"
+		}
+		"9036"
+		{
+			"name"	"generate frenzy on damage"
+			"attribute_class"	"generate_rage_on_dmg"
+			"description_string"	"#TFP_ATR_GenerateFrenzyOnDMG"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"1"
 		}
 	}
 	"items"
@@ -460,7 +517,7 @@
 					"attribute_class"	"special_taunt"
 					"value" "1"
 				}
-				"generate rage on damage"
+				"generate frenzy on damage"
 				{
 					"attribute_class"	"generate_rage_on_dmg"
 					"value" "1"
@@ -1409,12 +1466,12 @@
 				"Blast radius decreased"
 				{
 					"attribute_class"	"mult_explosion_radius"
-					"value" "0.75"
+					"value" "0.8"
 				}
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
-					"value" "0.75"
+					"value" "0.85"
 				}
 			}
 

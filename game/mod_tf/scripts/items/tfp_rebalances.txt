@@ -410,8 +410,114 @@
 			}
 		}
 
-		
+		// Pain train disabler
+		"154"
+		{
+			"prefab"	"hidden_by_rebalance"
+			"rebalanced"	"1"
+		}
+		// Pain train rebalance
+		"20001"
+		{
+			"enabled"	"1"
+			"auto_unlock"	"1"
+			"show_in_armory"	"1"
 
+			"name"	"The Pain Train (Rebalanced)"
+			"first_sale_date"	"2010/09/29"
+			"item_class"	"tf_weapon_shovel"
+			"craft_class"	"weapon"
+			"craft_material_type"	"weapon"
+			"capabilities"
+			{
+				"nameable"		"1"
+			}
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_be_equipped_by_soldier_or_demo"	"1"
+				"can_deal_critical_damage"	"1"
+			}
+			"item_logname"	"paintrain"
+			"item_iconname"	"paintrain"
+			"show_in_armory"	"1"
+			"item_type_name"	"#TF_Weapon_MakeshiftClub"
+			"item_name"	"#TF_Unique_Makeshiftclub"
+			"item_slot"	"melee"
+			"image_inventory"	"backpack/workshop/weapons/c_models/c_paintrain/c_paintrain"
+			"image_inventory_size_w"		"128"
+			"image_inventory_size_h"		"82"
+			"inspect_panel_dist" 				"55"			
+			"model_player"	"models/workshop/weapons/c_models/c_paintrain/c_paintrain.mdl"
+			"attach_to_hands"	"1"
+			"item_quality"	"unique"
+			"propername"	"1"
+			"min_ilevel"	"5"
+			"max_ilevel"	"5"
+			"used_by_classes"
+			{
+				"demoman"	"1"
+				"soldier"	"1"
+			}
+			"static_attrs"
+			{
+				"min_viewmodel_offset"					"10 -3 -11"
+			}
+			"attributes"
+			{
+				"increase player capture value"
+				{
+					"attribute_class"	"add_player_capturevalue"
+					"value"	"1"
+				}
+				"melee combo infinite scaling HIDDEN"
+				{
+					"attribute_class"	"melee_combo"
+					"value"	"-1"
+				}
+				"melee combo firing speed bonus"
+				{
+					"attribute_class"	"melee_combo_mult_firing_speed"
+					"value"	"0.75"
+				}
+				"melee combo duration bonus"
+				{
+					"attribute_class"	"melee_combo_duration_mod"
+					"value"	"1.0"
+				}
+				"melee combo disable loss on miss HIDDEN"
+				{
+					"attribute_class"	"melee_combo_disable_loss_on_miss"
+					"value"	"1"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"0.85"
+				}
+				"damage force increase"
+				{
+					"attribute_class"	"damage_force_reduction"
+					"value"	"1.15"
+				}
+			}
+			"visuals"
+			{
+				"sound_melee_miss"	"Weapon_PickAxe.Swing"
+				"sound_melee_hit"	"Weapon_PickAxe.HitFlesh"
+				"sound_burst"		"Weapon_PickAxe.SwingCrit"
+				"sound_melee_hit_world"	"Weapon_Shovel.HitWorld"
+
+				"animation_replacement"
+				{
+					"ACT_MELEE_VM_INSPECT_START"	"ACT_MELEE_ALT1_VM_INSPECT_START"
+					"ACT_MELEE_VM_INSPECT_IDLE"		"ACT_MELEE_ALT1_VM_INSPECT_IDLE"
+					"ACT_MELEE_VM_INSPECT_END"		"ACT_MELEE_ALT1_VM_INSPECT_END"
+				}
+			}
+			"mouse_pressed_sound"	"ui/item_wood_pole_pickup.wav"
+			"drop_sound"		"ui/item_wood_pole_drop.wav"
+		}
 
 	}
 }

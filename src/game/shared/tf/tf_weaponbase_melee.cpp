@@ -203,9 +203,13 @@ void CTFWeaponBaseMelee::PrimaryAttack()
 	if ( !CanAttack() )
 		return;
 
+
+	float iMeleeComboDurationMod = 0;
+	CALL_ATTRIB_HOOK_FLOAT(iMeleeComboDurationMod, melee_combo_duration_mod);
+
 	if (HasMeleeCombo())
 	{
-		if (gpGlobals->curtime - m_flLastComboHit > MELEE_COMBO_TIMEOUT)
+		if (gpGlobals->curtime - m_flLastComboHit > MELEE_COMBO_TIMEOUT + iMeleeComboDurationMod)
 		{
 			//Msg("Lost combo :( \n");
 			m_iComboCount = 0;
@@ -815,7 +819,16 @@ void CTFWeaponBaseMelee::Smack( void )
 		}
 		else
 		{
-			m_iComboCount = 0;
+			int iDisableLossOnMiss = 0;
+			CALL_ATTRIB_HOOK_INT(iDisableLossOnMiss, melee_combo_disable_loss_on_miss);
+
+			// Only lose combo on miss if we should
+			if (iDisableLossOnMiss == 0) 
+			{
+				//Msg("Missed! \n");
+				m_iComboCount = 0;
+			}
+			
 		}
 	}
 
@@ -1226,7 +1239,7 @@ bool CTFWeaponBaseMelee::HasMeleeCombo()
 	int iMeleeCombo = 0;
 	CALL_ATTRIB_HOOK_INT(iMeleeCombo, melee_combo);
 
-	return iMeleeCombo > 0;
+	return iMeleeCombo != 0;
 }
 //-----------------------------------------------------------------------------
 // Purpose: Get Melee Combo required hit count 
@@ -1252,4 +1265,23 @@ void CTFWeaponBaseMelee::OnSuccessfulCombo(void)
 
 }
 
+
+//-----------------------------------------------------------------------------
+// Combo Firing speed multiplier
+//-----------------------------------------------------------------------------
+float CTFWeaponBaseMelee::ApplyFireDelay(float flDelay)
+{
+	float flDelayMult = 1.0f;
+
+	// Melee combo firing speed 
+	float flMeleeComboFiringSpeedMult = 1.0f;
+	CALL_ATTRIB_HOOK_FLOAT(flMeleeComboFiringSpeedMult, melee_combo_mult_firing_speed);
+
+	flDelayMult *= powf(flMeleeComboFiringSpeedMult, m_iComboCount);
+
+	//Msg("Delay mult: %.f \n MultInc %.3 \n Combo %i \n", flDelayMult, flMeleeComboFiringSpeedMult, m_iComboCount);
+
+	// clamp min speed
+	return BaseClass::ApplyFireDelay(flDelay) * MAX(flDelayMult, 0.33f);
+}
 
