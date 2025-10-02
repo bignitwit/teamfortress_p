@@ -378,6 +378,16 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"1"
 		}
+		"9037" // may not work, idk
+		{
+			"name"	"heal on kill fire"
+			"attribute_class"	"heal_on_kill_fire"
+			"description_string"	"#TFP_ATR_HealOnKillFlame"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"0"
+		}
 	}
 	"items"
 	{
@@ -1031,7 +1041,7 @@
 			"anim_slot"	"secondary"
 
 		}
-		// HotSauce
+		// HotSauce - Not implemented
 		"9009"
 		{
 
@@ -1328,12 +1338,12 @@
 			}
 
 			"anim_slot"	"primary"
-			"model_player"	"models/weapons/c_models/c_stickybomb_launcher/c_stickybomb_launcher.mdl"
+			"model_player"	"models/workshop/weapons/c_models/c_liberty_launcher/c_liberty_launcher.mdl"
 
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
 			"drop_sound"		"ui/item_heavy_gun_drop.wav"
 		}
-		// The Slick Suit 
+		// The Slick Suit - create new Spy wearable class
 		"9013"
 		{
 
@@ -1420,7 +1430,7 @@
 			"item_name"		"#TFP_WEP_HL2RocketLauncher"
 			"item_class"	"tf_weapon_rocketlauncher_mortar"
 			"item_logname"	"hl2_rocketlauncher"
-			"item_iconname"	"skull_tf"
+			"item_iconname"	"rocketlauncher"
 			"propername"	"0"
 
 			// Usage
@@ -1463,11 +1473,6 @@
 					"attribute_class"	"mult_projectile_speed"
 					"value" "0.60"
 				}
-				"Blast radius decreased"
-				{
-					"attribute_class"	"mult_explosion_radius"
-					"value" "0.8"
-				}
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
@@ -1476,7 +1481,7 @@
 			}
 
 			"anim_slot"	"primary"
-			"model_player"	"models/weapons/c_models/c_stickybomb_launcher/c_stickybomb_launcher.mdl"
+			"model_player"	"models/weapons/c_models/c_hl2rocketlauncher/c_rocketlauncher.mdl"
 
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
 			"drop_sound"		"ui/item_heavy_gun_drop.wav"
@@ -1491,7 +1496,7 @@
 			"name"	"#TFP_Set_HL2Soldier"
 			"items"
 			{
-				"HL2RocketLauncher"				"1"
+				"HL2RocketLauncher"			"1"
 				"HL2Crowbar"				"1"
 			}
 		}

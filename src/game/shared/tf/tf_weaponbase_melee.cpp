@@ -1282,6 +1282,7 @@ float CTFWeaponBaseMelee::ApplyFireDelay(float flDelay)
 	//Msg("Delay mult: %.f \n MultInc %.3 \n Combo %i \n", flDelayMult, flMeleeComboFiringSpeedMult, m_iComboCount);
 
 	// clamp min speed
-	return BaseClass::ApplyFireDelay(flDelay) * MAX(flDelayMult, 0.33f);
+	return MAX(BaseClass::ApplyFireDelay(flDelay) * flDelayMult, 0.25f);
 }
 
+ 

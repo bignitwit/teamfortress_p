@@ -25,6 +25,7 @@
 #include "tf_player.h"
 #include "items.h"
 #include "tf_weaponbase_grenadeproj.h"
+
 #include "soundent.h"
 #include "KeyValues.h"
 #include "IEffects.h"
@@ -34,11 +35,16 @@
 #include "takedamageinfo.h"
 #include "tf_team.h"
 #include "physics_collisionevent.h"
+#include "tf_obj_sentrygun.h"
+#include "tf_obj_dispenser.cpp"
+#include "tf_obj_teleporter.h"
+#include "player_vs_environment/tf_base_boss.h"
 #ifdef TF_RAID_MODE
 #include "player_vs_environment/boss_alpha/boss_alpha.h"
 #endif // TF_RAID_MODE
 #include "tf_weapon_medigun.h"
 #endif
+
 
 #define TF_WEAPON_PIPEBOMB_TIMER		3.0f //Seconds
 
@@ -720,15 +726,20 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 	int iStickiesAttachToPlayers = 0;
 	CALL_ATTRIB_HOOK_INT_ON_OTHER(GetLauncher(), iStickiesAttachToPlayers, stickies_attach_to_players);
 
-	if (pOther->IsPlayer() && iStickiesAttachToPlayers)
+	if (iStickiesAttachToPlayers == 0)
 	{
-		//Msg("Touched Player \n");
+		return;
+	}
 
-		CTFPlayer* pOwner = ToTFPlayer(GetThrower());
+	CTFPlayer* pOwner = ToTFPlayer(GetThrower());
+	CBaseEntity* pCurrentParent = GetParent();
+
+	// Sticking to Players
+	if (pOther->IsPlayer())
+	{
+
 		CTFPlayer* pTouchedPlayer = ToTFPlayer(pOther);
-		CBaseEntity* pCurrentParent = GetParent();
-
-
+		
 		// if Touched is not the owner of the bomb
 		if (pTouchedPlayer != pOwner)
 		{
@@ -784,8 +795,38 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 		else
 		{
 			//Msg("Stickyied Player is owner, no sticky! \n");
+			return;
 		}
 	}
+
+
+	// Sticking to Buildings, Bosses, or whatever doesn't fit into those categories
+	if (assert_cast<CBaseObject*>(pOther))
+	{
+		CBaseObject* pTouchedObject = assert_cast<CBaseObject*>(pOther);
+
+		Msg("Is Base object: %d \n", assert_cast<CBaseObject*>(pOther) != NULL);
+
+		if (assert_cast<CObjectSentrygun*>(pTouchedObject) || assert_cast<CObjectDispenser*>(pTouchedObject) || assert_cast<CObjectTeleporter*>(pTouchedObject)) {
+			Msg("Building! \n");
+		}
+
+		m_bTouched = true;
+		VPhysicsGetObject()->EnableMotion(false);
+
+		Vector vecOrigin = GetAbsOrigin();
+		QAngle ang = GetAbsAngles();
+		SetAbsOrigin(vecOrigin);
+		SetAbsAngles(ang);
+
+		RemoveEffects(EF_NODRAW);
+		SetRenderMode(kRenderNormal);
+
+		SetParent(pOther);
+		return;
+	}
+
+
 #endif
 }
 

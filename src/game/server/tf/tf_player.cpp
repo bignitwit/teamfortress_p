@@ -11590,6 +11590,32 @@ void CTFPlayer::OnKilledOther_Effects( CBaseEntity *pVictim, const CTakeDamageIn
 		}
 	}
 
+
+	int iHealOnKillFire = 0;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(pWeapon, iHealOnKillFire, heal_on_kill_fire);
+
+	if (iHealOnKillFire > 0 && (info.GetDamageType() & (DMG_BURN | DMG_IGNITE)))
+	{
+		int iHealthToAdd = MIN(iHealOnKillFire, m_Shared.GetMaxBuffedHealth() - m_iHealth);
+		TakeHealth(iHealthToAdd, DMG_GENERIC);
+		//m_iHealth += iHealthToAdd;
+
+		IGameEvent* event = gameeventmanager->CreateEvent("player_healonhit");
+		if (event)
+		{
+			event->SetInt("amount", iHealthToAdd);
+			event->SetInt("entindex", entindex());
+			item_definition_index_t healingItemDef = INVALID_ITEM_DEF_INDEX;
+			if (pWeapon->GetAttributeContainer() && pWeapon->GetAttributeContainer()->GetItem())
+			{
+				healingItemDef = pWeapon->GetAttributeContainer()->GetItem()->GetItemDefIndex();
+			}
+			event->SetInt("weapon_def_index", healingItemDef);
+			gameeventmanager->FireEvent(event);
+		}
+	}
+
+
 	int iSpeedBoostOnKill = 0;
 	CALL_ATTRIB_HOOK_INT_ON_OTHER( pWeapon, iSpeedBoostOnKill, speed_boost_on_kill );
 	if ( iSpeedBoostOnKill )

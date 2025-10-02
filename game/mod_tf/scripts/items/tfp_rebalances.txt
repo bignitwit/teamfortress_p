@@ -417,7 +417,7 @@
 			"rebalanced"	"1"
 		}
 		// Pain train rebalance
-		"20001"
+		"60001"
 		{
 			"enabled"	"1"
 			"auto_unlock"	"1"
@@ -478,12 +478,12 @@
 				"melee combo firing speed bonus"
 				{
 					"attribute_class"	"melee_combo_mult_firing_speed"
-					"value"	"0.75"
+					"value"	"0.85"
 				}
 				"melee combo duration bonus"
 				{
 					"attribute_class"	"melee_combo_duration_mod"
-					"value"	"1.0"
+					"value"	"2"
 				}
 				"melee combo disable loss on miss HIDDEN"
 				{
@@ -493,12 +493,12 @@
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
-					"value"	"0.85"
+					"value"	"0.00085"
 				}
 				"damage force increase"
 				{
 					"attribute_class"	"damage_force_reduction"
-					"value"	"1.15"
+					"value"	"1.25"
 				}
 			}
 			"visuals"
