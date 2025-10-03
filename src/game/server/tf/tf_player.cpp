@@ -8757,7 +8757,7 @@ void HandleRageGain( CTFPlayer *pPlayer, unsigned int iRequiredBuffFlags, float 
 	{
 		if ( pPlayer->IsPlayerClass( TF_CLASS_ENGINEER ) && ( kRageBuffFlag_OnDamageDealt & iRequiredBuffFlags ) )
 		{
-			pPlayer->m_Shared.ModifyRage( 2.f * flDamage / fInverseRageGainScale);
+			pPlayer->m_Shared.ModifyRage(0.44 * (flDamage / fInverseRageGainScale));
 		}
 		else if ( pPlayer->IsPlayerClass( TF_CLASS_HEAVYWEAPONS ) && ( kRageBuffFlag_OnDamageDealt & iRequiredBuffFlags ) )
 		{
