@@ -289,7 +289,7 @@
 			"name"	"rocket control duration Increased"
 			"attribute_class"	"mult_rocketcontrol_duration"
 			"description_string"	"#TFP_ATR_RocketControlDurationIncreased"
-			"description_format"	"value_is_percentage"
+			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
 		}
@@ -298,7 +298,7 @@
 			"name"	"rocket control duration Decreased"
 			"attribute_class"	"mult_rocketcontrol_duration"
 			"description_string"	"#TFP_ATR_RocketControlDurationDecreased"
-			"description_format"	"value_is_inverted_percentage"
+			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"negative"
 		}
@@ -387,6 +387,16 @@
 			"hidden"	"0"
 			"effect_type"	"positive"
 			"stored_as_integer"	"0"
+		}
+		"9038" // Lose combo progress on miss
+		{
+			"name"	"melee combo lose point on miss HIDDEN"
+			"attribute_class"	"melee_combo_lose_point_on_miss"
+			"description_string"	"#TFP_ATR_MeleeCombo_LosePointOnMiss"
+			"description_format"	"value_is_additive"
+			"hidden"	"1"
+			"effect_type"	"negative"
+			"stored_as_integer"	"1"
 		}
 	}
 	"items"
@@ -831,12 +841,12 @@
 				"accuracy increase on kill HIDDEN"
 				{
 					"attribute_class"	"accuracy_increase_on_kill"
-					"value"	"0.0066" // From 0.08->0.04; 6 kills to max out 0.04/6
+					"value"	"0.0083" // From 0.08->0.05; 6 kills to max out 0.05/6
 				}
 				"firing speed increase on kill HIDDEN"
 				{
 					"attribute_class"	"firing_speed_on_kill"
-					"value"	"0.083" // From 1->0.5; 6 kills to max out 0.5/6
+					"value"	"0.0417" // From 1->0.75; 6 kills to max out 0.25/6
 				}
 				"maxammo primary reduced"
 				{
@@ -847,6 +857,11 @@
 				{
 					"attribute_class"	"mult_minigun_spinup_time"
 					"value"	"1.60"
+				}
+				"aiming movespeed decreased"
+				{
+					"attribute_class"	"mult_player_aiming_movespeed"
+					"value"	"0.75"
 				}
 
 			}
@@ -1428,6 +1443,7 @@
 			// Base def
 			"name"	"HL2RocketLauncher"
 			"item_name"		"#TFP_WEP_HL2RocketLauncher"
+			"item_type_name"	"#TFP_WEP_TYPE_TrackedRocketLauncher"
 			"item_class"	"tf_weapon_rocketlauncher_mortar"
 			"item_logname"	"hl2_rocketlauncher"
 			"item_iconname"	"rocketlauncher"

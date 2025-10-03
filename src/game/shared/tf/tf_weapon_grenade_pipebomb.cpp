@@ -35,10 +35,12 @@
 #include "takedamageinfo.h"
 #include "tf_team.h"
 #include "physics_collisionevent.h"
+/*
 #include "tf_obj_sentrygun.h"
 #include "tf_obj_dispenser.cpp"
 #include "tf_obj_teleporter.h"
 #include "player_vs_environment/tf_base_boss.h"
+*/
 #ifdef TF_RAID_MODE
 #include "player_vs_environment/boss_alpha/boss_alpha.h"
 #endif // TF_RAID_MODE
@@ -800,16 +802,9 @@ void CTFGrenadePipebombProjectile::StickybombTouch( CBaseEntity *pOther )
 	}
 
 
-	// Sticking to Buildings, Bosses, or whatever doesn't fit into those categories
-	if (assert_cast<CBaseObject*>(pOther))
+	// Sticking to Bosses
+	if (TFGameRules()->GetActiveBoss() && pOther == TFGameRules()->GetActiveBoss())
 	{
-		CBaseObject* pTouchedObject = assert_cast<CBaseObject*>(pOther);
-
-		Msg("Is Base object: %d \n", assert_cast<CBaseObject*>(pOther) != NULL);
-
-		if (assert_cast<CObjectSentrygun*>(pTouchedObject) || assert_cast<CObjectDispenser*>(pTouchedObject) || assert_cast<CObjectTeleporter*>(pTouchedObject)) {
-			Msg("Building! \n");
-		}
 
 		m_bTouched = true;
 		VPhysicsGetObject()->EnableMotion(false);

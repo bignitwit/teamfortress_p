@@ -656,7 +656,7 @@ void CTFWrench_Frenzy::ApplyRageEffect(void)
 {
 #define WRENCH_FRENZY_EFFECT_TIME 10.0f 
 #define WRENCH_FRENZY_DMG_RESISTANCE 0.75f
-#define WRENCH_FRENZY_MOVESPEED_BONUS 1.25f
+#define WRENCH_FRENZY_MOVESPEED_BONUS 1.10f
 #define WRENCH_FRENZY_ATTACKSPEED_BONUS 0.75f
 
 
@@ -666,6 +666,7 @@ void CTFWrench_Frenzy::ApplyRageEffect(void)
 	{
 		// ADD EFFECTS
 		
+		// moved fire rate bonus to apply fire delay
 		//pPlayer->AddCustomAttribute("fire rate bonus", WRENCH_FRENZY_ATTACKSPEED_BONUS, WRENCH_FRENZY_EFFECT_TIME);
 		pPlayer->AddCustomAttribute("move speed bonus", WRENCH_FRENZY_MOVESPEED_BONUS, WRENCH_FRENZY_EFFECT_TIME);
 
@@ -721,4 +722,25 @@ void CTFWrench_Frenzy::SecondaryAttack(void)
 #endif
 	}
 	
+}
+
+float CTFWrench_Frenzy::ApplyFireDelay(float flDelay)
+{
+	float flBaseDelay = BaseClass::ApplyFireDelay(flDelay);
+
+	CTFPlayer* pPlayer = GetTFPlayerOwner();
+	if (!pPlayer)
+		return false;
+
+
+	// Apply fire speed bonus While rage is draining
+	if (pPlayer->m_Shared.IsRageDraining()) 
+	{
+		return flBaseDelay * WRENCH_FRENZY_ATTACKSPEED_BONUS;
+	}
+	else 
+	{
+		return flBaseDelay;
+	}
+
 }

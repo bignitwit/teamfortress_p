@@ -1898,7 +1898,7 @@ float CTFWeaponBase::ApplyFireDelay( float flDelay ) const
 
 		flDelayMult -= flDelayKillMod;
 
-		flDelayMult = MAX(flDelayMult * 0.5f, flDelayMult); // Clamp max change to half of base 
+		flDelayMult = MAX(flDelayMult * 0.75f, flDelayMult); // Clamp max change to -25% of base 
 
 		if (pPlayer->m_Shared.GetCarryingRuneType() == RUNE_HASTE) {
 			if (pPlayer->IsPlayerClass(TF_CLASS_PYRO) && GetWeaponID() == TF_WEAPON_FLAREGUN)

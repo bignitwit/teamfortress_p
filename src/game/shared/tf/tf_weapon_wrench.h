@@ -132,6 +132,8 @@ public:
 	bool			EffectMeterShouldFlash(void);
 
 	void			ApplyRageEffect(void);
+	float			ApplyFireDelay(float flDelay);
+
 
 };
 

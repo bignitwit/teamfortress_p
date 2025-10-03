@@ -810,7 +810,7 @@ void CTFWeaponBaseMelee::Smack( void )
 
 			if (m_iComboCount == MeleeComboCount())
 			{
-				//Msg("Got big hit! \n");
+				//Msg("Combo success! \n");
 				m_iComboCount = 0;
 				m_bBigHit = true;
 
@@ -822,11 +822,21 @@ void CTFWeaponBaseMelee::Smack( void )
 			int iDisableLossOnMiss = 0;
 			CALL_ATTRIB_HOOK_INT(iDisableLossOnMiss, melee_combo_disable_loss_on_miss);
 
+			int iLosePointOnMiss = 0;
+			CALL_ATTRIB_HOOK_INT(iLosePointOnMiss, melee_combo_lose_point_on_miss);
+
 			// Only lose combo on miss if we should
 			if (iDisableLossOnMiss == 0) 
 			{
 				//Msg("Missed! \n");
 				m_iComboCount = 0;
+			}
+			if (iLosePointOnMiss) 
+			{
+				if (m_iComboCount > 0) 
+				{
+					m_iComboCount -= iLosePointOnMiss;
+				}
 			}
 			
 		}

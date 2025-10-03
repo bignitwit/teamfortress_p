@@ -493,7 +493,7 @@
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
-					"value"	"0.00085"
+					"value"	"0.8"
 				}
 				"damage force increase"
 				{

@@ -135,7 +135,7 @@ int CMannVsMachineUpgradeManager::GetAttributeIndexByName( const char* pszAttrib
 void CMannVsMachineUpgradeManager::LoadUpgradesFile( void )
 {
 	// Determine the upgrades file to load
-	const char *pszPath = "scripts/items/mvm_upgrades.txt";
+	const char *pszPath = "scripts/items/tfp_upgrades.txt";
 
 	// Allow map to override
 	const char *pszCustomUpgradesFile = TFGameRules()->GetCustomUpgradesFile();

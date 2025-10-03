@@ -1,0 +1,18 @@
+#base mvm_upgrades.txt
+
+"upgrades"
+{
+
+	"ItemUpgrades"
+	{
+		//"100"
+		//{
+		//	// Rocket Mortar Control duration
+		//	"attribute"	"rocket control duration Increased"
+		//	"icon"		"achievements/tf_demoman_kill_x_with_directpipe"
+		//	"increment"	"1.0"				// percent
+		//	"cap"		"5.0"				// percent
+		//	"cost"		"150"				// first tier points/credits cost
+		//}
+	}
+}
