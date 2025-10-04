@@ -388,7 +388,7 @@
 			"effect_type"	"positive"
 			"stored_as_integer"	"0"
 		}
-		"9038" // Lose combo progress on miss
+		"9038" // Lose minor combo progress on miss
 		{
 			"name"	"melee combo lose point on miss HIDDEN"
 			"attribute_class"	"melee_combo_lose_point_on_miss"

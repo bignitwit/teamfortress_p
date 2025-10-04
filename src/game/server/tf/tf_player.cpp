@@ -11869,19 +11869,23 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 	if ( IsPlayerClass( TF_CLASS_MEDIC ) )
 	{
 		CWeaponMedigun* pMedigun = assert_cast<CWeaponMedigun*>( Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );
+
 		float flChargeLevel = pMedigun ? pMedigun->GetChargeLevel() : 0.f;
 		float flMinChargeLevel = pMedigun ? pMedigun->GetMinChargeAmount() : 1.f;
 		bool bCharged = flChargeLevel >= flMinChargeLevel;
 
-		CTFPlayer* pHealTarget = nullptr;
-		if (pMedigun->GetHealTarget())
+		CTFPlayer* pHealTarget = NULL;
+
+		if (pMedigun) 
 		{
-			if (pMedigun->GetHealTarget()->IsPlayer()) 
+			if (pMedigun->GetHealTarget())
 			{
-				pHealTarget = ToTFPlayer(pMedigun->GetHealTarget());
+				if (pMedigun->GetHealTarget()->IsPlayer())
+				{
+					pHealTarget = ToTFPlayer(pMedigun->GetHealTarget());
+				}
 			}
 		}
-
 
 		// Revenge Crits
 		if (pHealTarget)
