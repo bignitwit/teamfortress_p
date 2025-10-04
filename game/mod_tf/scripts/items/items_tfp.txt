@@ -398,6 +398,42 @@
 			"effect_type"	"negative"
 			"stored_as_integer"	"1"
 		}
+		"9039"
+		{
+			"name"	"dmg taken in water reduced"
+			"attribute_class"	"mult_dmgtaken_while_in_water"
+			"description_string"	"#TFP_ATR_DMGTakenInWaterDecreased"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9040" 
+		{
+			"name"	"dmg taken in water increased"
+			"attribute_class"	"mult_dmgtaken_while_in_water"
+			"description_string"	"#TFP_ATR_DMGTakenInWaterIncreased"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"negative"
+		}
+		"9041"
+		{
+			"name"	"dmg taken not in water reduced"
+			"attribute_class"	"mult_dmgtaken_while_not_in_water"
+			"description_string"	"#TFP_ATR_DMGTakenNotInWaterDecreased"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9042" 
+		{
+			"name"	"dmg taken not in water increased"
+			"attribute_class"	"mult_dmgtaken_while_not_in_water"
+			"description_string"	"#TFP_ATR_DMGTakenNotInWaterIncreased"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"negative"
+		}
 	}
 	"items"
 	{

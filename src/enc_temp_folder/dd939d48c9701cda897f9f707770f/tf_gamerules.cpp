@@ -7258,16 +7258,19 @@ float CTFGameRules::ApplyOnDamageAliveModifyRules( const CTakeDamageInfo &info, 
 				}
 			}
 
+			Msg("checl vuln \n");
 			// Water vulnerabilities / resistances
 			if ((pVictim->GetWaterLevel() > WL_NotInWater))
 			{
 				// In Water
 				// Damage Res/Vuln while in water
+				Msg("In Water \n");
 				CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(pVictim, flDamageBase, mult_dmgtaken_while_in_water);
 			}
 			else
 			{
 				// Damage Res/Vuln while not in  water
+				Msg("Not in Water \n");
 				CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(pVictim, flDamageBase, mult_dmgtaken_while_not_in_water);
 			}
 		}
