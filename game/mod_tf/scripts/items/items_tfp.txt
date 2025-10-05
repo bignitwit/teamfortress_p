@@ -1490,6 +1490,7 @@
 			// Base def
 			"name"	"HL2RocketLauncher"
 			"item_name"		"#TFP_WEP_HL2RocketLauncher"
+			"item_description"		"#TFP_WEP_HL2RocketLauncher_Desc"
 			"item_type_name"	"#TFP_WEP_TYPE_TrackedRocketLauncher"
 			"item_class"	"tf_weapon_rocketlauncher_mortar"
 			"item_logname"	"hl2_rocketlauncher"
