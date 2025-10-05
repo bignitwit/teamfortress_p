@@ -446,7 +446,7 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 			if (nBulletsPerShot == 1) 
 			{
 				// do funny spiral-like thing for weps w/ 1 shot
-				iSpread = pWpn->m_iConsecutiveShots % nSpreadCount;
+				iSpread = (pWpn->m_iConsecutiveShots * nBulletsPerShot)  % nSpreadCount;
 			}
 			else 
 			{
