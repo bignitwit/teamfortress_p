@@ -434,17 +434,6 @@
 			"hidden"	"0"
 			"effect_type"	"negative"
 		}
-		"9043" // Multiply variance of fixed shot pattern
-		{
-			"name"	"fixed shot pattern variance"
-			"attribute_class"	"mult_fixed_shot_pattern_variance"
-			"description_format"	"value_is_percentage"
-			"hidden"	"0"
-			"effect_type"	"neutral"
-		}
-
-
-		
 	}
 	"items"
 	{
@@ -1069,6 +1058,11 @@
 
 			"attributes"
 			{
+				"fixed shot pattern ring"
+				{
+					"attribute_class"	"fixed_shot_pattern"
+					"value"	"4"
+				}
 				"mod medic killed revenge CUSTOM"
 				{
 					"attribute_class"	"medic_killed_revenge"

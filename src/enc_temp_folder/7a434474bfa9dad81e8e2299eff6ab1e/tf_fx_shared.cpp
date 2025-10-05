@@ -356,13 +356,9 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 	bool bFixedSpread = ( nDamageType & DMG_BUCKSHOT ) && ( nBulletsPerShot > 1 ) && IsFixedWeaponSpreadEnabled( pWpn );
 
 	int iFixedSpread = 0;
-	float flFixedSpreadVarianceMult = 1.0f;
 	if ( pWeapon )
 	{
 		CALL_ATTRIB_HOOK_INT_ON_OTHER(pWeapon, iFixedSpread, fixed_shot_pattern);
-		CALL_ATTRIB_HOOK_INT_ON_OTHER(pWeapon, flFixedSpreadVarianceMult, mult_fixed_shot_pattern_variance);
-
-
 		CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pWeapon, nBulletsPerShot, mult_bullets_per_shot );
 	}
 
@@ -374,7 +370,7 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 	// Choose shape based on factors
 	switch (iFixedSpread)
 	{
-		// Hourglass - 14
+		// Hourglass
 		case (4):
 		{
 			g_vecSpreadShape = g_vecFixedWpnSpreadHourglass;
@@ -382,7 +378,7 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 			bVariance = true;
 			break;
 		}
-		// Quad - 4
+		// Quad
 		case (3): 
 		{
 			g_vecSpreadShape = g_vecFixedWpnSpreadQuad;
@@ -390,7 +386,7 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 			bVariance = true;
 			break;
 		}
-		// Ring - 12
+		// Ring
 		case (2):
 		{
 			g_vecSpreadShape = g_vecFixedWpnSpreadRing;
@@ -432,11 +428,12 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 
 		if ( bFixedSpread || iFixedSpread != 0)
 		{
+
+
 			int iSpread = iBullet;
-			if (nBulletsPerShot == 1) 
+			if (nBulletsPerShot == 1 || true) 
 			{
-				// do funny spiral-like thing for weps w/ 1 shot
-				iSpread = pWpn->m_iConsecutiveShots % nSpreadCount;
+				iSpread = (pWpn->m_iConsecutiveShots + iBullet) % nSpreadCount;
 			}
 			else 
 			{
@@ -447,8 +444,8 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 			}
 
 			float flScalar = 1.f;
-			x = (g_vecSpreadShape[iSpread].x + (bVariance ? random->RandomFloat(-0.07f * flFixedSpreadVarianceMult, 0.07f * flFixedSpreadVarianceMult) : 0)) * flScalar;
-			y = (g_vecSpreadShape[iSpread].y + (bVariance ? random->RandomFloat(-0.07f * flFixedSpreadVarianceMult, 0.07f * flFixedSpreadVarianceMult) : 0)) * flScalar;
+			x = (g_vecSpreadShape[iSpread].x + (bVariance ? random->RandomFloat(-0.07f, 0.07f) : 0)) * flScalar;
+			y = (g_vecSpreadShape[iSpread].y + (bVariance ? random->RandomFloat(-0.07f, 0.07f) : 0)) * flScalar;
 
 		}
 		else
