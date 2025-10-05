@@ -421,6 +421,16 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 		}
 	}
 
+	// Debug if we don't have enough bullets to complete the pattern (not counting the fallback ones)
+	if (nSpreadCount != nBulletsPerShot)
+	{
+		if (iFixedSpread != 0 && iFixedSpread != 1) 
+		{
+			DevMsg("Not right enough of bullets for pattern! Needs %i, currently has %i \n", nSpreadCount, nBulletsPerShot);
+		}
+	}
+
+
 
 	for ( int iBullet = 0; iBullet < nBulletsPerShot; ++iBullet )
 	{
@@ -544,7 +554,6 @@ bool IsFixedWeaponSpreadEnabled( CTFWeaponBase *pWeapon /*= NULL*/ )
 		// Any fixed spread type not 0 counts
 		if (iFixedSpread != 0) 
 		{
-			Msg("using fixed spread from wep \n");
 			return true;
 		}
 	}
