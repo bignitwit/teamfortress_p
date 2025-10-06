@@ -957,7 +957,6 @@
 			// Base def
 			"name"	"CarpetBomber"
 			"item_name"		"#TFP_WEP_CarpetBomber"
-			"item_type_name"	"#TF_Weapon_PipebombLauncher"
 			"item_description"	"#TFP_WEP_CarpetBomber_Desc"
 			"item_class"	"tf_weapon_pipebomblauncher"
 			"item_logname"	"carpet_bomber"
@@ -1366,7 +1365,6 @@
 			// Base def
 			"name"	"TrojanHorse"
 			"item_name"		"#TFP_WEP_TrojanHorse"
-			"item_type_name"	"#TF_Weapon_PipebombLauncher"
 			"item_description"	"#TFP_WEP_CarpetBomber_Desc"
 			"item_class"	"tf_weapon_pipebomblauncher"
 			"item_logname"	"trojan_horse"

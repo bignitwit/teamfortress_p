@@ -440,6 +440,7 @@ bool CTFProjectile_Arrow::StrikeTarget( mstudiobbox_t *pBox, CBaseEntity *pOther
 	const Vector &vecOrigin = GetAbsOrigin();
 	Vector vecVelocity = GetAbsVelocity();
 	int nDamageCustom = 0;
+	int iDamage = GetDamage();
 	bool bApplyEffect = true;
 	int nDamageType = GetDamageType();
 
@@ -493,6 +494,31 @@ bool CTFProjectile_Arrow::StrikeTarget( mstudiobbox_t *pBox, CBaseEntity *pOther
 			{
 				nDamageType |= DMG_CRITICAL;
 				nDamageCustom = TF_DMG_CUSTOM_HEADSHOT;
+
+				int iTauntOnHeadshot = 0;
+				CALL_ATTRIB_HOOK_INT_ON_OTHER(m_hLauncher, iTauntOnHeadshot, mod_bow_taunt_on_headshot);
+
+
+				bool bTruce = TFGameRules() && TFGameRules()->IsTruceActive() && pAttacker->IsTruceValidForEnt();
+
+				if (iTauntOnHeadshot != 0) 
+				{
+					CTFPlayer* pVictimPlayer = ToTFPlayer(pOther);
+
+					if (!bTruce && pVictimPlayer && (pAttacker->GetTeamNumber() != pVictimPlayer->GetTeamNumber()))
+					{
+						// force victim to laugh!
+						pVictimPlayer->Taunt(TAUNT_MISC_ITEM, MP_CONCEPT_TAUNT_LAUGH);
+					}
+				}
+
+				int iNoDamageHeadshots = 0;
+				CALL_ATTRIB_HOOK_INT_ON_OTHER(m_hLauncher, iNoDamageHeadshots, mod_bow_no_damage_headshots);
+
+				if (iNoDamageHeadshots != 0)
+				{
+					iDamage = 0;
+				}
 			}
 
 			if ( m_bCritical )
@@ -528,7 +554,7 @@ bool CTFProjectile_Arrow::StrikeTarget( mstudiobbox_t *pBox, CBaseEntity *pOther
 					}
 				}
 
-				CTakeDamageInfo info( this, pAttacker, m_hLauncher, vecVelocity, vecOrigin, GetDamage(), nDamageType, nDamageCustom );
+				CTakeDamageInfo info( this, pAttacker, m_hLauncher, vecVelocity, vecOrigin, iDamage, nDamageType, nDamageCustom );
 				pOther->TakeDamage( info );
 
 				// Play an impact sound.

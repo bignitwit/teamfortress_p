@@ -205,6 +205,22 @@ Vector g_vecFixedWpnSpreadHourglass[] =
 };
 const int g_iSpreadHourglassCount = ARRAYSIZE(g_vecFixedWpnSpreadHourglass);
 
+// 10, Heart
+Vector g_vecFixedWpnSpreadHeart[] =
+{
+	Vector(0.0f, -1.0f, 0.0f),
+	Vector(0.5f, -0.6f, 0.0f),
+	Vector(1.0f, 0.0f, 0.0f),
+	Vector(1.0f, 0.5f, 0.0f),
+	Vector(0.5f, 1.0f, 0.0f),
+	Vector(0.0f, 0.5f, 0.0f),
+	Vector(-0.5f, 1.0f, 0.0f),
+	Vector(-1.0f, 0.5f, 0.0f),
+	Vector(-1.0f, 0.0f, 0.0f),
+	Vector(-0.5f, -0.6f, 0.0f)
+};
+const int g_iSpreadHeartCount = ARRAYSIZE(g_vecFixedWpnSpreadHeart);
+
 //-----------------------------------------------------------------------------
 // Purpose: This runs on both the client and the server.  On the server, it 
 // only does the damage calculations.  On the client, it does all the effects.
@@ -374,6 +390,14 @@ void FX_FireBullets( CTFWeaponBase *pWpn, int iPlayer, const Vector &vecOrigin, 
 	// Choose shape based on factors
 	switch (iFixedSpread)
 	{
+		// Heart - 10
+		case (5):
+		{
+			g_vecSpreadShape = g_vecFixedWpnSpreadHeart;
+			nSpreadCount = g_iSpreadHeartCount;
+			bVariance = true;
+			break;
+		}
 		// Hourglass - 14
 		case (4):
 		{

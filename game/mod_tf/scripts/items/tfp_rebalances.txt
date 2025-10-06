@@ -80,7 +80,7 @@
 			"prefab"	"hidden_by_rebalance"
 		}
 		// Hot hand rebalance
-		"10001"
+		"60000"
 		{
 			"enabled"	"1"
 			"auto_unlock"	"1"
@@ -178,7 +178,7 @@
 		}
 
 		// Sandman rebalance
-		"10000"
+		"60001"
 		{
 			"enabled"	"1"
 			"auto_unlock"	"1"
@@ -337,7 +337,7 @@
 			"prefab"	"hidden_by_rebalance"
 			"rebalanced"	"1"
 		}
-		"9015"
+		"60002"
 		{
 			"enabled"	"1"
 			"auto_unlock"	"1"
@@ -417,7 +417,7 @@
 			"rebalanced"	"1"
 		}
 		// Pain train rebalance
-		"60001"
+		"60003"
 		{
 			"enabled"	"1"
 			"auto_unlock"	"1"

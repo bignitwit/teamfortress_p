@@ -305,7 +305,11 @@ float CTFCompoundBow::GetProjectileDamage( void )
 //-----------------------------------------------------------------------------
 float CTFCompoundBow::GetProjectileSpeed( void )
 {
-	return RemapValClamped( GetCurrentCharge(), 0.0f, GetChargeMaxTime(), 1800, 2600 );
+	float flProjSpeedMult = 1.0;
+	CALL_ATTRIB_HOOK_FLOAT(flProjSpeedMult, mult_projectile_speed);
+
+	
+	return RemapValClamped( GetCurrentCharge(), 0.0f, GetChargeMaxTime(), 1800 * flProjSpeedMult, 2600 * flProjSpeedMult);
 }
 
 //-----------------------------------------------------------------------------
