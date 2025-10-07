@@ -7211,6 +7211,14 @@ float CTFGameRules::ApplyOnDamageAliveModifyRules( const CTakeDamageInfo &info, 
 				outParams.bPlayDamageReductionSound = CheckMedicResist( TF_COND_MEDIGUN_SMALL_FIRE_RESIST, TF_COND_MEDIGUN_UBER_FIRE_RESIST, pVictim, flRawDamage, flDamageBase, bCrit, flDamageBonus );
 			}
 
+			// Apply bleed
+			if (info.GetDamageCustom() == TF_DMG_CUSTOM_BLEEDING)
+			{
+				CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(pVictim, flDamageBase, mult_dmgtaken_from_bleed);
+				CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(pVictim->GetActiveWeapon(), flDamageBase, mult_dmgtaken_from_bleed_active);
+			}
+
+
 			if ( pTFAttacker && pVictim && pVictim->m_Shared.InCond( TF_COND_BURNING ) )
 			{
 				CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pTFAttacker->GetActiveWeapon(), flDamageBase, mult_dmg_vs_burning );

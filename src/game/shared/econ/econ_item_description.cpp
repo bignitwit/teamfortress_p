@@ -756,8 +756,9 @@ static void GenerateLocalizedFullItemName
 												 ? attrQualityTextOverride.value().c_str()
 												 : EconQuality_GetLocalizationString( (EEconItemQuality)unQuality );
 
-		if ( unQuality > 0 && pszQualityLocalizationString && unQuality != AE_PAINTKITWEAPON )
+		if ( unQuality > 0 && pszQualityLocalizationString && unQuality != AE_PAINTKITWEAPON)
 		{
+
 			// Unique items use proper names, but not if we have a quality text override
 			if ( unQuality == AE_UNIQUE && !attrQualityTextOverride.has_value() )
 			{

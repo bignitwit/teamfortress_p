@@ -464,7 +464,56 @@
 			"hidden"	"0"
 			"effect_type"	"positive"
 		}
-		
+		"9046" // Use value 5
+		{
+			"name"	"fixed shot pattern heart"
+			"attribute_class"	"fixed_shot_pattern"
+			"description_string"	"#TFP_ATR_FixedShotPattern_Heart"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+		}
+		"9047"
+		{
+			"name"	"spread penalty HIDDEN"
+			"attribute_class"	"mult_spread_scale"
+			"description_string"	"#Attrib_Spread_Negative"
+			"description_format"	"value_is_percentage"
+			"hidden"	"1"
+			"effect_type"	"negative"
+			"stored_as_integer"	"0"
+		}
+		"9048"
+		{
+			"name"	"dmg taken from bleed increased on wearer SPECIAL1"
+			"attribute_class"	"mult_dmgtaken_from_bleed"
+			"description_string"	"#TFP_ATR_DMGTakenFromBleedIncreased_SPECIAL1"
+			"description_format"	"value_is_percentage"
+			"hidden"	"0"
+			"effect_type"	"negative"
+			"armory_desc"	"on_wearer"
+			"stored_as_integer"	"0"
+		}
+		"9049"
+		{
+			"name"	"SET BONUS: valentines sniper"
+			"attribute_class"	"set_bonus_dummy"
+			"description_string"	"#TFP_ATR_ValentinesSniper_SetBonus"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"is_set_bonus"	"1"
+			"stored_as_integer"	"1"
+		}
+		"9050" 
+		{
+			"name"	"bow no ignite"
+			"attribute_class"	"mod_bow_no_ignite"
+			"description_string"	"#TFP_ATR_BowNoIgnite"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"negative"
+		}
 	}
 	"items"
 	{
@@ -1371,7 +1420,7 @@
 			"item_class"	"tf_weapon_pipebomblauncher"
 			"item_logname"	"trojan_horse"
 			"item_iconname"	"skull_tf"
-			"propername"	"0"
+			"propername"	"1"
 
 			// Usage
 			"item_slot"		"secondary"
@@ -1541,6 +1590,7 @@
 				"can_be_equipped_by_soldier_or_demo"	"1"
 				"can_deal_critical_damage"	"1"
 				"can_deal_long_distance_damage"	"1"
+				"has_tracked_rockets"	"1"
 			}
 			"attributes"
 			{
@@ -1587,6 +1637,10 @@
 			"item_iconname"	"huntsman"
 			"propername"	"1"
 
+			"min_ilevel"		"69"
+			"max_ilevel"		"69"
+
+
 			// Usage
 			"item_slot"		"primary"
 			"item_quality"	"unique"
@@ -1616,11 +1670,6 @@
 			}
 			"attributes"
 			{
-				"damage penalty"
-				{
-					"attribute_class"	"mult_dmg"
-					"value"	"0.75"
-				}
 				"bow no damage headshots"
 				{
 					"attribute_class"	"mod_bow_no_damage_headshots"
@@ -1629,6 +1678,11 @@
 				"bow force taunt on headshot"
 				{
 					"attribute_class"	"mod_bow_taunt_on_headshot"
+					"value"	"1"
+				}
+				"bow no ignite"
+				{
+					"attribute_class"	"mod_bow_no_ignite"
 					"value"	"1"
 				}
 				"override projectile type"
@@ -1677,9 +1731,147 @@
 			"mouse_pressed_sound"	"ui/item_wood_pole_pickup.wav"
 			"drop_sound"		"ui/item_wood_pole_drop.wav"
 		}
+		// Heart SMG
+		"9016"
+		{
+			"prefab"	"tfp_customitem"
 
+			// Base def
+			"name"	"HeartSMG"
+			"item_name"		"#TFP_WEP_HeartSMG"
+			"item_type_name"	"#TF_Weapon_SMG"
+			"item_class"	"tf_weapon_smg"
+			"item_logname"	"heart_smg"
+			"item_iconname"	"smg"
+			"propername"	"1"
+
+			"min_ilevel"		"69"
+			"max_ilevel"		"69"
+
+
+			// Usage
+			"item_slot"		"secondary"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"sniper"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+				"can_deal_mvm_penetration_damage"	"1"
+				"can_deal_long_distance_damage"	"1"
+			}
+			"attributes"
+			{
+				"fixed shot pattern heart"
+				{
+					"attribute_class"	"fixed_shot_pattern"
+					"value"	"5"
+				}
+				"fire rate bonus"
+				{
+					"attribute_class"	"mult_postfiredelay"
+					"value"	"0.75"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"0.9"
+				}
+				"clip size penalty"
+				{
+					"attribute_class"	"mult_clipsize"
+					"value"	"0.4"
+				}
+
+				"fixed shot pattern variance"
+				{
+					"attribute_class"	"mult_fixed_shot_pattern_variance"
+					"value"	"0.5"
+				}
+			}
+
+			"model_player"	"models/workshop/weapons/c_models/c_pro_smg/c_pro_smg.mdl"
+
+			"mouse_pressed_sound"	"ui/item_light_gun_pickup.wav"
+			"drop_sound"		"ui/item_light_gun_drop.wav"
+		}
+		// Box o Chocolates
+		"9017"
+		{
+			"prefab"	"tfp_customitem"
+
+			// Base def
+			"name"	"BoxOfChocolates"
+			"item_name"		"#TFP_WEP_ChocoBox"
+			"item_type_name"	"#TFP_WEP_ChocoBox_Type"
+			"item_class"	"tf_weapon_club"
+			"item_logname"	"chocolate_box_melee"
+			"item_iconname"	"kukri"
+			"propername"	"0"
+
+			"min_ilevel"		"69"
+			"max_ilevel"		"69"
+
+
+			// Usage
+			"item_slot"		"melee"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"sniper"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_deal_critical_damage"	"1"
+			}
+			"attributes"
+			{
+				"drop health pack on kill"
+				{
+					"attribute_class"	"drop_health_pack_on_kill"
+					"value"			"1"
+				}
+				"dmg taken from bleed increased on wearer SPECIAL1"
+				{
+					"attribute_class"	"mult_dmgtaken_from_bleed"
+					"value"	"1.33"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"	"0.25"
+				}
+				
+			}
+
+			"model_player"	"models/workshop/weapons/c_models/c_candy_cane/c_candy_cane.mdl"
+
+			"mouse_pressed_sound" 	"ui/item_hat_pickup.wav"
+			"drop_sound" 		"ui/item_hat_drop.wav"
+		}
 	}
-
 	"item_sets" 
 	{
 		"hl2_soldier_pack"
@@ -1699,6 +1891,25 @@
 				"HL2Shotgun"				"1"
 				"HL2Stunstick"				"1"
 			}
+		}
+		"valentines_sniper"
+		{
+			"name"	"#TFP_Set_ValentinesSniper"
+			"items"
+			{
+				"CupidBow"				"1"
+				"HeartSMG"				"1"
+				"BoxOfChocolates"		"1"
+			}
+			"attributes"
+			{
+				"SET BONUS: valentines sniper"
+				{
+					"attribute_class"	"set_bonus_dummy"
+					"value"	"1"
+				}
+			}
+
 		}
 	}
 }

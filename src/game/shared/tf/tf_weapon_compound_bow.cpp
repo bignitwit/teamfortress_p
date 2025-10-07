@@ -648,6 +648,14 @@ bool CTFCompoundBow::CalcIsAttackCriticalHelper()
 //-----------------------------------------------------------------------------
 void CTFCompoundBow::SetArrowAlight( bool bAlight ) 
 { 
+	int iNoIgnite = 0;
+	CALL_ATTRIB_HOOK_INT(iNoIgnite, mod_bow_no_ignite)
+
+	if (iNoIgnite != 0) 
+	{
+		return;
+	}
+
 	// Don't light arrows if we're still firing one.
 	if (GetActivity() != ACT_ITEM2_VM_PRIMARYATTACK ) 
 	{
