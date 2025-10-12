@@ -47,13 +47,16 @@ enum FlameThrowerMode_t
 
 #define MAX_PARTICLE_EFFECT_NAME_LENGTH 128
 
+#define AIRBLAST_CHARGE_MAXTIME	3.0f
+
+
 //=========================================================
 // Flamethrower Weapon
 //=========================================================
 #ifdef GAME_DLL
 class CTFFlameThrower : public CTFWeaponBaseGun, public CGameEventListener
 #else
-class CTFFlameThrower : public CTFWeaponBaseGun
+class CTFFlameThrower : public CTFWeaponBaseGun, public ITFChargeUpWeapon
 #endif // GAME_DLL
 {
 	DECLARE_CLASS( CTFFlameThrower, CTFWeaponBaseGun );
@@ -111,6 +114,19 @@ public:
 	bool			EffectMeterShouldFlash( void );
 
 	virtual bool	Deploy( void ) OVERRIDE;
+
+
+
+	virtual bool CanCharge() { float iCharge = 0;	CALL_ATTRIB_HOOK_INT(iCharge, set_charged_airblast)	return iCharge; }
+	virtual float GetChargeBeginTime(void) { return m_flChargeBeginTime; }
+	virtual float GetChargeMaxTime(void)
+	{
+		float flChargeTime = AIRBLAST_CHARGE_MAXTIME;
+		CALL_ATTRIB_HOOK_FLOAT(flChargeTime, stickybomb_charge_rate);
+
+		return flChargeTime;
+	}
+
 
 #if defined( CLIENT_DLL )
 

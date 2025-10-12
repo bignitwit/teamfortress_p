@@ -143,6 +143,15 @@ ConVar tf_airblast_cray_pitch_control( "tf_airblast_cray_pitch_control", "0", FC
 #define TF_FLAMETHROWER_HITACCURACY_MED			40.0f
 #define TF_FLAMETHROWER_HITACCURACY_HIGH		60.0f
 
+
+
+
+#define AIRBLAST_CHARGE_SIZEMULT_MIN	1.0f
+#define AIRBLAST_CHARGE_SIZEMULT_MAX	1.5f
+#define AIRBLAST_CHARGE_FORCEMULT_MIN	1.0f
+#define AIRBLAST_CHARGE_FORCEMULT_MAX	3.0f
+
+
 //-----------------------------------------------------------------------------
 
 #define TF_WEAPON_BUBBLE_WAND_MODEL		"models/player/items/pyro/mtp_bubble_wand.mdl"
@@ -1232,16 +1241,18 @@ float CTFFlameThrower::GetDeflectionRadius() const
 {
 	float fMultiplier = 1.0f;
 
-	// int iChargedAirblast = 0;
-	// CALL_ATTRIB_HOOK_INT( iChargedAirblast, set_charged_airblast );
-	// if ( iChargedAirblast != 0 )
-	// {
-	//	 fMultiplier *= RemapValClamped( ( gpGlobals->curtime - m_flChargeBeginTime ),
-	// 										  0.0f,
-	// 										  GetChargeMaxTime(),
-	// 										  AIRBLAST_CHARGE_MULT_MIN,
-	// 										  AIRBLAST_CHARGE_MULT_MAX );
-	// }
+	int iChargedAirblast = 0;
+	CALL_ATTRIB_HOOK_INT( iChargedAirblast, set_charged_airblast );
+	if ( iChargedAirblast != 0 )
+	{
+		fMultiplier *= RemapValClamped( ( gpGlobals->curtime - m_flChargeBeginTime ),
+											0.0f,
+											AIRBLAST_CHARGE_MAXTIME,
+											AIRBLAST_CHARGE_SIZEMULT_MIN,
+											AIRBLAST_CHARGE_SIZEMULT_MAX );
+	 }
+
+	//Msg("Charge Mult after charge: %.3f \n", fMultiplier);
 
 	// Allow custom attributes to scale the deflection size.
 	CALL_ATTRIB_HOOK_FLOAT( fMultiplier, deflection_size_multiplier );
@@ -1665,6 +1676,26 @@ bool CTFFlameThrower::DeflectPlayer( CTFPlayer *pTarget, CTFPlayer *pOwner, Vect
 		int iReverseBlast = 0;
 		CALL_ATTRIB_HOOK_INT( iReverseBlast, reverse_airblast );
 
+
+
+		// Calculate our force multiplier based on the charge
+		float flChargeForceMultiplier = 1.0f;
+
+		int iChargedAirblast = 0;
+		CALL_ATTRIB_HOOK_INT(iChargedAirblast, set_charged_airblast);
+		if (iChargedAirblast != 0)
+		{
+			flChargeForceMultiplier *= RemapValClamped((gpGlobals->curtime - m_flChargeBeginTime),
+				0.0f,
+				AIRBLAST_CHARGE_MAXTIME,
+				AIRBLAST_CHARGE_FORCEMULT_MIN,
+				AIRBLAST_CHARGE_FORCEMULT_MAX);
+		}
+
+		//Msg("Charge force after mult: %.3f \n", flChargeForceMultiplier);
+
+
+
 		// Against players, let's force the pyro to be actually looking at them.
 		// We'll be a bit more laxed when it comes to aiming at rockets and grenades.
 		Vector vecToTarget;
@@ -1759,7 +1790,7 @@ bool CTFFlameThrower::DeflectPlayer( CTFPlayer *pTarget, CTFPlayer *pOwner, Vect
 				{ pTarget->m_Shared.AddCond( TF_COND_LOST_FOOTING, flLoseFooting ); }
 			pTarget->m_Shared.AddCond( TF_COND_AIR_CURRENT );
 			pTarget->m_Shared.AddCond( TF_COND_KNOCKED_INTO_AIR );
-			pTarget->ApplyAbsVelocityImpulse( vecForce );
+			pTarget->ApplyAbsVelocityImpulse( vecForce * flChargeForceMultiplier);
 		}
 		else
 		{
@@ -1826,7 +1857,7 @@ bool CTFFlameThrower::DeflectPlayer( CTFPlayer *pTarget, CTFPlayer *pOwner, Vect
 			pTarget->SetAbsVelocity( vec3_origin );
 
 			// Apply GenericPushback
-			pTarget->ApplyGenericPushbackImpulse( vecForce, pOwner );
+			pTarget->ApplyGenericPushbackImpulse( vecForce * flChargeForceMultiplier, pOwner );
 		}
 
 

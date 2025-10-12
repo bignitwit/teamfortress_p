@@ -30,8 +30,21 @@
 				"nameable"	"0"
 				"tradeable" "0"
 			}
+		}
+		"weapon_aoeflame"
+		{
+			"prefab"		"weapon_newflame"
 
-
+			"static_attrs"
+			{
+				"flame_gravity"							"1"
+				"flame_drag"							"4"
+				"flame_up_speed"						"0"
+				"flame_speed"							"1500"
+				"flame_spread_degree"					"3"
+				"flame_lifetime"						"4"
+				"flame_random_life_time_offset"			"0.1"
+			}
 		}
 	}
 	"attributes" 
@@ -513,6 +526,25 @@
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"negative"
+		}
+		"9051" 
+		{
+			"name"	"aoe_flame_desc"
+			"attribute_class"	"aoe_flame_desc"
+			"description_string"	"#TFP_ATR_AOEFlameDesc"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"neutral"
+		}
+		"9052"
+		{
+			"name"	"charged airblast CUSTOM"
+			"attribute_class"	"set_charged_airblast"
+			"description_string"	"#TFP_ATR_ChargedAirblast"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"0"
 		}
 	}
 	"items"
@@ -1871,6 +1903,87 @@
 			"mouse_pressed_sound" 	"ui/item_hat_pickup.wav"
 			"drop_sound" 		"ui/item_hat_drop.wav"
 		}
+		// Afterburner
+		"9018"
+		{
+			"prefab"	"tfp_customitem	weapon_baseflamethrower weapon_aoeflame"
+
+			// Base def
+			"name"	"The Afterburner"
+			"item_name"		"#TFP_WEP_Afterburner"
+			"item_type_name"	"#TF_Weapon_Flamethrower"
+			"item_class"	"tf_weapon_flamethrower"
+			"item_logname"	"afterburner"
+			"item_iconname"	"flamethrower"
+			"propername"	"1"
+
+
+			// Usage
+			"item_slot"		"primary"
+			"item_quality"	"unique"
+			"attach_to_hands" "1"
+
+			"capabilities"
+			{
+				"nameable"	"1"
+			}
+			"used_by_classes"
+			{
+				"pyro"	"1"
+			}
+
+
+			// Stats
+			"tags"
+			{
+				"can_deal_damage"			"1"
+				"can_reflect_projectiles"	"1"
+				"can_extinguish"			"1"
+				"can_deal_posthumous_damage"	"1"
+				"can_deal_critical_damage"	"1"
+				"is_flamethrower" "1"
+			}
+			"static_attrs"
+			{
+				"extinguish restores health"			"20"
+			}
+			"attributes"
+			{
+				"charged airblast CUSTOM"
+				{
+					"attribute_class"	"set_charged_airblast"
+					"value"			"1"
+				}
+				"aoe_flame_desc"
+				{
+					"attribute_class"	"aoe_flame_desc"
+					"value"			"1"
+				}
+				"maxammo primary reduced"
+				{
+					"attribute_class"	"mult_maxammo_primary"
+					"value"			"0.75"
+				}
+				"damage penalty"
+				{
+					"attribute_class"	"mult_dmg"
+					"value"			"0.9"
+				}
+				"airblast cost increased"
+				{
+					"attribute_class"	"mult_airblast_cost"
+					"value"			"1.25"
+				}
+			}
+
+			"model_player"	"models/weapons/c_models/c_flamethrower/c_backburner.mdl"
+
+			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
+			"drop_sound"		"ui/item_heavy_gun_drop.wav"
+		}
+
+		
+
 	}
 	"item_sets" 
 	{
