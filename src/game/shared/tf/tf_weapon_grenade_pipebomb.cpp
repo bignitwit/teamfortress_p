@@ -1348,8 +1348,12 @@ void CTFGrenadePipebombProjectile::Deflected( CBaseEntity *pDeflectedBy, Vector&
 		
 		// Remove parent
 		m_bTouched = false;
-		VPhysicsGetObject()->EnableMotion(true);
-		SetParent(NULL, -1);
+		if (m_pPhysicsObject) 
+		{
+			VPhysicsGetObject()->EnableMotion(true);
+			SetParent(NULL, -1);
+		}
+		
 
 
 		pOldOwner = ToTFPlayer( GetThrower() );

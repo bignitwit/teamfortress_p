@@ -33,16 +33,16 @@
 		}
 		"weapon_aoeflame"
 		{
-			"prefab"		"weapon_newflame"
+			//"prefab"		"weapon_newflame"
 
 			"static_attrs"
 			{
-				"flame_gravity"							"1"
-				"flame_drag"							"4"
-				"flame_up_speed"						"0"
-				"flame_speed"							"1500"
+				"flame_gravity"							"-5"
+				"flame_drag"							"11"
+				"flame_up_speed"						"40"
+				"flame_speed"							"2450"
 				"flame_spread_degree"					"3"
-				"flame_lifetime"						"4"
+				"flame_lifetime"						"3"
 				"flame_random_life_time_offset"			"0.1"
 			}
 		}
@@ -1967,7 +1967,7 @@
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
-					"value"			"0.9"
+					"value"			"0.75"
 				}
 				"airblast cost increased"
 				{
@@ -1976,7 +1976,19 @@
 				}
 			}
 
+			"visuals"
+			{
+				"animation_replacement"
+				{
+					"ACT_MP_ATTACK_CROUCH_SECONDARYFIRE"	"ACT_MP_ATTACK_CROUCH_PRIMARY_ALT"
+					"ACT_MP_ATTACK_STAND_SECONDARYFIRE"		"ACT_MP_ATTACK_STAND_PRIMARY_ALT"
+					"ACT_MP_ATTACK_SWIM_SECONDARYFIRE"		"ACT_MP_ATTACK_SWIM_PRIMARY_ALT"
+				}
+			}
+
 			"model_player"	"models/weapons/c_models/c_flamethrower/c_backburner.mdl"
+
+
 
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
 			"drop_sound"		"ui/item_heavy_gun_drop.wav"
